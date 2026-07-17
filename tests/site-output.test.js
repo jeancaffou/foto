@@ -5,6 +5,9 @@ const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
 const posts = require("../src/_data/wordpressPosts.json");
+const pressFeatures = require("../src/_data/pressFeatures");
+const featurePages = require("../src/_data/featurePages");
+const site = require("../src/_data/site");
 
 const ROOT = path.resolve(__dirname, "..");
 const OUTPUT = path.resolve(ROOT, process.env.SITE_OUTPUT || "_site");
@@ -70,6 +73,23 @@ test("keeps homepage journal links and the National Geographic route canonical",
   assert.match(natGeo, /<html lang="sl">/);
   assert.match(natGeo, /Druga zmaga na National Geographic/);
   assert.match(natGeo, /\/assets\/blog\//);
+});
+
+test("builds local landing pages for every featured and press card", () => {
+  assert.equal(site.press.filter((item) => /^https?:/.test(item.url)).length, 0);
+  assert.equal(site.features.filter((item) => /^https?:/.test(item.url)).length, 0);
+
+  [...pressFeatures, ...featurePages].forEach((item) => {
+    assert.ok(fs.existsSync(outputPath(item.permalink)), `Missing landing page: ${item.permalink}`);
+  });
+
+  const videoPage = fs.readFileSync(outputPath("/press/fotografija-postojne-iz-zraka-in-pod-zemljo/"), "utf8");
+  assert.match(videoPage, /youtube-nocookie\.com\/embed\/TYeM4MJ5kCQ/);
+
+  const nikonPage = fs.readFileSync(outputPath("/featured/i-am-nikon-jaz-sem-raketa/"), "utf8");
+  assert.match(nikonPage, /Second place, 2010/);
+  assert.match(nikonPage, /feature-i-am-nikon-jaz-sem-raketa\.jpg/);
+  assert.match(nikonPage, /feature-i-am-nikon-series-6816\.jpg/);
 });
 
 test("keeps built internal post links and localized assets resolvable", () => {

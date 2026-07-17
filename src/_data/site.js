@@ -18,7 +18,7 @@ module.exports = {
       source: "Radio 94",
       year: "2026",
       image: "/assets/images/press-radio94.jpg",
-      url: "https://www.youtube.com/watch?v=TYeM4MJ5kCQ",
+      url: "/press/fotografija-postojne-iz-zraka-in-pod-zemljo/",
       kind: "video"
     },
     {
@@ -26,7 +26,7 @@ module.exports = {
       source: "Municipality of Postojna",
       year: "2024",
       image: "/assets/images/press-postojna-award.jpg",
-      url: "https://www.postojna.si/objava/919103",
+      url: "/featured/mayors-award-postojna-2024/",
       kind: "award"
     },
     {
@@ -34,7 +34,7 @@ module.exports = {
       source: "Prepih",
       year: "2024",
       image: "/assets/images/press-prepih-2024.jpg",
-      url: "https://www.postojna.si/objava/910480",
+      url: "/press/prepih-na-obisku-zan-kafol/",
       kind: "article"
     },
     {
@@ -42,7 +42,7 @@ module.exports = {
       source: "RTV SLO, interview",
       year: "2023",
       image: "/assets/images/press-rtvslo-creative.jpg",
-      url: "https://www.rtvslo.si/zabava-in-slog/ture-avanture/da-si-lahko-zares-ustvarjalen-moras-vcasih-krsiti-ustaljene-okvire/691924",
+      url: "/press/da-si-lahko-zares-ustvarjalen/",
       kind: "article"
     },
     {
@@ -50,7 +50,7 @@ module.exports = {
       source: "RTV SLO, interview",
       year: "2023",
       image: "/assets/images/press-rtvslo-interview.jpg",
-      url: "https://www.rtvslo.si/kultura/vizualna-umetnost/ce-si-amater-se-ne-pomeni-da-si-slab-meni-veckrat-nagrajeni-fotograf-zan-kafol/689184",
+      url: "/press/ce-si-amater-se-ne-pomeni-da-si-slab/",
       kind: "article"
     },
     {
@@ -58,7 +58,7 @@ module.exports = {
       source: "Dobro jutro, RTV SLO",
       year: "2023",
       image: "/assets/images/press-dobro-jutro.jpg",
-      url: "https://www.youtube.com/watch?v=PE-eHr3zWnk",
+      url: "/press/dvakratni-zmagovalec-national-geographica/",
       kind: "video"
     },
     {
@@ -74,7 +74,7 @@ module.exports = {
       source: "Radio 94",
       year: "2023",
       image: "/assets/images/press-radio94-natgeo-2023.jpg",
-      url: "https://www.radio94.si/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
+      url: "/press/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
       kind: "audio"
     },
     {
@@ -82,7 +82,7 @@ module.exports = {
       source: "Primorska kronika, TV Koper",
       year: "2023",
       image: "/assets/images/press-primorska-kronika.jpg",
-      url: "https://www.youtube.com/watch?v=OrNQ_4JSaoY",
+      url: "/press/razsvetljenje-v-rakovem-skocjanu/",
       kind: "video"
     },
     {
@@ -90,7 +90,7 @@ module.exports = {
       source: "Prvi dnevnik, RTV SLO",
       year: "2023",
       image: "/assets/images/press-prvi-dnevnik.jpg",
-      url: "https://www.youtube.com/watch?v=fw4Psa0lcx0",
+      url: "/press/znova-izbranec-national-geographica/",
       kind: "video"
     },
     {
@@ -98,7 +98,7 @@ module.exports = {
       source: "TV Koper, RTV SLO",
       year: "2023",
       image: "/assets/images/press-soncna-stran.jpg",
-      url: "https://www.youtube.com/watch?v=bkEhJ0gXGU4",
+      url: "/press/na-soncni-strani/",
       kind: "video"
     },
     {
@@ -114,7 +114,7 @@ module.exports = {
       source: "Radio 94",
       year: "2022",
       image: "/assets/images/press-radio94-nedeljski.jpg",
-      url: "https://www.radio94.si/nedeljski-klepet-zan-kafol/",
+      url: "/press/nedeljski-klepet-zan-kafol/",
       kind: "audio"
     },
     {
@@ -122,7 +122,7 @@ module.exports = {
       source: "Radio 94",
       year: "2022",
       image: "/assets/images/press-radio94-natgeo-2022.jpg",
-      url: "https://www.radio94.si/zan-kafol-zmagal-na-natecaju-national-geographica/",
+      url: "/press/zan-kafol-zmagal-na-natecaju-national-geographica/",
       kind: "audio"
     }
   ],
@@ -140,15 +140,15 @@ module.exports = {
       logo: "/assets/images/logo-postojna.svg",
       title: "Mayor's Award, Postojna, 2024",
       detail: "Special achievements in photography and promotion of the Municipality of Postojna, Slovenia",
-      url: "https://www.postojna.si/objava/919103",
+      url: "/featured/mayors-award-postojna-2024/",
       className: "postojna"
     },
     {
       name: "Nikon",
       logo: "/assets/images/logo-nikon.svg",
-      title: "Awarded photographer, 2010",
-      detail: "I AM Nikon photo contest",
-      url: "https://iprom.si/blog/nikonova-kampanja-in-nagradni-natecaj-jaz-sem-navdusila-slovenijo/",
+      title: "Second place, 2010",
+      detail: "Jaz sem Raketa (I Am a Rocket) · I AM Nikon photo contest",
+      url: "/featured/i-am-nikon-jaz-sem-raketa/",
       className: "nikon"
     }
   ],

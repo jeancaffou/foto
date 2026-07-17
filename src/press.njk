@@ -38,22 +38,39 @@ eleventyComputed:
       <h1>{{ pressItem.title }}</h1>
       <div class="press-detail__meta">
         <strong>{{ pressItem.publication }}</strong>
-        <span>{{ pressItem.section }}</span>
+        {% if pressItem.section %}<span>{{ pressItem.section }}</span>{% endif %}
         <time datetime="{{ pressItem.date }}">{{ pressItem.displayDate }}</time>
-        <span>Words by {{ pressItem.byline }}</span>
+        {% if pressItem.byline %}<span>Words by {{ pressItem.byline }}</span>{% endif %}
         {% if pressItem.photoCredit %}<span>Photography by {{ pressItem.photoCredit }}</span>{% endif %}
       </div>
+      {% if pressItem.summary %}<p class="press-detail__summary">{{ pressItem.summary }}</p>{% endif %}
       <a class="press-detail__source" href="{{ pressItem.originalUrl }}" target="_blank" rel="noreferrer">
         {{ pressItem.originalLabel }} <span aria-hidden="true">↗</span>
       </a>
     </header>
 
+    {% if pressItem.youtubeId %}
+    <div class="press-detail__video shell">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/{{ pressItem.youtubeId }}"
+        title="{{ pressItem.title }}"
+        loading="eager"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+    {% elif pressItem.scan %}
     <figure class="press-detail__scan shell">
       <a href="{{ pressItem.scan }}" target="_blank" aria-label="Open article scan at full size">
         <img src="{{ pressItem.scan }}" alt="{{ pressItem.scanAlt }}" loading="eager" decoding="async">
       </a>
       <figcaption>Published in {{ pressItem.publication }} · Open the scan at full size</figcaption>
     </figure>
+    {% elif pressItem.image %}
+    <figure class="press-detail__visual shell">
+      <img src="{{ pressItem.image }}" alt="{{ pressItem.imageAlt }}" loading="eager" decoding="async">
+      {% if pressItem.imageCaption %}<figcaption>{{ pressItem.imageCaption }}</figcaption>{% endif %}
+    </figure>
+    {% endif %}
   </article>
 </main>
 

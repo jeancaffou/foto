@@ -8,13 +8,15 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".about__fact-icon")).toHaveCount(3);
   await expect(page.locator("#press")).toBeVisible();
   await expect(page.locator(".press-card")).toHaveCount(14);
-  await expect(page.locator('.press-card[href*="rtvslo.si"][href*="/689184"]')).toHaveCount(1);
-  await expect(page.locator('.press-card[href*="rtvslo.si"][href*="/691924"]')).toHaveCount(1);
+  await expect(page.locator('.press-card[href="/press/ce-si-amater-se-ne-pomeni-da-si-slab/"]')).toHaveCount(1);
+  await expect(page.locator('.press-card[href="/press/da-si-lahko-zares-ustvarjalen/"]')).toHaveCount(1);
   await expect(page.locator('.press-card[href="/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/"]')).toHaveCount(1);
-  await expect(page.locator('.press-card[href*="radio94.si"]')).toHaveCount(3);
-  await expect(page.locator('.press-card[href*="/objava/910480"]')).toHaveCount(1);
+  await expect(page.locator('.press-card[href^="/"]')).toHaveCount(14);
+  await expect(page.locator('.press-card[href^="http"]')).toHaveCount(0);
+  await expect(page.locator('.press-card[href="/featured/mayors-award-postojna-2024/"]')).toHaveCount(1);
+  await expect(page.locator('.press-card[href="/press/prepih-na-obisku-zan-kafol/"]')).toHaveCount(1);
   await expect(page.locator('.press-card[href="/press/zan-kafol-od-zgoraj-od-blizu/"]')).toHaveCount(1);
-  await expect(page.locator('.press-card[href*="/objava/919103"]')).toHaveCount(1);
+  await expect(page.locator('.feature-card[href^="/"]')).toHaveCount(3);
   await expect(page.locator(".feature-card")).toHaveCount(3);
   await expect(page.locator(".publication-mark img")).toHaveCount(6);
   await expect(page.locator(".ambassador-mark img")).toHaveAttribute("alt", "Visit Postojnsko");
@@ -26,7 +28,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".feature-card--postojna")).toContainText("Special achievements in photography and promotion of the Municipality of Postojna, Slovenia");
   await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
   await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);
-  await expect(page.locator('.press-card[href*="/objava/919103"]')).toContainText("Županovo priznanje za fotografijo");
+  await expect(page.locator('.press-card[href="/featured/mayors-award-postojna-2024/"]')).toContainText("Županovo priznanje za fotografijo");
   await expect(page.locator(".about__facts")).toContainText("Karst Research Institute");
   await expect(page.locator(".hero__intro")).toContainText("Photo stories shaped by flight");
   await expect(page.locator(".post-card")).toHaveCount(3);
@@ -163,6 +165,27 @@ test("renders local press archive pages with publisher links and readable scans"
   await expect(page.locator(".press-detail__meta")).toContainText("Issue 134, page 20");
   await expect(page.locator(".press-detail__source")).toHaveAttribute("href", /Prepih%20November%2021c-11-22%20WEB\.pdf$/);
   await expect(page.locator('.press-detail__scan img[src="/assets/images/press-prepih-2022-article.jpg"]')).toBeVisible();
+
+  const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  expect(horizontalOverflow).toBe(false);
+});
+
+test("renders local video, award, and Nikon landing pages", async ({ page }) => {
+  await page.goto("/press/fotografija-postojne-iz-zraka-in-pod-zemljo/");
+  await expect(page.locator("h1")).toHaveText("Fotografija Postojne iz zraka in pod zemljo");
+  await expect(page.locator('.press-detail__video iframe')).toHaveAttribute("src", "https://www.youtube-nocookie.com/embed/TYeM4MJ5kCQ");
+  await expect(page.locator('.press-detail__source[href*="youtube.com/watch?v=TYeM4MJ5kCQ"]')).toBeVisible();
+
+  await page.goto("/featured/mayors-award-postojna-2024/");
+  await expect(page.locator("h1")).toHaveText("Mayor's Award, Postojna, 2024");
+  await expect(page.locator(".press-detail__summary")).toContainText("promotion of the Municipality of Postojna");
+  await expect(page.locator('img[src="/assets/images/feature-mayors-award-postojna-2024.jpg"]')).toBeVisible();
+
+  await page.goto("/featured/i-am-nikon-jaz-sem-raketa/");
+  await expect(page.locator("h1")).toHaveText("I AM Nikon — Jaz sem Raketa");
+  await expect(page.locator(".press-detail__meta")).toContainText("Second place, 2010");
+  await expect(page.locator(".press-detail__gallery img")).toHaveCount(2);
+  await expect(page.locator(".press-detail__gallery figcaption").first()).toContainText("I Am a Rocket");
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);

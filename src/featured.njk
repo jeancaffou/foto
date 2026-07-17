@@ -1,0 +1,85 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: featurePages
+  size: 1
+  alias: featureItem
+permalink: "{{ featureItem.permalink }}"
+pressStyles: true
+bodyClass: press-detail-page
+eleventyComputed:
+  title: "{{ featureItem.title }} — {{ featureItem.publication }}"
+---
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="Žan Kafol, home">
+    <span class="brand__name">Žan Kafol</span>
+    <span class="brand__role">{{ site.eyebrow }}</span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__lines" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="/#work">Work</a>
+    <a href="/#about">About</a>
+    <a href="/#featured">Featured</a>
+    <a href="/#press">Press</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main" class="press-detail">
+  <article>
+    <header class="press-detail__header shell">
+      <a class="press-detail__back" href="/#featured">← Featured &amp; awarded</a>
+      <p class="section-label">Featured &amp; awarded</p>
+      <h1>{{ featureItem.title }}</h1>
+      <div class="press-detail__meta">
+        <strong>{{ featureItem.publication }}</strong>
+        <time datetime="{{ featureItem.date }}">{{ featureItem.displayDate }}</time>
+      </div>
+      <p class="press-detail__summary">{{ featureItem.summary }}</p>
+      <a class="press-detail__source" href="{{ featureItem.originalUrl }}" target="_blank" rel="noreferrer">
+        {{ featureItem.originalLabel }} <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <div class="press-detail__gallery shell{% if featureItem.images.length == 1 %} press-detail__gallery--single{% endif %}">
+      {% for image in featureItem.images %}
+      <figure>
+        <a href="{{ image.src }}" target="_blank" aria-label="Open image at full size">
+          <img src="{{ image.src }}" alt="{{ image.alt }}" loading="{% if loop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+        </a>
+        <figcaption>{{ image.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__brand">
+      <span class="brand__name">Žan Kafol</span>
+      <span class="brand__role">{{ site.eyebrow }}</span>
+      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Contact</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <span>{{ site.location }}</span>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Follow</p>
+      <div class="footer-socials">
+        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <p>© {% year %} Žan Kafol</p>
+      <a href="/">Back home ↑</a>
+    </div>
+  </div>
+</footer>
