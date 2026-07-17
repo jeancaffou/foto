@@ -1,0 +1,96 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: wordpressPosts
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+permalink: "{{ post.permalink }}"
+blogStyles: true
+bodyClass: article-page
+pageLanguage: sl
+eleventyComputed:
+  title: "{{ post.title }} — Žan Kafol"
+  metaDescription: "{{ post.summary }}"
+  ogImage: "{{ post.leadImage }}"
+---
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="Žan Kafol, home">
+    <span class="brand__name">Žan Kafol</span>
+    <span class="brand__role">{{ site.eyebrow }}</span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__lines" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="/#work">Work</a>
+    <a href="/#about">About</a>
+    <a href="/blog/" aria-current="page">Journal</a>
+    <a href="/#press">Press</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main" class="article-main">
+  <article>
+    <header class="article-header shell">
+      <a class="article-header__back" href="/blog/"><span aria-hidden="true">←</span> Journal</a>
+      <p class="section-label">Photo story</p>
+      <h1>{{ post.title }}</h1>
+      <div class="article-header__meta">
+        <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
+        {% for category in post.categories %}<span>{{ category.name }}</span>{% endfor %}
+      </div>
+    </header>
+
+    <figure class="article-lead shell">
+      <img src="{{ post.leadImage }}" alt="" loading="eager" decoding="async">
+    </figure>
+
+    <div class="post-copy shell">
+      {{ post.content | safe }}
+    </div>
+
+    <nav class="article-pagination shell" aria-label="Adjacent journal posts">
+      {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}"><span>Newer story</span><strong aria-hidden="true">←</strong></a>
+      {% else %}
+      <span></span>
+      {% endif %}
+      <a class="article-pagination__archive" href="/blog/">All stories</a>
+      {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}"><span>Older story</span><strong aria-hidden="true">→</strong></a>
+      {% else %}
+      <span></span>
+      {% endif %}
+    </nav>
+  </article>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__brand">
+      <span class="brand__name">Žan Kafol</span>
+      <span class="brand__role">{{ site.eyebrow }}</span>
+      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Contact</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <span>{{ site.location }}</span>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Follow</p>
+      <div class="footer-socials">
+        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <p>© {% year %} Žan Kafol</p>
+      <a href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>

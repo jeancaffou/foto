@@ -1,0 +1,118 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: wordpressPosts
+  size: 12
+  alias: posts
+  addAllPagesToCollections: true
+blogStyles: true
+bodyClass: blog-page
+pageLanguage: sl
+title: Journal — Žan Kafol
+metaDescription: Photo stories by Žan Kafol from the air, caves and the karst landscape.
+eleventyComputed:
+  permalink: "{% if pagination.pageNumber == 0 %}/blog/index.html{% else %}/blog/page/{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+---
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="Žan Kafol, home">
+    <span class="brand__name">Žan Kafol</span>
+    <span class="brand__role">{{ site.eyebrow }}</span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__lines" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="/#work">Work</a>
+    <a href="/#about">About</a>
+    <a href="/blog/" aria-current="page">Journal</a>
+    <a href="/#press">Press</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="blog-hero" aria-labelledby="blog-title">
+    <div class="blog-hero__media" aria-hidden="true">
+      <img src="{{ posts[0].leadImage }}" alt="" loading="eager" decoding="async">
+    </div>
+    <div class="blog-hero__shade" aria-hidden="true"></div>
+    <div class="blog-hero__content shell">
+      <p class="section-label">Photo journal</p>
+      <h1 id="blog-title">Stories from<br>air, caves &amp; karst</h1>
+      <p>An archive of photographs, flights, cave visits and landscapes, published since 2006.</p>
+    </div>
+  </section>
+
+  <section class="blog-archive shell" aria-labelledby="archive-title">
+    <header class="blog-archive__header">
+      <div>
+        <p class="section-label">Archive</p>
+        <h2 id="archive-title">Latest photo stories</h2>
+      </div>
+      <p>{{ wordpressPosts.length }} posts <span aria-hidden="true">·</span> Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</p>
+    </header>
+
+    <div class="blog-grid">
+      {% for post in posts %}
+      <article class="blog-card{% if loop.first %} blog-card--lead{% endif %}">
+        <a href="{{ post.permalink }}">
+          <figure class="blog-card__image">
+            <img src="{{ post.featuredImage }}" alt="" loading="{% if loop.index <= 4 %}eager{% else %}lazy{% endif %}" decoding="async">
+          </figure>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
+              {% if post.categories.length %}<span>{{ post.categories[0].name }}</span>{% endif %}
+            </div>
+            <h3>{{ post.title }}</h3>
+            {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+            <span class="blog-card__read">Read story <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+
+    <nav class="blog-pagination" aria-label="Journal pages">
+      {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}"><span aria-hidden="true">←</span> Newer stories</a>
+      {% else %}
+      <span aria-hidden="true">← Newer stories</span>
+      {% endif %}
+      <span>Page {{ pagination.pageNumber + 1 }} / {{ pagination.pages.length }}</span>
+      {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}">Older stories <span aria-hidden="true">→</span></a>
+      {% else %}
+      <span>Older stories →</span>
+      {% endif %}
+    </nav>
+  </section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__brand">
+      <span class="brand__name">Žan Kafol</span>
+      <span class="brand__role">{{ site.eyebrow }}</span>
+      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Contact</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <span>{{ site.location }}</span>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Follow</p>
+      <div class="footer-socials">
+        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <p>© {% year %} Žan Kafol</p>
+      <a href="/">Back home ↑</a>
+    </div>
+  </div>
+</footer>
