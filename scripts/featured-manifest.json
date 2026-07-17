@@ -22,31 +22,31 @@
       "id": "below-ground",
       "label": "Below Ground",
       "kicker": "24 photographs",
-      "file": "20210605-_MG_9621.jpg"
+      "file": "20250212-IMG_7268-Enhanced-NR.jpg"
     },
     {
       "id": "in-flight",
       "label": "In Flight",
-      "kicker": "11 photographs",
-      "file": "20190302-_MG_9036.jpg"
+      "kicker": "9 photographs",
+      "file": "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg"
     },
     {
       "id": "after-dark",
       "label": "After Dark",
       "kicker": "23 photographs",
-      "file": "20240510-IMG_4255.jpg"
+      "file": "20201029-DJI_0456.jpg"
     },
     {
       "id": "water-and-ice",
       "label": "Water & Ice",
-      "kicker": "17 photographs",
-      "file": "20201018-DJI_0364-2.jpg"
+      "kicker": "21 photographs",
+      "file": "20200727-DJI_0263.jpg"
     },
     {
       "id": "land-and-life",
       "label": "Land & Life",
-      "kicker": "14 photographs",
-      "file": "20251016-DSC_3057.jpg"
+      "kicker": "12 photographs",
+      "file": "20211025-IMG_2309.jpg"
     }
   ],
   "categories": [
@@ -71,7 +71,7 @@
     {
       "id": "below-ground",
       "label": "Below Ground",
-      "cover": "20210605-_MG_9621.jpg",
+      "cover": "20250212-IMG_7268-Enhanced-NR.jpg",
       "files": [
         "20210314-_MG_1507.jpg",
         "20210314-_MG_1530.jpg",
@@ -102,7 +102,7 @@
     {
       "id": "in-flight",
       "label": "In Flight",
-      "cover": "20190302-_MG_9036.jpg",
+      "cover": "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
       "files": [
         "20160430-G0102983.jpg",
         "20160430-G0123010.jpg",
@@ -112,15 +112,13 @@
         "20190302-_MG_9037.jpg",
         "20210813-IMG_20210813_161736.jpg",
         "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
-        "20221010-G0319710.jpg",
-        "20221010-G0399782.jpg",
         "20221010-G0569960-Enhanced-NR.jpg"
       ]
     },
     {
       "id": "after-dark",
       "label": "After Dark",
-      "cover": "20240510-IMG_4255.jpg",
+      "cover": "20201029-DJI_0456.jpg",
       "files": [
         "20201029-DJI_0456-2.jpg",
         "20201029-DJI_0456.jpg",
@@ -150,8 +148,10 @@
     {
       "id": "water-and-ice",
       "label": "Water & Ice",
-      "cover": "20201018-DJI_0364-2.jpg",
+      "cover": "20200727-DJI_0263.jpg",
       "files": [
+        "20171229-_MG_8375-2.jpg",
+        "20171229-_MG_8375.jpg",
         "20200726-DJI_0216-2.jpg",
         "20200726-DJI_0216.jpg",
         "20200727-DJI_0263.jpg",
@@ -162,6 +162,8 @@
         "20201018-DJI_0408.jpg",
         "20210725-DJI_0970.jpg",
         "20210725-IMG_1255.jpg",
+        "20221010-G0319710.jpg",
+        "20221010-G0399782.jpg",
         "20231105-DJI_0307-Pano.jpg",
         "20231111-DJI_0461-Pano.jpg",
         "20231126-DJI_0664-Pano.jpg",
@@ -174,11 +176,9 @@
     {
       "id": "land-and-life",
       "label": "Land & Life",
-      "cover": "20251016-DSC_3057.jpg",
+      "cover": "20211025-IMG_2309.jpg",
       "files": [
         "20170426-_MG_7764.jpg",
-        "20171229-_MG_8375-2.jpg",
-        "20171229-_MG_8375.jpg",
         "20210417-_MG_9299.jpg",
         "20210725-IMG_1127.jpg",
         "20210725-IMG_1143.jpg",
@@ -246,7 +246,7 @@
       "captured": "2017:12:29 16:14:14",
       "camera": "Canon Canon EOS 60D",
       "tags": [
-        "land-and-life"
+        "water-and-ice"
       ]
     },
     {
@@ -257,7 +257,7 @@
       "captured": "2017:12:29 16:14:14",
       "camera": "Canon Canon EOS 60D",
       "tags": [
-        "land-and-life"
+        "water-and-ice"
       ]
     },
     {
@@ -884,7 +884,7 @@
       "captured": "2022:10:10 17:41:58",
       "camera": "GoPro HERO10 Black",
       "tags": [
-        "in-flight"
+        "water-and-ice"
       ]
     },
     {
@@ -895,7 +895,7 @@
       "captured": "2022:10:10 17:50:38",
       "camera": "GoPro HERO10 Black",
       "tags": [
-        "in-flight"
+        "water-and-ice"
       ]
     },
     {

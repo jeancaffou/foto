@@ -16,6 +16,12 @@ function stem(file) {
   return file.replace(/\.jpe?g$/i, "");
 }
 
+function captureKey(file) {
+  const source = imageByFile.get(file);
+  const timestamp = source.captured || file.slice(0, 8);
+  return timestamp.replace(/\D/g, "").padEnd(14, "0");
+}
+
 function imageData(file, category) {
   const source = imageByFile.get(file);
   if (!source) throw new Error(`Unknown gallery image: ${file}`);
@@ -50,7 +56,9 @@ const categories = [
   label: category.label,
   description: descriptions[category.id],
   cover: imageData(category.cover, category.label).full,
-  images: category.files.map((file) => imageData(file, category.label))
+  images: [...category.files]
+    .sort((left, right) => captureKey(right).localeCompare(captureKey(left)))
+    .map((file) => imageData(file, category.label))
 }));
 
 const selected = manifest.selectedWorkTiles.map((tile) => {
