@@ -1,0 +1,128 @@
+.press-detail-page {
+  background:
+    radial-gradient(circle at 72% 8%, rgba(188, 123, 49, 0.11), transparent 34rem),
+    var(--ink);
+}
+
+.press-detail-page .site-header {
+  position: relative;
+}
+
+.press-detail {
+  border-top: 1px solid var(--line);
+}
+
+.press-detail__header {
+  max-width: 1020px;
+  padding-block: clamp(4rem, 9vw, 8rem) clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.press-detail__back {
+  display: inline-block;
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.press-detail__back:hover,
+.press-detail__back:focus-visible {
+  color: var(--gold-light);
+}
+
+.press-detail__header .section-label {
+  margin-bottom: 1.25rem;
+}
+
+.press-detail__header h1 {
+  max-width: 930px;
+  margin: 0;
+  color: var(--paper-bright);
+  font-size: clamp(2.6rem, 6vw, 5.8rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.press-detail__meta {
+  display: flex;
+  margin-top: clamp(1.6rem, 3vw, 2.5rem);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.2rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.press-detail__meta strong {
+  color: var(--paper);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.press-detail__source {
+  display: inline-flex;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgba(214, 155, 80, 0.62);
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--gold-light);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.press-detail__source:hover,
+.press-detail__source:focus-visible {
+  color: var(--ink);
+  background: var(--gold-light);
+}
+
+.press-detail__scan {
+  max-width: 1180px;
+  margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.press-detail__scan img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(224, 218, 205, 0.2);
+  background: #fff;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.38);
+}
+
+.press-detail__scan figcaption {
+  margin-top: 0.8rem;
+  color: #77736c;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .press-detail__header {
+    padding-top: 2.8rem;
+  }
+
+  .press-detail__back {
+    margin-bottom: 2.8rem;
+  }
+
+  .press-detail__header h1 {
+    font-size: clamp(2.25rem, 12vw, 3.5rem);
+  }
+
+  .press-detail__meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .press-detail__source {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

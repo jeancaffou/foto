@@ -8,7 +8,7 @@
     },
     {
       "id": "natgeo-2023",
-      "label": "Razsvetljenje",
+      "label": "Enlightened (All Roads Lead to Rakov Škocjan)",
       "kicker": "National Geographic Slovenia · 2023",
       "file": "20210810-IMG_1621.jpg"
     },
@@ -43,9 +43,9 @@
       "file": "20201018-DJI_0364-2.jpg"
     },
     {
-      "id": "wild-places",
-      "label": "Wild Places",
-      "kicker": "39 photographs",
+      "id": "land-and-life",
+      "label": "Land & Life",
+      "kicker": "12 photographs",
       "file": "20251016-DSC_3057.jpg"
     }
   ],
@@ -228,49 +228,22 @@
       ]
     },
     {
-      "id": "wild-places",
-      "label": "Wild Places",
+      "id": "land-and-life",
+      "label": "Land & Life",
       "cover": "20251016-DSC_3057.jpg",
       "files": [
-        "20160430-G0123010.jpg",
         "20170426-_MG_7764.jpg",
         "20171229-_MG_8375-2.jpg",
         "20171229-_MG_8375.jpg",
-        "20190128-_MG_8888.jpg",
-        "20190128-_MG_8909.jpg",
-        "20190128-_MG_8911.jpg",
-        "20190128-_MG_8923.jpg",
-        "20190128-_MG_8979.jpg",
-        "20190128-_MG_8983.jpg",
-        "20210323-_MG_1729.jpg",
-        "20210330-DSCN8535.jpg",
         "20210417-_MG_9299.jpg",
-        "20210422-_MG_9511-Edit.jpg",
-        "20210711-IMG_0460-Edit.jpg",
-        "20210725-DJI_0970.jpg",
         "20210725-IMG_1127.jpg",
         "20210725-IMG_1143.jpg",
         "20210725-IMG_1185.jpg",
-        "20210725-IMG_1255.jpg",
         "20210804-IMG_1462.jpg",
-        "20211025-IMG_2309.jpg",
-        "20211025-IMG_2323.jpg",
         "20211212-IMG_2386.jpg",
         "20231212-IMG_3002.jpg",
-        "20240120-DJI_20240120160337_0034_D.jpg",
-        "20240120-DJI_20240120161322_0039_D.jpg",
         "20240414-DSC_1106.jpg",
-        "20240501-DJI_0056.jpg",
-        "20241012-DJI_20241012161447_0007_D-Enhanced-NR.jpg",
-        "20241012-DJI_20241012172905_0030_D.jpg",
-        "20241020-IMG_5009-Enhanced-NR.jpg",
-        "20241021-IMG_5046-Enhanced-NR-2.jpg",
-        "20241021-IMG_5046-Enhanced-NR.jpg",
-        "20241021-IMG_5062.jpg",
-        "20250612-DJI_20250612181931_0613_D.jpg",
-        "20251016-DSC_3057.jpg",
-        "20251108-DJI_20251108153046_0170_D.jpg",
-        "20260430-DSC_5513.jpg"
+        "20251016-DSC_3057.jpg"
       ]
     }
   ],

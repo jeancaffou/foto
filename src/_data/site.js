@@ -23,7 +23,7 @@ module.exports = {
     },
     {
       title: "Županovo priznanje za fotografijo",
-      source: "Občina Postojna",
+      source: "Municipality of Postojna",
       year: "2024",
       image: "/assets/images/press-postojna-award.jpg",
       url: "https://www.postojna.si/objava/919103",
@@ -39,7 +39,7 @@ module.exports = {
     },
     {
       title: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire",
-      source: "RTV SLO, intervju",
+      source: "RTV SLO, interview",
       year: "2023",
       image: "/assets/images/press-rtvslo-creative.jpg",
       url: "https://www.rtvslo.si/zabava-in-slog/ture-avanture/da-si-lahko-zares-ustvarjalen-moras-vcasih-krsiti-ustaljene-okvire/691924",
@@ -47,7 +47,7 @@ module.exports = {
     },
     {
       title: "Če si amater, še ne pomeni, da si slab",
-      source: "RTV SLO, intervju",
+      source: "RTV SLO, interview",
       year: "2023",
       image: "/assets/images/press-rtvslo-interview.jpg",
       url: "https://www.rtvslo.si/kultura/vizualna-umetnost/ce-si-amater-se-ne-pomeni-da-si-slab-meni-veckrat-nagrajeni-fotograf-zan-kafol/689184",
@@ -63,10 +63,10 @@ module.exports = {
     },
     {
       title: "Če se hočeš umakniti, greš gor ali pa dol",
-      source: "Nedelo, Delo",
+      source: "neDelo",
       year: "2023",
-      image: "/assets/images/press-delo.webp",
-      url: "https://www.delo.si/nedelo/ce-se-hoces-umakniti-gres-gor-ali-pa-dol",
+      image: "/assets/images/press-nedelo.jpg",
+      url: "/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/",
       kind: "article"
     },
     {
@@ -106,7 +106,7 @@ module.exports = {
       source: "Prepih",
       year: "2022",
       image: "/assets/images/press-prepih-2022.jpg",
-      url: "https://www.postojna.si/Files/eMagazine/105/702287/Prepih%20November%2021c-11-22%20WEB.pdf",
+      url: "/press/zan-kafol-od-zgoraj-od-blizu/",
       kind: "article"
     },
     {
@@ -131,7 +131,7 @@ module.exports = {
       name: "National Geographic",
       logo: "/assets/images/logo-national-geographic.svg",
       title: "Two-time overall winner",
-      detail: "Cerkniško polje, 2022 · Razsvetljenje, 2023",
+      detail: "Cerkniško polje, 2022 · Enlightened (All Roads Lead to Rakov Škocjan), 2023",
       url: "/2023/10/druga-zmaga-na-national-geographic.html",
       className: "natgeo"
     },
@@ -139,23 +139,23 @@ module.exports = {
       name: "Nikon",
       logo: "/assets/images/logo-nikon.svg",
       title: "Awarded photographer, 2010",
-      detail: "Nikon ‘Jaz sem’ photo contest",
+      detail: "I AM Nikon photo contest",
       url: "https://iprom.si/blog/nikonova-kampanja-in-nagradni-natecaj-jaz-sem-navdusila-slovenijo/",
       className: "nikon"
     },
     {
-      name: "Občina Postojna",
+      name: "Municipality of Postojna",
       logo: "/assets/images/logo-postojna.png",
-      title: "Županovo priznanje, 2024",
-      detail: "Photography and promotion of Postojna",
+      title: "Mayor's Award for Photography, 2024",
+      detail: "Municipality of Postojna, Slovenia",
       url: "https://www.postojna.si/objava/919103",
       className: "postojna"
     }
   ],
   publications: ["RTV Slovenija", "N1", "STA", "Delo", "Primorske novice", "Radio 94"],
   posts: [
-    { title: "Ledena jama v Paradani", excerpt: "Led, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Jan 11, 2025", category: "Cave", url: "/blog/" },
-    { title: "Severni sij nad Slovenijo", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/blog/" },
-    { title: "Letenje nad Tržaškim zalivom", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Mar 18, 2024", category: "Flight", url: "/blog/" }
+    { title: "Ice Cave in Paradana", excerpt: "Led, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Jan 11, 2025", category: "Cave", url: "/blog/" },
+    { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/blog/" },
+    { title: "Flying over the Gulf of Trieste", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Mar 18, 2024", category: "Flight", url: "/blog/" }
   ]
 };

@@ -29,7 +29,7 @@ if (pressSection) {
   const nextButton = pressSection.querySelector("[data-press-next]");
   const pageLabel = pressSection.querySelector("[data-press-page]");
   const totalLabel = pressSection.querySelector("[data-press-total]");
-  const pageSize = Number.parseInt(pressSection.dataset.pageSize, 10) || 4;
+  const pageSize = Number.parseInt(pressSection.dataset.pageSize, 10) || 6;
   const totalPages = Math.ceil(cards.length / pageSize);
   let currentPage = 0;
 

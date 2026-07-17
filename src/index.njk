@@ -33,7 +33,7 @@ title: Žan Kafol — Aerial & Cave Photographer
       <p class="kicker">Stories in two directions</p>
       <h1 id="hero-title">Aerial &amp; cave<br>photography</h1>
       <span class="gold-rule" aria-hidden="true"></span>
-      <p class="hero__intro">Stories from above the landscape<br>and beneath the karst.</p>
+      <p class="hero__intro">Photo stories shaped by flight,<br>caves and the karst landscape.</p>
     </div>
     <a class="hero__scroll" href="#work">
       <span>Explore</span>
@@ -85,7 +85,7 @@ title: Žan Kafol — Aerial & Cave Photographer
           <svg class="about__fact-icon" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M3 9c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 15c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 21c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 27c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3"/>
           </svg>
-          <dd>Institute for Karst Research<br>ZRC SAZU</dd>
+          <dd>Karst Research Institute<br>ZRC SAZU</dd>
         </div>
         <div>
           <dt class="sr-only">Photography practice</dt>
@@ -117,12 +117,12 @@ title: Žan Kafol — Aerial & Cave Photographer
         {% for publication in site.publications %}<span class="publication-mark">{{ publication }}</span>{% endfor %}
       </div>
       <blockquote data-reveal>
-        <p>“S svojimi fotografijami želim narediti pozitivno spremembo na tem svetu.”</p>
-        <cite>Žan Kafol</cite>
+        <p>If you want to get away, you go up or down.</p>
+        <cite><a href="/assets/images/press-nedelo.jpg" target="_blank" rel="noreferrer">Žan Kafol, neDelo, 2023</a></cite>
       </blockquote>
     </section>
 
-    <section class="press band-section" id="press" aria-labelledby="press-title" data-press data-page-size="4">
+    <section class="press band-section" id="press" aria-labelledby="press-title" data-press data-page-size="6">
       <div class="press__heading">
         <p class="section-label" id="press-title">Press &amp; interviews</p>
         <div class="press-pager" data-press-pager hidden>
@@ -135,7 +135,7 @@ title: Žan Kafol — Aerial & Cave Photographer
       </div>
       <div class="press-grid" id="press-grid">
         {% for item in site.press %}
-        <a class="press-card" href="{{ item.url }}" target="_blank" rel="noreferrer" data-press-card>
+        <a class="press-card" href="{{ item.url }}"{% if item.url[0] != "/" %} target="_blank" rel="noreferrer"{% endif %} data-press-card>
           <div class="press-card__image">
             <img src="{{ item.image }}" alt="" loading="lazy">
             <span class="press-card__kind press-card__kind--{{ item.kind }}" aria-hidden="true">{% if item.kind == "video" %}▶{% elif item.kind == "audio" %}♪{% elif item.kind == "award" %}★{% else %}↗{% endif %}</span>
@@ -175,7 +175,7 @@ title: Žan Kafol — Aerial & Cave Photographer
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
       <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Stories from above the landscape<br>and beneath the karst.</p>
+      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
     </div>
     <div class="footer-group">
       <p class="footer-label">Contact</p>

@@ -35,10 +35,11 @@
 - User correction: press coverage must represent the actual interview and broadcast archive.
 - Earlier mistake: only two cards were shown and both reused generic portrait images unrelated to the linked media.
 - Preferred rule: use real local stills from each specific appearance. The verified archive includes four Radio 94 appearances, Dobro jutro, Primorska kronika, Prvi dnevnik, Na sončni strani, two RTV SLO written interviews, the Nedelo/Delo feature, two Prepih features, and the 2024 municipal-award coverage.
-- Do not shorten the visible archive to make the band fit. Paginate it four items at a time and keep every verified entry in the DOM with accessible previous/next controls.
+- Do not shorten the visible archive to make the band fit. Paginate it six items at a time and keep every verified entry in the DOM with accessible previous/next controls.
 - The two RTV written interviews are `Če si amater, še ne pomeni, da si slab` at canonical article ID `689184` and `Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire` at canonical article ID `691924`.
 - The two Prepih features are the November 2022 `Žan Kafol: od zgoraj, od blizu` article and the April 2024 full interview `Prepih na obisku: Žan Kafol`. Use the supplied `context/odzgoraj.jpg` for the 2022 card.
 - Žan received the `Županovo priznanje` in 2024 for special achievements in photography and promotion of the Municipality of Postojna. Use the supplied `context/OBČINA POSTOJNA PODELITEV OBČINSKIH PRIZNANJ 23.4.2024 - Valter Leban-0306.jpg` for this coverage.
+- The supplied `context/nedelo1.jpg` is the readable neDelo article scan. Keep it local, expose it from the neDelo press card, and use the article line `If you want to get away, you go up or down` for the homepage quote.
 - Do not add the Poček/Tednik appearance back without a direct request.
 
 ## Award Presentation
@@ -46,7 +47,20 @@
 - Feature and award logos must be visually prominent and may stand alone above their descriptions. Do not reduce them to tiny marks inside text-heavy cards.
 - Nikon correction: Žan's Nikon recognition was for the 2010 `Jaz sem` photo contest.
 - Earlier mistake: the Nikon card incorrectly described the Nikon Z6II received as the 2023 National Geographic Slovenia prize as a Nikon photography award.
-- Preferred rule: keep the 2010 Nikon contest recognition distinct from the later National Geographic prize equipment.
+- Preferred rule: keep the 2010 Nikon contest recognition distinct from the later National Geographic prize equipment. On the English homepage use the official campaign form `I AM Nikon`, not `Jaz sem`.
+
+## Homepage Language
+
+- The portfolio homepage is English. Translate descriptive labels, award labels, category names, quotes, and homepage post titles into English.
+- Press and interview headlines retain their original Slovenian titles. Surrounding interface labels and source metadata remain English.
+- Keep Slovenian only when it is a proper name, such as `Žan Kafol`, `Cerkniško polje`, `Rakov Škocjan`, `Prepih`, `neDelo`, or `RTV Slovenija`.
+- Do not expose unexplained Slovenian institutional labels. Use `Mayor's Award for Photography, 2024` and identify the body as `Municipality of Postojna, Slovenia`.
+- Imported legacy blog articles retain their original text as required by the migration; the homepage language rule does not authorize rewriting the archived post bodies.
+
+## Gallery Categories
+
+- User correction: `Wild Places` was too generic and did not accurately describe the exported set.
+- Preferred replacement: `Land & Life` at `/work/land-and-life/`, limited to the 12 coherent photographs of landscapes, trees, wildlife, people outdoors, Predjama Castle, and seasonal scenes.
 
 ## WordPress Migration
 
@@ -70,8 +84,10 @@
 - Žan is based in Postojna, Slovenia.
 - His photography brings together aerial views, paragliding, caves, karst, nature, and night landscapes.
 - He won the National Geographic Slovenia photo competition overall in 2022 with `Cerkniško polje` and again in 2023 with `Razsvetljenje`.
+- The exact English title of `Razsvetljenje` is `Enlightened (All Roads Lead to Rakov Škocjan)`. Do not translate it as `Illumination`.
 - He received Postojna's municipal recognition for photography and promotion of the municipality in 2024.
-- He collaborates with the Institute for Karst Research ZRC SAZU. Describe this accurately as technical collaboration and support work.
+- He collaborates with the Karst Research Institute ZRC SAZU. Always use this official English word order; `Institute for Karst Research` is incorrect.
+- Caves are part of karst, not something `beneath the karst`. The earlier tagline made a false geographic distinction. Prefer direct language connecting flight, caves and the karst landscape.
 
 ## UI Audio
 

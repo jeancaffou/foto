@@ -1,13 +1,13 @@
 const manifest = require("../../scripts/featured-manifest.json");
 
 const descriptions = {
-  "award-winning": "The two National Geographic Slovenia overall winners: Cerkniško polje in 2022 and Razsvetljenje in 2023.",
+  "award-winning": "The two National Geographic Slovenia overall winners: Cerkniško polje in 2022 and Enlightened (All Roads Lead to Rakov Škocjan) in 2023.",
   "from-above": "Karst poljes, forests, towns and water seen from the air.",
   "below-ground": "Caves, underground rivers and light shaped with a team.",
   "in-flight": "Paragliding, long views and movement above the landscape.",
   "after-dark": "The Milky Way, storms, aurora and landscapes after sunset.",
   "water-and-ice": "Flooded poljes, rivers, snow and ice across the karst.",
-  "wild-places": "Mountains, forests, rock and changing weather."
+  "land-and-life": "Landscapes, trees, wildlife and life outdoors."
 };
 
 const imageByFile = new Map(manifest.images.map((image) => [image.file, image]));

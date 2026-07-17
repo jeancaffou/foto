@@ -590,7 +590,7 @@ a:focus-visible {
 
 .press-grid {
   display: grid;
-  min-height: clamp(100px, 10vw, 118px);
+  min-height: clamp(156px, 15vw, 184px);
   grid-template-columns: repeat(2, 1fr);
   align-content: start;
   gap: clamp(0.45rem, 0.8vw, 0.8rem) clamp(0.65rem, 1vw, 1rem);
