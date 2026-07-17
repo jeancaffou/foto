@@ -16,8 +16,8 @@ title: Žan Kafol — Aerial & Cave Photographer
   <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
     <a href="#work">Work</a>
     <a href="#about">About</a>
+    <a href="#featured">Featured</a>
     <a href="#press">Press</a>
-    <a href="#recognition">Awards</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -66,7 +66,7 @@ title: Žan Kafol — Aerial & Cave Photographer
     <div class="about__inner shell">
       <div class="about__portrait" data-reveal>
         <div class="about__halo" aria-hidden="true"></div>
-        <img src="/assets/images/portrait.png" alt="Portrait of Žan Kafol" loading="lazy">
+        <img src="/assets/images/headshot-bw.webp" alt="Portrait of Žan Kafol" loading="lazy">
       </div>
       <div class="about__copy" data-reveal>
         <p class="section-label">About</p>
@@ -93,6 +93,27 @@ title: Žan Kafol — Aerial & Cave Photographer
   </section>
 
   <div class="editorial-band">
+    <section class="featured band-section" id="featured" aria-labelledby="featured-title">
+      <p class="section-label" id="featured-title">Featured &amp; awarded</p>
+      <div class="feature-grid">
+        {% for item in site.features %}
+        <a class="feature-card" href="{{ item.url }}" target="_blank" rel="noreferrer" data-reveal>
+          <span class="feature-card__logo"><img src="{{ item.logo }}" alt="{{ item.name }}"></span>
+          <strong>{{ item.title }}</strong>
+          <span>{{ item.detail }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      <div class="publication-list" data-reveal aria-label="Selected publications">
+        <span class="publication-list__label">Published in</span>
+        {% for publication in site.publications %}<span class="publication-mark">{{ publication }}</span>{% endfor %}
+      </div>
+      <blockquote data-reveal>
+        <p>“S svojimi fotografijami želim narediti pozitivno spremembo na tem svetu.”</p>
+        <cite>Žan Kafol</cite>
+      </blockquote>
+    </section>
+
     <section class="press band-section" id="press" aria-labelledby="press-title">
       <p class="section-label" id="press-title">Press &amp; interviews</p>
       <div class="press-grid">
@@ -109,19 +130,6 @@ title: Žan Kafol — Aerial & Cave Photographer
         </a>
         {% endfor %}
       </div>
-    </section>
-
-    <section class="recognition band-section" id="recognition" aria-labelledby="recognition-title">
-      <p class="section-label" id="recognition-title">Recognition</p>
-      <div class="award-grid" data-reveal>
-        <div><strong>2×</strong><span>National Geographic Slovenia<br>overall winner</span></div>
-        <div><strong>2024</strong><span>Postojna municipal<br>recognition</span></div>
-        <div><strong>ZRC SAZU</strong><span>Institute for<br>Karst Research</span></div>
-      </div>
-      <blockquote data-reveal>
-        <p>“S svojimi fotografijami želim narediti pozitivno spremembo na tem svetu.”</p>
-        <cite>Žan Kafol</cite>
-      </blockquote>
     </section>
   </div>
 

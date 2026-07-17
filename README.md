@@ -25,9 +25,8 @@ npm test
 - `src/index.njk`: homepage composition
 - `src/_includes/layouts/`: shared document layouts
 - `src/_data/site.js`: featured work, press, journal, and social data
-- `src/assets/`: local fonts, images, styles, and scripts
+- `src/assets/`: local images, styles, and scripts
 - `tests/`: responsive Playwright checks
 - `_site/`: generated output
 
 Update work and journal details in `src/_data/site.js`. Keep production imagery local in `src/assets/images/`; the supplied `context/` folder and design reference are intentionally ignored.
-

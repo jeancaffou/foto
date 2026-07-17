@@ -10,7 +10,8 @@
 ## Visual Direction
 
 - Preserve the dark, restrained, image-led editorial direction of the supplied design.
-- Keep production images and fonts local under `src/assets/`. Never hotlink visual assets.
+- Keep production images local under `src/assets/`. Never hotlink image assets.
+- Load the display typeface through Google Fonts; do not add local font binaries.
 - Maintain strong type hierarchy, warm amber accents, fine rules, and generous negative space.
 - Responsive layouts must reflow deliberately. Do not shrink desktop grids until they become unreadable.
 - Motion should be sparse and meaningful. Respect `prefers-reduced-motion`.
@@ -36,4 +37,3 @@
 
 - Do not add typing sounds to autonomous UI, galleries, feeds, boot logs, or rotating content.
 - Typing sounds are reserved for interactive console-focus reveals opened by a user action. This photography site currently has no audio behavior.
-

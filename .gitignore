@@ -8,3 +8,4 @@ playwright-report/
 context/
 ChatGPT Image*.png
 
+/.idea/
