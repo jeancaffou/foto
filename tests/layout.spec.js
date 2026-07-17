@@ -65,6 +65,34 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await page.screenshot({ path: testInfo.outputPath("page.png"), fullPage: true });
 });
 
+test("aligns visible homepage bands to the max-width shell", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Max-width shell geometry only needs one desktop run");
+  await page.setViewportSize({ width: 2100, height: 1000 });
+  await page.goto("/");
+  await page.evaluate(() => document.querySelectorAll("[data-reveal]").forEach((item) => item.classList.add("is-visible")));
+
+  const leftSelectors = [
+    ".works > .section-label",
+    ".work-grid",
+    ".about__portrait",
+    ".featured > .section-label",
+    ".feature-grid",
+    ".publication-list",
+    ".ambassador-mark",
+    ".journal__heading",
+    ".site-footer__inner"
+  ];
+  const leftEdges = await Promise.all(leftSelectors.map((selector) => page.locator(selector).evaluate((item) => item.getBoundingClientRect().left)));
+  expect(Math.max(...leftEdges) - Math.min(...leftEdges)).toBeLessThan(0.1);
+
+  const shell = await page.locator(".works").evaluate((item) => {
+    const bounds = item.getBoundingClientRect();
+    return { left: bounds.left, right: bounds.right };
+  });
+  expect(shell.left).toBeCloseTo(280, 1);
+  expect(shell.right).toBeCloseTo(1820, 1);
+});
+
 test("paginates the complete press archive without dropping entries", async ({ page }) => {
   await page.goto("/");
   await page.locator("#press").scrollIntoViewIfNeeded();
