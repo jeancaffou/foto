@@ -28,6 +28,8 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".feature-card--postojna")).toContainText("Special achievements in photography and promotion of the Municipality of Postojna, Slovenia");
   await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
   await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);
+  await expect(page.locator(".feature-card--nikon")).toContainText("I Am Nikon photo contest, second place, 2010");
+  await expect(page.locator(".feature-card--nikon")).toContainText("Photo titled Jaz sem Raketa (I Am a Rocket) won second place on I Am Nikon photo contest");
   await expect(page.locator('.press-card[href="/featured/mayors-award-postojna-2024/"]')).toContainText("Županovo priznanje za fotografijo");
   await expect(page.locator(".about__facts")).toContainText("Karst Research Institute");
   await expect(page.locator(".hero__intro")).toContainText("Photo stories shaped by flight");

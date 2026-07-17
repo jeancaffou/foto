@@ -32,6 +32,11 @@ test("assigns every featured photograph to exactly one collection", () => {
   });
 });
 
+test("excludes the removed 20170427 flight photograph", () => {
+  assert.equal(manifest.images.some((image) => image.file === "20170427-_MG_7839.jpg"), false);
+  assert.equal(manifest.categories.some((category) => category.files.includes("20170427-_MG_7839.jpg")), false);
+});
+
 test("uses editorial descriptors instead of collection counts in selected work", () => {
   const categories = new Map(manifest.categories.map((category) => [category.id, category]));
 

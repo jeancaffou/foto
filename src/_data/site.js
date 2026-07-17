@@ -146,8 +146,8 @@ module.exports = {
     {
       name: "Nikon",
       logo: "/assets/images/logo-nikon.svg",
-      title: "Second place, 2010",
-      detail: "Jaz sem Raketa (I Am a Rocket) · I AM Nikon photo contest",
+      title: "I Am Nikon photo contest, second place, 2010",
+      detail: "Photo titled Jaz sem Raketa (I Am a Rocket) won second place on I Am Nikon photo contest",
       url: "/featured/i-am-nikon-jaz-sem-raketa/",
       className: "nikon"
     }
