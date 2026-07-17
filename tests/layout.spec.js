@@ -22,7 +22,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".ambassador-mark")).toContainText("Tourist ambassador for Visit Postojnsko (Tourism Postojna)");
   await expect(page.locator('.work-card[href="/work/water-and-ice/"] img')).toHaveAttribute("src", /20231105-DJI_0307-Pano/);
   await expect(page.locator(".work-card__type").filter({ hasText: /^\d+ photographs$/ })).toHaveCount(0);
-  await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award for Photography, 2024");
+  await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award, Postojna, 2024");
   await expect(page.locator(".feature-card--postojna")).toContainText("Special achievements in photography and promotion of the Municipality of Postojna, Slovenia");
   await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
   await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);

@@ -138,7 +138,7 @@ module.exports = {
     {
       name: "Municipality of Postojna",
       logo: "/assets/images/logo-postojna.svg",
-      title: "Mayor's Award for Photography, 2024",
+      title: "Mayor's Award, Postojna, 2024",
       detail: "Special achievements in photography and promotion of the Municipality of Postojna, Slovenia",
       url: "https://www.postojna.si/objava/919103",
       className: "postojna"
