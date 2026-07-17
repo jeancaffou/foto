@@ -1,0 +1,1480 @@
+{
+  "selectedWorkTiles": [
+    {
+      "id": "natgeo-2022",
+      "label": "Cerkniško polje",
+      "kicker": "National Geographic Slovenia · 2022",
+      "file": "20210228-DJI_0270-Pano.jpg"
+    },
+    {
+      "id": "natgeo-2023",
+      "label": "Razsvetljenje",
+      "kicker": "National Geographic Slovenia · 2023",
+      "file": "20210810-IMG_1621.jpg"
+    },
+    {
+      "id": "from-above",
+      "label": "From Above",
+      "kicker": "37 photographs",
+      "file": "20250612-DJI_20250612182344_0620_D.jpg"
+    },
+    {
+      "id": "below-ground",
+      "label": "Below Ground",
+      "kicker": "25 photographs",
+      "file": "20210605-_MG_9621.jpg"
+    },
+    {
+      "id": "in-flight",
+      "label": "In Flight",
+      "kicker": "17 photographs",
+      "file": "20190302-_MG_9036.jpg"
+    },
+    {
+      "id": "after-dark",
+      "label": "After Dark",
+      "kicker": "26 photographs",
+      "file": "20240510-IMG_4255.jpg"
+    },
+    {
+      "id": "water-and-ice",
+      "label": "Water & Ice",
+      "kicker": "37 photographs",
+      "file": "20201018-DJI_0364-2.jpg"
+    },
+    {
+      "id": "wild-places",
+      "label": "Wild Places",
+      "kicker": "39 photographs",
+      "file": "20251016-DSC_3057.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "from-above",
+      "label": "From Above",
+      "cover": "20250612-DJI_20250612182344_0620_D.jpg",
+      "files": [
+        "20160430-G0123010.jpg",
+        "20190128-_MG_8888.jpg",
+        "20190128-_MG_8909.jpg",
+        "20190128-_MG_8911.jpg",
+        "20190128-_MG_8923.jpg",
+        "20190128-_MG_8979.jpg",
+        "20190128-_MG_8983.jpg",
+        "20200726-DJI_0216-2.jpg",
+        "20200726-DJI_0216.jpg",
+        "20200727-DJI_0263.jpg",
+        "20200731-DJI_0521.jpg",
+        "20201018-DJI_0362.jpg",
+        "20201018-DJI_0364-2.jpg",
+        "20201018-DJI_0364-3.jpg",
+        "20201018-DJI_0364.jpg",
+        "20201018-DJI_0408.jpg",
+        "20201029-DJI_0456-2.jpg",
+        "20201029-DJI_0456.jpg",
+        "20210228-DJI_0270-Pano.jpg",
+        "20210725-DJI_0970.jpg",
+        "20210813-IMG_20210813_161736.jpg",
+        "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
+        "20221010-G0319710.jpg",
+        "20221010-G0399782.jpg",
+        "20221010-G0569960-Enhanced-NR.jpg",
+        "20231105-DJI_0307-Pano.jpg",
+        "20231111-DJI_0461-Pano.jpg",
+        "20231126-DJI_0664-Pano.jpg",
+        "20240120-DJI_20240120160337_0034_D.jpg",
+        "20240120-DJI_20240120161322_0039_D.jpg",
+        "20240501-DJI_0056.jpg",
+        "20241012-DJI_20241012161447_0007_D-Enhanced-NR.jpg",
+        "20241012-DJI_20241012172905_0030_D.jpg",
+        "20250101-DJI_20250101001256_0266_D-Enhanced-NR.jpg",
+        "20250612-DJI_20250612181931_0613_D.jpg",
+        "20250612-DJI_20250612182344_0620_D.jpg",
+        "20251108-DJI_20251108153046_0170_D.jpg"
+      ]
+    },
+    {
+      "id": "below-ground",
+      "label": "Below Ground",
+      "cover": "20210605-_MG_9621.jpg",
+      "files": [
+        "20210314-_MG_1507.jpg",
+        "20210314-_MG_1530.jpg",
+        "20210314-_MG_1595.jpg",
+        "20210501-_MG_9316.jpg",
+        "20210502-_MG_9427.jpg",
+        "20210605-_MG_9621.jpg",
+        "20210625-_MG_9826.jpg",
+        "20210710-_MG_0031-Edit.jpg",
+        "20210710-_MG_0040-Edit.jpg",
+        "20210710-_MG_9998.jpg",
+        "20210717-_MG_0670.jpg",
+        "20210717-_MG_0683.jpg",
+        "20210718-_MG_0811.jpg",
+        "20210810-IMG_1621.jpg",
+        "20230802-IMG_0855-2.jpg",
+        "20230802-IMG_0855.jpg",
+        "20230802-IMG_0856-2.jpg",
+        "20230802-IMG_0856.jpg",
+        "20231011-IMG_1862.jpg",
+        "20231216-IMG_3292-Enhanced-NR.jpg",
+        "20250212-IMG_7268-Enhanced-NR.jpg",
+        "20250212-IMG_7270-Enhanced-NR.jpg",
+        "20250212-IMG_7407-Enhanced-NR.jpg",
+        "20250212-IMG_7412.jpg",
+        "20250212-IMG_7418.jpg"
+      ]
+    },
+    {
+      "id": "in-flight",
+      "label": "In Flight",
+      "cover": "20190302-_MG_9036.jpg",
+      "files": [
+        "20160430-G0102983.jpg",
+        "20160430-G0123010.jpg",
+        "20170427-_MG_7839.jpg",
+        "20190128-_MG_8888.jpg",
+        "20190128-_MG_8909.jpg",
+        "20190128-_MG_8911.jpg",
+        "20190128-_MG_8923.jpg",
+        "20190128-_MG_8979.jpg",
+        "20190128-_MG_8983.jpg",
+        "20190302-_MG_9036.jpg",
+        "20190302-_MG_9037-2.jpg",
+        "20190302-_MG_9037.jpg",
+        "20210813-IMG_20210813_161736.jpg",
+        "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
+        "20221010-G0319710.jpg",
+        "20221010-G0399782.jpg",
+        "20221010-G0569960-Enhanced-NR.jpg"
+      ]
+    },
+    {
+      "id": "after-dark",
+      "label": "After Dark",
+      "cover": "20240510-IMG_4255.jpg",
+      "files": [
+        "20201029-DJI_0456-2.jpg",
+        "20201029-DJI_0456.jpg",
+        "20210323-_MG_1729.jpg",
+        "20210330-DSCN8535.jpg",
+        "20210331-_MG_8858.jpg",
+        "20210422-_MG_9511-Edit.jpg",
+        "20210711-IMG_0460-Edit.jpg",
+        "20210810-IMG_1621.jpg",
+        "20210811-IMG_1691.jpg",
+        "20210812-IMG_1707.jpg",
+        "20210812-IMG_1709.jpg",
+        "20211025-IMG_2309.jpg",
+        "20211025-IMG_2323.jpg",
+        "20211218-IMG_2417.jpg",
+        "20230719-IMG_0691-Enhanced-NR.jpg",
+        "20230719-IMG_0691.jpg",
+        "20230724-IMG_0830.jpg",
+        "20240510-IMG_4254-Enhanced-NR.jpg",
+        "20240510-IMG_4255.jpg",
+        "20241020-IMG_5009-Enhanced-NR.jpg",
+        "20241021-IMG_5046-Enhanced-NR-2.jpg",
+        "20241021-IMG_5046-Enhanced-NR.jpg",
+        "20241021-IMG_5062.jpg",
+        "20241022-IMG_1404-Enhanced-NR.jpg",
+        "20250101-DJI_20250101001256_0266_D-Enhanced-NR.jpg",
+        "20260430-DSC_5513.jpg"
+      ]
+    },
+    {
+      "id": "water-and-ice",
+      "label": "Water & Ice",
+      "cover": "20201018-DJI_0364-2.jpg",
+      "files": [
+        "20200726-DJI_0216-2.jpg",
+        "20200726-DJI_0216.jpg",
+        "20200727-DJI_0263.jpg",
+        "20201018-DJI_0362.jpg",
+        "20201018-DJI_0364-2.jpg",
+        "20201018-DJI_0364-3.jpg",
+        "20201018-DJI_0364.jpg",
+        "20201018-DJI_0408.jpg",
+        "20210228-DJI_0270-Pano.jpg",
+        "20210314-_MG_1507.jpg",
+        "20210314-_MG_1530.jpg",
+        "20210314-_MG_1595.jpg",
+        "20210605-_MG_9621.jpg",
+        "20210710-_MG_0031-Edit.jpg",
+        "20210710-_MG_0040-Edit.jpg",
+        "20210710-_MG_9998.jpg",
+        "20210725-DJI_0970.jpg",
+        "20210725-IMG_1255.jpg",
+        "20210810-IMG_1621.jpg",
+        "20230802-IMG_0855-2.jpg",
+        "20230802-IMG_0855.jpg",
+        "20230802-IMG_0856-2.jpg",
+        "20230802-IMG_0856.jpg",
+        "20231105-DJI_0307-Pano.jpg",
+        "20231111-DJI_0461-Pano.jpg",
+        "20231126-DJI_0664-Pano.jpg",
+        "20240120-DJI_20240120161322_0039_D.jpg",
+        "20240501-DJI_0056.jpg",
+        "20241012-DJI_20241012161447_0007_D-Enhanced-NR.jpg",
+        "20241012-DJI_20241012172905_0030_D.jpg",
+        "20250212-IMG_7268-Enhanced-NR.jpg",
+        "20250212-IMG_7270-Enhanced-NR.jpg",
+        "20250212-IMG_7407-Enhanced-NR.jpg",
+        "20250212-IMG_7412.jpg",
+        "20250212-IMG_7418.jpg",
+        "20250612-DJI_20250612181931_0613_D.jpg",
+        "20251108-DJI_20251108153046_0170_D.jpg"
+      ]
+    },
+    {
+      "id": "wild-places",
+      "label": "Wild Places",
+      "cover": "20251016-DSC_3057.jpg",
+      "files": [
+        "20160430-G0123010.jpg",
+        "20170426-_MG_7764.jpg",
+        "20171229-_MG_8375-2.jpg",
+        "20171229-_MG_8375.jpg",
+        "20190128-_MG_8888.jpg",
+        "20190128-_MG_8909.jpg",
+        "20190128-_MG_8911.jpg",
+        "20190128-_MG_8923.jpg",
+        "20190128-_MG_8979.jpg",
+        "20190128-_MG_8983.jpg",
+        "20210323-_MG_1729.jpg",
+        "20210330-DSCN8535.jpg",
+        "20210417-_MG_9299.jpg",
+        "20210422-_MG_9511-Edit.jpg",
+        "20210711-IMG_0460-Edit.jpg",
+        "20210725-DJI_0970.jpg",
+        "20210725-IMG_1127.jpg",
+        "20210725-IMG_1143.jpg",
+        "20210725-IMG_1185.jpg",
+        "20210725-IMG_1255.jpg",
+        "20210804-IMG_1462.jpg",
+        "20211025-IMG_2309.jpg",
+        "20211025-IMG_2323.jpg",
+        "20211212-IMG_2386.jpg",
+        "20231212-IMG_3002.jpg",
+        "20240120-DJI_20240120160337_0034_D.jpg",
+        "20240120-DJI_20240120161322_0039_D.jpg",
+        "20240414-DSC_1106.jpg",
+        "20240501-DJI_0056.jpg",
+        "20241012-DJI_20241012161447_0007_D-Enhanced-NR.jpg",
+        "20241012-DJI_20241012172905_0030_D.jpg",
+        "20241020-IMG_5009-Enhanced-NR.jpg",
+        "20241021-IMG_5046-Enhanced-NR-2.jpg",
+        "20241021-IMG_5046-Enhanced-NR.jpg",
+        "20241021-IMG_5062.jpg",
+        "20250612-DJI_20250612181931_0613_D.jpg",
+        "20251016-DSC_3057.jpg",
+        "20251108-DJI_20251108153046_0170_D.jpg",
+        "20260430-DSC_5513.jpg"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "file": "20160430-G0102983.jpg",
+      "width": 3000,
+      "height": 2250,
+      "orientation": "landscape",
+      "captured": "2016:04:30 16:20:32",
+      "camera": "GoPro HERO4 Black",
+      "tags": [
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20160430-G0123010.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2016:04:30 17:03:49",
+      "camera": "GoPro HERO4 Black",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20170426-_MG_7764.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2017:04:26 14:32:48",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20170427-_MG_7839.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2017:04:27 15:18:26",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20171229-_MG_8375-2.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2017:12:29 16:14:14",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20171229-_MG_8375.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2017:12:29 16:14:14",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8888.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 13:12:23",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8909.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 13:14:00",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8911.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 13:14:10",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8923.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 13:16:40",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8979.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 16:57:13",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190128-_MG_8983.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:01:28 16:58:17",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "from-above",
+        "in-flight",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20190302-_MG_9036.jpg",
+      "width": 3000,
+      "height": 1719,
+      "orientation": "landscape",
+      "captured": "2019:03:02 18:27:03",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20190302-_MG_9037-2.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2019:03:02 18:27:07",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20190302-_MG_9037.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2019:03:02 18:27:07",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20200726-DJI_0216-2.jpg",
+      "width": 1687,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2020:07:26 17:35:22",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20200726-DJI_0216.jpg",
+      "width": 3000,
+      "height": 1687,
+      "orientation": "landscape",
+      "captured": "2020:07:26 17:35:22",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20200727-DJI_0263.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2020:07:27 18:53:36",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20200731-DJI_0521.jpg",
+      "width": 3000,
+      "height": 1688,
+      "orientation": "landscape",
+      "captured": "2020:07:31 08:35:32",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above"
+      ]
+    },
+    {
+      "file": "20201018-DJI_0362.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2020:10:18 15:40:16",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20201018-DJI_0364-2.jpg",
+      "width": 3000,
+      "height": 3000,
+      "orientation": "square-ish",
+      "captured": "2020:10:18 15:40:34",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20201018-DJI_0364-3.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2020:10:18 15:40:34",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20201018-DJI_0364.jpg",
+      "width": 3000,
+      "height": 2250,
+      "orientation": "landscape",
+      "captured": "2020:10:18 15:40:34",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20201018-DJI_0408.jpg",
+      "width": 3000,
+      "height": 3000,
+      "orientation": "square-ish",
+      "captured": "2020:10:18 15:44:40",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20201029-DJI_0456-2.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2020:10:29 17:16:03",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20201029-DJI_0456.jpg",
+      "width": 3000,
+      "height": 1688,
+      "orientation": "landscape",
+      "captured": "2020:10:29 17:16:03",
+      "camera": "DJI FC7203",
+      "tags": [
+        "from-above",
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20210228-DJI_0270-Pano.jpg",
+      "width": 3000,
+      "height": 1203,
+      "orientation": "landscape",
+      "captured": "2021:02:28 13:36:40",
+      "camera": "Hasselblad L1D-20c",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210314-_MG_1507.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:03:14 14:58:44",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210314-_MG_1530.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:03:14 15:12:36",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210314-_MG_1595.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:03:14 18:04:47",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210323-_MG_1729.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:03:23 18:16:32",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210330-DSCN8535.jpg",
+      "width": 3000,
+      "height": 2250,
+      "orientation": "landscape",
+      "captured": "2021:03:30 06:43:43",
+      "camera": "NIKON COOLPIX P900",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210331-_MG_8858.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:03:31 06:17:56",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20210417-_MG_9299.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:04:17 14:32:47",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210422-_MG_9511-Edit.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:04:22 18:35:33",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210501-_MG_9316.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:05:01 13:44:09",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210502-_MG_9427.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:05:02 14:38:32",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210605-_MG_9621.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:06:05 14:07:48",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210625-_MG_9826.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:06:25 21:01:00",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210710-_MG_0031-Edit.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:10 23:46:08",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210710-_MG_0040-Edit.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:07:10 23:48:57",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210710-_MG_9998.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:10 23:29:31",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210711-IMG_0460-Edit.jpg",
+      "width": 2518,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:11 21:14:26",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210717-_MG_0670.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:17 11:24:03",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210717-_MG_0683.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:17 11:29:10",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210718-_MG_0811.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:18 15:26:47",
+      "camera": "Canon Canon EOS 60D",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20210725-DJI_0970.jpg",
+      "width": 3000,
+      "height": 1688,
+      "orientation": "landscape",
+      "captured": "2021:07:25 19:31:27",
+      "camera": "DJI FC7303",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210725-IMG_1127.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:07:25 16:51:35",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210725-IMG_1143.jpg",
+      "width": 3000,
+      "height": 1995,
+      "orientation": "landscape",
+      "captured": "2021:07:25 16:59:45",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210725-IMG_1185.jpg",
+      "width": 3000,
+      "height": 1711,
+      "orientation": "landscape",
+      "captured": "2021:07:25 18:49:51",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210725-IMG_1255.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:07:25 19:45:38",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210804-IMG_1462.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:04 13:11:07",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20210810-IMG_1621.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:10 22:46:08",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "after-dark",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20210811-IMG_1691.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:11 23:12:49",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20210812-IMG_1707.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:12 23:03:55",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20210812-IMG_1709.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:12 23:06:18",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20210813-IMG_20210813_161736.jpg",
+      "width": 2272,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:08:13 16:17:36",
+      "camera": "Cat S62 Pro",
+      "tags": [
+        "from-above",
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20211025-IMG_2309.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:10:25 17:25:30",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20211025-IMG_2323.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2021:10:25 17:32:25",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
+      "width": 3000,
+      "height": 1688,
+      "orientation": "landscape",
+      "captured": null,
+      "camera": null,
+      "tags": [
+        "from-above",
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20211212-IMG_2386.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2021:12:12 15:02:40",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20211218-IMG_2417.jpg",
+      "width": 3000,
+      "height": 3000,
+      "orientation": "square-ish",
+      "captured": "2021:12:18 07:03:43",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20221010-G0319710.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2022:10:10 17:41:58",
+      "camera": "GoPro HERO10 Black",
+      "tags": [
+        "from-above",
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20221010-G0399782.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2022:10:10 17:50:38",
+      "camera": "GoPro HERO10 Black",
+      "tags": [
+        "from-above",
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20221010-G0569960-Enhanced-NR.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2022:10:10 18:05:19",
+      "camera": "GoPro HERO10 Black",
+      "tags": [
+        "from-above",
+        "in-flight"
+      ]
+    },
+    {
+      "file": "20230719-IMG_0691-Enhanced-NR.jpg",
+      "width": 3000,
+      "height": 1776,
+      "orientation": "landscape",
+      "captured": "2023:07:19 22:54:46",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20230719-IMG_0691.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:07:19 22:54:46",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20230724-IMG_0830.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2023:07:24 23:55:46",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20230802-IMG_0855-2.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:08:02 17:48:41",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20230802-IMG_0855.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2023:08:02 17:48:41",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20230802-IMG_0856-2.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:08:02 17:50:49",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20230802-IMG_0856.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:08:02 17:50:49",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20231011-IMG_1862.jpg",
+      "width": 1688,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:10:11 10:21:04",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20231105-DJI_0307-Pano.jpg",
+      "width": 3000,
+      "height": 1745,
+      "orientation": "landscape",
+      "captured": "2023:11:05 16:58:35",
+      "camera": "DJI FC2220",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20231111-DJI_0461-Pano.jpg",
+      "width": 3000,
+      "height": 1748,
+      "orientation": "landscape",
+      "captured": "2023:11:11 15:56:04",
+      "camera": "DJI FC2220",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20231126-DJI_0664-Pano.jpg",
+      "width": 3000,
+      "height": 1463,
+      "orientation": "landscape",
+      "captured": "2023:11:26 15:43:49",
+      "camera": "DJI FC7303",
+      "tags": [
+        "from-above",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20231212-IMG_3002.jpg",
+      "width": 1687,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:12:12 15:40:37",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20231216-IMG_3292-Enhanced-NR.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2023:12:16 14:21:10",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground"
+      ]
+    },
+    {
+      "file": "20240120-DJI_20240120160337_0034_D.jpg",
+      "width": 1688,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:01:20 16:03:37",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20240120-DJI_20240120161322_0039_D.jpg",
+      "width": 1687,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:01:20 16:13:22",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20240414-DSC_1106.jpg",
+      "width": 3000,
+      "height": 1996,
+      "orientation": "landscape",
+      "captured": "2024:04:14 16:51:56",
+      "camera": "NIKON CORPORATION NIKON Z 6_2",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20240501-DJI_0056.jpg",
+      "width": 1688,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:05:01 15:25:39",
+      "camera": "DJI FC7303",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20240510-IMG_4254-Enhanced-NR.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:05:10 22:32:46",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20240510-IMG_4255.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2024:05:10 22:33:40",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20241012-DJI_20241012161447_0007_D-Enhanced-NR.jpg",
+      "width": 1688,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:10:12 16:14:47",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241012-DJI_20241012172905_0030_D.jpg",
+      "width": 1688,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:10:12 17:29:05",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241020-IMG_5009-Enhanced-NR.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:10:20 20:17:37",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241021-IMG_5046-Enhanced-NR-2.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:10:21 20:14:12",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241021-IMG_5046-Enhanced-NR.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2024:10:21 20:14:12",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241021-IMG_5062.jpg",
+      "width": 2400,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2024:10:21 20:29:50",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20241022-IMG_1404-Enhanced-NR.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2024:10:22 21:04:41",
+      "camera": "Canon Canon EOS 6D",
+      "tags": [
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20250101-DJI_20250101001256_0266_D-Enhanced-NR.jpg",
+      "width": 2250,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2025:01:01 00:12:56",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "after-dark"
+      ]
+    },
+    {
+      "file": "20250212-IMG_7268-Enhanced-NR.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2025:02:12 13:21:56",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20250212-IMG_7270-Enhanced-NR.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2025:02:12 13:23:00",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20250212-IMG_7407-Enhanced-NR.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2025:02:12 15:15:44",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20250212-IMG_7412.jpg",
+      "width": 3000,
+      "height": 2000,
+      "orientation": "landscape",
+      "captured": "2025:02:12 15:18:28",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20250212-IMG_7418.jpg",
+      "width": 2000,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2025:02:12 15:19:43",
+      "camera": "Canon Canon EOS 6D Mark II",
+      "tags": [
+        "below-ground",
+        "water-and-ice"
+      ]
+    },
+    {
+      "file": "20250612-DJI_20250612181931_0613_D.jpg",
+      "width": 3000,
+      "height": 2250,
+      "orientation": "landscape",
+      "captured": "2025:06:12 18:19:31",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20250612-DJI_20250612182344_0620_D.jpg",
+      "width": 3000,
+      "height": 2250,
+      "orientation": "landscape",
+      "captured": "2025:06:12 18:23:44",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above"
+      ]
+    },
+    {
+      "file": "20251016-DSC_3057.jpg",
+      "width": 1996,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2025:10:16 16:43:14",
+      "camera": "NIKON CORPORATION NIKON Z 6_2",
+      "tags": [
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20251108-DJI_20251108153046_0170_D.jpg",
+      "width": 1687,
+      "height": 3000,
+      "orientation": "portrait",
+      "captured": "2025:11:08 15:30:46",
+      "camera": "DJI FC8482",
+      "tags": [
+        "from-above",
+        "water-and-ice",
+        "wild-places"
+      ]
+    },
+    {
+      "file": "20260430-DSC_5513.jpg",
+      "width": 3000,
+      "height": 1996,
+      "orientation": "landscape",
+      "captured": "2026:04:30 20:28:12",
+      "camera": "NIKON CORPORATION NIKON Z 6_2",
+      "tags": [
+        "after-dark",
+        "wild-places"
+      ]
+    }
+  ]
+}

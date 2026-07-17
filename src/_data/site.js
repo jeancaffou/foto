@@ -1,3 +1,5 @@
+const galleries = require("./galleries");
+
 module.exports = {
   name: "Žan Kafol",
   eyebrow: "Aerial & cave photographer",
@@ -9,58 +11,119 @@ module.exports = {
     { label: "TikTok", url: "https://www.tiktok.com/@jeancaffou", icon: "/assets/images/logo-tiktok.svg" },
     { label: "YouTube", url: "https://www.youtube.com/jeancaffou", icon: "/assets/images/logo-youtube.svg" }
   ],
-  works: [
-    { title: "Planinsko polje", type: "Aerial", image: "/assets/images/cerknisko-polje.jpg", position: "center" },
-    { title: "Rakov Škocjan", type: "Cave", image: "/assets/images/rakov-skocjan.jpg", position: "center 64%" },
-    { title: "Predjama", type: "Night", image: "/assets/images/predjama.jpg", position: "center" },
-    { title: "Markov Spodmol", type: "Cave", image: "/assets/images/markov-spodmol.jpg", position: "center" },
-    { title: "Above Slivnica", type: "Flight", image: "/assets/images/slivnica-flight.webp", position: "center" },
-    { title: "Storm over Nanos", type: "Nature", image: "/assets/images/storm-over-nanos.jpg", position: "center" },
-    { title: "Aurora borealis", type: "Night sky", image: "/assets/images/aurora-borealis.jpg", position: "center" },
-    { title: "Postojna from above", type: "Aerial", image: "/assets/images/postojna-from-above.jpg", position: "center" }
-  ],
+  works: galleries.selected,
   press: [
     {
       title: "Fotografija Postojne iz zraka in pod zemljo",
       source: "Radio 94",
       year: "2026",
       image: "/assets/images/press-radio94.jpg",
-      url: "https://www.youtube.com/watch?v=TYeM4MJ5kCQ"
+      url: "https://www.youtube.com/watch?v=TYeM4MJ5kCQ",
+      kind: "video"
+    },
+    {
+      title: "Županovo priznanje za fotografijo",
+      source: "Občina Postojna",
+      year: "2024",
+      image: "/assets/images/press-postojna-award.jpg",
+      url: "https://www.postojna.si/objava/919103",
+      kind: "award"
+    },
+    {
+      title: "Prepih na obisku: Žan Kafol",
+      source: "Prepih",
+      year: "2024",
+      image: "/assets/images/press-prepih-2024.jpg",
+      url: "https://www.postojna.si/objava/910480",
+      kind: "article"
+    },
+    {
+      title: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire",
+      source: "RTV SLO, intervju",
+      year: "2023",
+      image: "/assets/images/press-rtvslo-creative.jpg",
+      url: "https://www.rtvslo.si/zabava-in-slog/ture-avanture/da-si-lahko-zares-ustvarjalen-moras-vcasih-krsiti-ustaljene-okvire/691924",
+      kind: "article"
+    },
+    {
+      title: "Če si amater, še ne pomeni, da si slab",
+      source: "RTV SLO, intervju",
+      year: "2023",
+      image: "/assets/images/press-rtvslo-interview.jpg",
+      url: "https://www.rtvslo.si/kultura/vizualna-umetnost/ce-si-amater-se-ne-pomeni-da-si-slab-meni-veckrat-nagrajeni-fotograf-zan-kafol/689184",
+      kind: "article"
     },
     {
       title: "Dvakratni zmagovalec National Geographica",
       source: "Dobro jutro, RTV SLO",
       year: "2023",
       image: "/assets/images/press-dobro-jutro.jpg",
-      url: "https://www.youtube.com/watch?v=PE-eHr3zWnk"
+      url: "https://www.youtube.com/watch?v=PE-eHr3zWnk",
+      kind: "video"
+    },
+    {
+      title: "Če se hočeš umakniti, greš gor ali pa dol",
+      source: "Nedelo, Delo",
+      year: "2023",
+      image: "/assets/images/press-delo.webp",
+      url: "https://www.delo.si/nedelo/ce-se-hoces-umakniti-gres-gor-ali-pa-dol",
+      kind: "article"
+    },
+    {
+      title: "Žanu Kafolu se je v poletni noči vse poklopilo",
+      source: "Radio 94",
+      year: "2023",
+      image: "/assets/images/press-radio94-natgeo-2023.jpg",
+      url: "https://www.radio94.si/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
+      kind: "audio"
     },
     {
       title: "Razsvetljenje v Rakovem Škocjanu",
       source: "Primorska kronika, TV Koper",
       year: "2023",
       image: "/assets/images/press-primorska-kronika.jpg",
-      url: "https://www.youtube.com/watch?v=OrNQ_4JSaoY"
+      url: "https://www.youtube.com/watch?v=OrNQ_4JSaoY",
+      kind: "video"
     },
     {
       title: "Znova izbranec National Geographica",
       source: "Prvi dnevnik, RTV SLO",
       year: "2023",
       image: "/assets/images/press-prvi-dnevnik.jpg",
-      url: "https://www.youtube.com/watch?v=fw4Psa0lcx0"
+      url: "https://www.youtube.com/watch?v=fw4Psa0lcx0",
+      kind: "video"
     },
     {
       title: "Žan Kafol: Na sončni strani",
       source: "TV Koper, RTV SLO",
       year: "2023",
       image: "/assets/images/press-soncna-stran.jpg",
-      url: "https://www.youtube.com/watch?v=bkEhJ0gXGU4"
+      url: "https://www.youtube.com/watch?v=bkEhJ0gXGU4",
+      kind: "video"
     },
     {
-      title: "Poček: življenje ob vadišču",
-      source: "Tednik, RTV SLO",
-      year: "2023",
-      image: "/assets/images/press-tednik.jpg",
-      url: "https://www.youtube.com/watch?v=b9XX16krqrk"
+      title: "Žan Kafol: od zgoraj, od blizu",
+      source: "Prepih",
+      year: "2022",
+      image: "/assets/images/press-prepih-2022.jpg",
+      url: "https://www.postojna.si/Files/eMagazine/105/702287/Prepih%20November%2021c-11-22%20WEB.pdf",
+      kind: "article"
+    },
+    {
+      title: "Nedeljski klepet: Žan Kafol",
+      source: "Radio 94",
+      year: "2022",
+      image: "/assets/images/press-radio94-nedeljski.jpg",
+      url: "https://www.radio94.si/nedeljski-klepet-zan-kafol/",
+      kind: "audio"
+    },
+    {
+      title: "Žan Kafol zmagal na natečaju National Geographica",
+      source: "Radio 94",
+      year: "2022",
+      image: "/assets/images/press-radio94-natgeo-2022.jpg",
+      url: "https://www.radio94.si/zan-kafol-zmagal-na-natecaju-national-geographica/",
+      kind: "audio"
     }
   ],
   features: [
@@ -69,14 +132,24 @@ module.exports = {
       logo: "/assets/images/logo-national-geographic.svg",
       title: "Two-time overall winner",
       detail: "Cerkniško polje, 2022 · Razsvetljenje, 2023",
-      url: "/2023/10/druga-zmaga-na-national-geographic.html"
+      url: "/2023/10/druga-zmaga-na-national-geographic.html",
+      className: "natgeo"
     },
     {
       name: "Nikon",
       logo: "/assets/images/logo-nikon.svg",
-      title: "Nikon Z6II",
-      detail: "National Geographic Slovenia main prize, 2023",
-      url: "https://n1info.si/novice/slovenija/ze-drugic-slabil-na-natecaju-national-geographica-ce-si-amater-se-nisi-slab/"
+      title: "Awarded photographer, 2010",
+      detail: "Nikon ‘Jaz sem’ photo contest",
+      url: "https://iprom.si/blog/nikonova-kampanja-in-nagradni-natecaj-jaz-sem-navdusila-slovenijo/",
+      className: "nikon"
+    },
+    {
+      name: "Občina Postojna",
+      logo: "/assets/images/logo-postojna.png",
+      title: "Županovo priznanje, 2024",
+      detail: "Photography and promotion of Postojna",
+      url: "https://www.postojna.si/objava/919103",
+      className: "postojna"
     }
   ],
   publications: ["RTV Slovenija", "N1", "STA", "Delo", "Primorske novice", "Radio 94"],

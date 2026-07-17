@@ -199,7 +199,7 @@ a:focus-visible {
   z-index: 0;
   left: 0;
   width: 78%;
-  background-image: url("../images/natgeo-2022.jpg");
+  background-image: url("../images/featured/full/20210228-DJI_0270-Pano.webp");
   background-position: center;
 }
 
@@ -207,7 +207,7 @@ a:focus-visible {
   z-index: 1;
   right: 0;
   width: 36%;
-  background-image: url("../images/natgeo-2023.jpg");
+  background-image: url("../images/featured/full/20210810-IMG_1621.webp");
   background-position: center bottom;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 39%, #000 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 39%, #000 100%);
@@ -409,8 +409,15 @@ a:focus-visible {
 .about__portrait img {
   width: 100%;
   height: 100%;
+  filter: grayscale(1);
+  image-rendering: auto;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
+  transition: filter 450ms ease;
+}
+
+.about__portrait:hover img {
+  filter: grayscale(0);
 }
 
 .about__halo {
@@ -510,7 +517,8 @@ a:focus-visible {
   padding: clamp(0.7rem, 0.9vw, 1rem) max(3vw, calc((100vw - 1540px) / 2));
 }
 
-.band-section > .section-label {
+.band-section > .section-label,
+.press__heading > .section-label {
   margin-bottom: 0.5rem;
 }
 
@@ -523,10 +531,73 @@ a:focus-visible {
   padding-left: clamp(2rem, 4vw, 5rem);
 }
 
+.press__heading {
+  display: flex;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.press__heading > .section-label {
+  margin-bottom: 0;
+}
+
+.press-pager {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.press-pager[hidden] {
+  display: none;
+}
+
+.press-pager button {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  border: 1px solid var(--line);
+  place-items: center;
+  color: #bdb7ac;
+  background: transparent;
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.press-pager button:hover:not(:disabled),
+.press-pager button:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.press-pager button:disabled {
+  color: #45443f;
+  cursor: default;
+}
+
+.press-pager__status {
+  min-width: 2.7rem;
+  color: #827d74;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
 .press-grid {
   display: grid;
+  min-height: clamp(100px, 10vw, 118px);
   grid-template-columns: repeat(2, 1fr);
+  align-content: start;
   gap: clamp(0.45rem, 0.8vw, 0.8rem) clamp(0.65rem, 1vw, 1rem);
+}
+
+.press-card[hidden] {
+  display: none;
 }
 
 .press-card {
@@ -558,7 +629,7 @@ a:focus-visible {
   transform: scale(1.04);
 }
 
-.play {
+.press-card__kind {
   position: absolute;
   right: 0.3rem;
   bottom: 0.3rem;
@@ -570,6 +641,17 @@ a:focus-visible {
   place-items: center;
   color: white;
   font-size: 0.46rem;
+}
+
+.press-card__kind--audio {
+  font-size: 0.65rem;
+}
+
+.press-card__kind--article,
+.press-card__kind--award {
+  border-color: rgba(202, 145, 76, 0.72);
+  color: var(--gold-light);
+  font-size: 0.62rem;
 }
 
 .press-card h3 {
@@ -594,18 +676,19 @@ a:focus-visible {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 0.7vw, 0.75rem);
 }
 
 .feature-card {
   display: flex;
-  min-height: clamp(62px, 5.2vw, 76px);
+  min-height: clamp(92px, 7.6vw, 112px);
   padding: clamp(0.45rem, 0.65vw, 0.65rem);
   border: 1px solid rgba(188, 123, 49, 0.48);
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 0.55rem;
   transition: border-color 220ms ease, background-color 220ms ease;
 }
 
@@ -617,23 +700,26 @@ a:focus-visible {
 .feature-card__logo {
   display: flex;
   width: 100%;
-  min-height: 18px;
-  margin-bottom: 0.2rem;
+  min-height: 42px;
   align-items: center;
 }
 
 .feature-card__logo img {
   width: auto;
-  max-width: 175px;
-  height: 18px;
-  max-height: 18px;
+  max-width: 100%;
+  height: 31px;
+  max-height: 42px;
   filter: grayscale(1) brightness(0) invert(1);
   object-fit: contain;
   object-position: left center;
 }
 
-.feature-card:nth-child(2) .feature-card__logo img {
-  height: 19px;
+.feature-card--nikon .feature-card__logo img {
+  height: 42px;
+}
+
+.feature-card--postojna .feature-card__logo img {
+  height: 42px;
 }
 
 .feature-card strong {
@@ -957,8 +1043,9 @@ blockquote cite {
   .press-card__image { height: auto; }
   .feature-grid { grid-template-columns: 1fr; }
   .feature-card { min-height: 88px; }
-  .feature-card__logo img { height: 23px; max-height: 23px; }
-  .feature-card:nth-child(2) .feature-card__logo img { height: 25px; }
+  .feature-card__logo img { height: 31px; max-height: 42px; }
+  .feature-card--nikon .feature-card__logo img,
+  .feature-card--postojna .feature-card__logo img { height: 42px; }
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
   blockquote { margin-top: 1.8rem; }
@@ -971,6 +1058,10 @@ blockquote cite {
   .site-footer__inner { grid-template-columns: 1fr 1fr; }
   .site-footer__brand, .site-footer__legal { grid-column: 1 / -1; }
   .site-footer__legal { padding: 1.5rem 0 0; border-top: 1px solid var(--line); border-left: 0; }
+}
+
+@media (max-width: 360px) {
+  .press-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

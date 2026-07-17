@@ -23,7 +23,8 @@
 - Preferred rule: compare against the 1086×1448 reference at its actual width. Preserve the shallow hero, four-column/two-row work grid, compact about band, split featured/press band, short journal row, and short footer.
 - User correction: the first headshot derivative was badly cropped and aggressively processed.
 - Earlier mistake: the source was cropped to 4:5, contrast-stretched, sharpened, darkened, and filtered again in CSS.
-- Preferred rule: keep a landscape crop from `Zan-Kafol-1024x683.jpg` that removes unused sky and side margins without cutting the head, shoulders, or torso. Use grayscale conversion only; do not add contrast, brightness, sharpening, or additional CSS filters.
+- Final source correction: use `context/20240312-IMG_3774.jpg` as supplied. A high-quality proportional downscale is acceptable, but do not crop, sharpen, stretch contrast, darken, retouch, or otherwise reinterpret the image.
+- Preferred display rule: keep the photograph in color, apply only CSS grayscale at rest, and restore its original color on hover. Load it eagerly and avoid persistent compositing hints that can create filter artifacts.
 - Source status: direct user correction on 2026-07-17.
 - User correction: the hero must use the two National Geographic Slovenia winning photographs, `Cerkniško polje` and `Razsvetljenje`.
 - Earlier mistake: the hero used unrelated images in rigid equal columns with a visible black divider.
@@ -33,7 +34,19 @@
 - Preferred rule: keep accessible hidden terms, but render the three fact rows with line icons and compact factual text. Blend the portrait into the dark background without artificial contrast or a visible light rectangle.
 - User correction: press coverage must represent the actual interview and broadcast archive.
 - Earlier mistake: only two cards were shown and both reused generic portrait images unrelated to the linked media.
-- Preferred rule: use real local stills from the specific Radio 94 and RTV Slovenija appearances. The verified initial set contains Radio 94, Dobro jutro, Primorska kronika, Prvi dnevnik, Na sončni strani, and Tednik.
+- Preferred rule: use real local stills from each specific appearance. The verified archive includes four Radio 94 appearances, Dobro jutro, Primorska kronika, Prvi dnevnik, Na sončni strani, two RTV SLO written interviews, the Nedelo/Delo feature, two Prepih features, and the 2024 municipal-award coverage.
+- Do not shorten the visible archive to make the band fit. Paginate it four items at a time and keep every verified entry in the DOM with accessible previous/next controls.
+- The two RTV written interviews are `Če si amater, še ne pomeni, da si slab` at canonical article ID `689184` and `Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire` at canonical article ID `691924`.
+- The two Prepih features are the November 2022 `Žan Kafol: od zgoraj, od blizu` article and the April 2024 full interview `Prepih na obisku: Žan Kafol`. Use the supplied `context/odzgoraj.jpg` for the 2022 card.
+- Žan received the `Županovo priznanje` in 2024 for special achievements in photography and promotion of the Municipality of Postojna. Use the supplied `context/OBČINA POSTOJNA PODELITEV OBČINSKIH PRIZNANJ 23.4.2024 - Valter Leban-0306.jpg` for this coverage.
+- Do not add the Poček/Tednik appearance back without a direct request.
+
+## Award Presentation
+
+- Feature and award logos must be visually prominent and may stand alone above their descriptions. Do not reduce them to tiny marks inside text-heavy cards.
+- Nikon correction: Žan's Nikon recognition was for the 2010 `Jaz sem` photo contest.
+- Earlier mistake: the Nikon card incorrectly described the Nikon Z6II received as the 2023 National Geographic Slovenia prize as a Nikon photography award.
+- Preferred rule: keep the 2010 Nikon contest recognition distinct from the later National Geographic prize equipment.
 
 ## WordPress Migration
 

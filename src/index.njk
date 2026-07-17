@@ -45,7 +45,7 @@ title: Žan Kafol — Aerial & Cave Photographer
     <p class="section-label" id="work-title" data-reveal>Selected works</p>
     <div class="work-grid">
       {% for work in site.works %}
-      <a class="work-card" href="/blog/" data-reveal style="--delay: {{ loop.index0 * 55 }}ms">
+      <a class="work-card" href="{{ work.url }}" data-reveal style="--delay: {{ loop.index0 * 55 }}ms">
         <figure>
           <img src="{{ work.image }}" alt="{{ work.title }}" loading="{% if loop.index < 5 %}eager{% else %}lazy{% endif %}" style="object-position: {{ work.position }}">
           <figcaption>
@@ -62,7 +62,7 @@ title: Žan Kafol — Aerial & Cave Photographer
     <div class="about__inner shell">
       <div class="about__portrait" data-reveal>
         <div class="about__halo" aria-hidden="true"></div>
-        <img src="/assets/images/headshot-simple.webp" alt="Portrait of Žan Kafol" loading="lazy">
+        <img src="/assets/images/headshot.jpg" alt="Portrait of Žan Kafol" width="1200" height="800" loading="eager" decoding="async">
       </div>
       <div class="about__copy" data-reveal>
         <p class="section-label">About</p>
@@ -105,7 +105,7 @@ title: Žan Kafol — Aerial & Cave Photographer
       <p class="section-label" id="featured-title">Featured &amp; awarded</p>
       <div class="feature-grid">
         {% for item in site.features %}
-        <a class="feature-card" href="{{ item.url }}" target="_blank" rel="noreferrer" data-reveal>
+        <a class="feature-card feature-card--{{ item.className }}" href="{{ item.url }}"{% if item.url[0] != "/" %} target="_blank" rel="noreferrer"{% endif %} data-reveal>
           <span class="feature-card__logo"><img src="{{ item.logo }}" alt="{{ item.name }}"></span>
           <strong>{{ item.title }}</strong>
           <span>{{ item.detail }}</span>
@@ -122,14 +122,23 @@ title: Žan Kafol — Aerial & Cave Photographer
       </blockquote>
     </section>
 
-    <section class="press band-section" id="press" aria-labelledby="press-title">
-      <p class="section-label" id="press-title">Press &amp; interviews</p>
-      <div class="press-grid">
+    <section class="press band-section" id="press" aria-labelledby="press-title" data-press data-page-size="4">
+      <div class="press__heading">
+        <p class="section-label" id="press-title">Press &amp; interviews</p>
+        <div class="press-pager" data-press-pager hidden>
+          <button type="button" data-press-prev aria-label="Previous press page" aria-controls="press-grid">←</button>
+          <span class="press-pager__status" role="status" aria-live="polite" aria-atomic="true">
+            <span data-press-page>01</span><span aria-hidden="true"> / </span><span data-press-total>01</span>
+          </span>
+          <button type="button" data-press-next aria-label="Next press page" aria-controls="press-grid">→</button>
+        </div>
+      </div>
+      <div class="press-grid" id="press-grid">
         {% for item in site.press %}
-        <a class="press-card" href="{{ item.url }}" target="_blank" rel="noreferrer" data-reveal>
+        <a class="press-card" href="{{ item.url }}" target="_blank" rel="noreferrer" data-press-card>
           <div class="press-card__image">
             <img src="{{ item.image }}" alt="" loading="lazy">
-            <span class="play" aria-hidden="true">▶</span>
+            <span class="press-card__kind press-card__kind--{{ item.kind }}" aria-hidden="true">{% if item.kind == "video" %}▶{% elif item.kind == "audio" %}♪{% elif item.kind == "award" %}★{% else %}↗{% endif %}</span>
           </div>
           <div>
           <h3>{{ item.title }}</h3>

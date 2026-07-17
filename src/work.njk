@@ -1,0 +1,99 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: galleries.categories
+  size: 1
+  alias: gallery
+permalink: "/work/{{ gallery.id }}/index.html"
+galleryStyles: true
+bodyClass: gallery-page
+eleventyComputed:
+  title: "{{ gallery.label }} — Žan Kafol"
+---
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="Žan Kafol, home">
+    <span class="brand__name">Žan Kafol</span>
+    <span class="brand__role">{{ site.eyebrow }}</span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__lines" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="/#work">Work</a>
+    <a href="/#about">About</a>
+    <a href="/#featured">Featured</a>
+    <a href="/#press">Press</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="gallery-hero" style="--gallery-cover: url('{{ gallery.cover }}')" aria-labelledby="gallery-title">
+    <div class="gallery-hero__shade" aria-hidden="true"></div>
+    <div class="gallery-hero__content shell">
+      <p class="section-label">Selected works</p>
+      <h1 id="gallery-title">{{ gallery.label }}</h1>
+      <p>{{ gallery.description }}</p>
+      <span>{{ gallery.images.length }} photographs</span>
+    </div>
+  </section>
+
+  <nav class="gallery-categories" aria-label="Photography collections">
+    <div class="shell">
+      {% for category in galleries.categories %}
+      <a href="/work/{{ category.id }}/"{% if category.id == gallery.id %} aria-current="page"{% endif %}>{{ category.label }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <section class="gallery-shell shell" aria-label="{{ gallery.label }} photographs">
+    <div class="gallery-grid" data-gallery-grid>
+      {% for image in gallery.images %}
+      <button class="gallery-tile" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-year="{{ image.year }}" aria-label="Open {{ image.alt }}">
+        <img src="{{ image.thumb }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if loop.index <= 6 %}eager{% else %}lazy{% endif %}" decoding="async">
+        {% if image.year %}<span>{{ image.year }}</span>{% endif %}
+      </button>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<dialog class="lightbox" data-lightbox aria-label="Image viewer">
+  <div class="lightbox__frame">
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close image viewer">Close</button>
+    <button class="lightbox__nav lightbox__nav--previous" type="button" data-lightbox-previous aria-label="Previous photograph">←</button>
+    <figure>
+      <img src="" alt="" data-lightbox-image>
+      <figcaption data-lightbox-caption></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photograph">→</button>
+  </div>
+</dialog>
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__brand">
+      <span class="brand__name">Žan Kafol</span>
+      <span class="brand__role">{{ site.eyebrow }}</span>
+      <p>Stories from above the landscape<br>and beneath the karst.</p>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Contact</p>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <span>{{ site.location }}</span>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">Follow</p>
+      <div class="footer-socials">
+        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <p>© {% year %} Žan Kafol</p>
+      <a href="/">Back home ↑</a>
+    </div>
+  </div>
+</footer>
