@@ -7,7 +7,7 @@ pagination:
   addAllPagesToCollections: true
 blogStyles: true
 bodyClass: blog-page
-pageLanguage: sl
+pageLanguage: en
 title: Journal — Žan Kafol
 metaDescription: Photo stories by Žan Kafol from the air, caves and the karst landscape.
 eleventyComputed:
@@ -41,7 +41,7 @@ eleventyComputed:
     <div class="blog-hero__shade" aria-hidden="true"></div>
     <div class="blog-hero__content shell">
       <p class="section-label">Photo journal</p>
-      <h1 id="blog-title">Stories from<br>air, caves &amp; karst</h1>
+      <h1 id="blog-title">Photo stories from<br>flight, caves &amp; karst</h1>
       <p>An archive of photographs, flights, cave visits and landscapes, published since 2006.</p>
     </div>
   </section>
@@ -65,10 +65,10 @@ eleventyComputed:
           <div class="blog-card__body">
             <div class="blog-card__meta">
               <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
-              {% if post.categories.length %}<span>{{ post.categories[0].name }}</span>{% endif %}
+              {% if post.categories.length %}<span>{{ post.categories[0].name | escape }}</span>{% endif %}
             </div>
-            <h3>{{ post.title }}</h3>
-            {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+            <h3>{{ post.title | escape }}</h3>
+            {% if post.summary %}<p>{{ post.summary | escape }}</p>{% endif %}
             <span class="blog-card__read">Read story <span aria-hidden="true">↗</span></span>
           </div>
         </a>

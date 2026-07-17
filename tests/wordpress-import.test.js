@@ -5,12 +5,21 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
+const importedPosts = require("../src/_data/wordpressPosts.json");
 const { parseTables } = require("../scripts/lib/mysql-dump");
 const {
   getMediaPaths,
   makeExcerpt,
+  renderWordPressEmbeds,
   rewriteWordPressUrls
 } = require("../scripts/lib/wordpress-content");
+
+test("committed journal keeps all 194 canonical WordPress permalinks", () => {
+  assert.equal(importedPosts.length, 194);
+  const permalinks = importedPosts.map((post) => post.permalink);
+  assert.equal(new Set(permalinks).size, 194);
+  permalinks.forEach((permalink) => assert.match(permalink, /^\/\d{4}\/\d{2}\/[^/]+\.html$/));
+});
 
 test("MySQL parser preserves complex WordPress HTML and escaped values", () => {
   const fixture = [
@@ -61,4 +70,16 @@ test("URL rewriting localizes current, legacy, and Photon WordPress media", () =
 test("excerpt generation strips block markup without losing text entities", () => {
   const excerpt = makeExcerpt("", "<!-- wp:paragraph --><p>Žan &amp; Ana visit the karst.</p><!-- /wp:paragraph -->");
   assert.equal(excerpt, "Žan & Ana visit the karst.");
+});
+
+test("bare WordPress video blocks render as privacy-conscious embeds", () => {
+  const content = [
+    '<div class="wp-block-embed__wrapper">https://youtu.be/jSSJV66OBHs</div>',
+    '<div class="wp-block-embed__wrapper">https://www.tiktok.com/@jeancaffou/video/7318055938018069792</div>'
+  ].join("");
+  const rendered = renderWordPressEmbeds(content);
+
+  assert.match(rendered, /youtube-nocookie\.com\/embed\/jSSJV66OBHs/);
+  assert.match(rendered, /tiktok\.com\/player\/v1\/7318055938018069792/);
+  assert.doesNotMatch(rendered, />\s*https?:\/\//);
 });

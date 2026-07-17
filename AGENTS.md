@@ -3,7 +3,7 @@
 ## Workflow
 
 - Run an Eleventy build after each implementation milestone.
-- Commit milestones incrementally with the repository-local identity `jeancaffou <jean@briskula.si>`.
+- Commit milestones incrementally.
 - Validate desktop and mobile layouts with Playwright before finishing.
 - Do not modify or commit the supplied `context/` folder or design reference image.
 
@@ -63,6 +63,10 @@
 - Preferred replacement: `Land & Life` at `/work/land-and-life/`, limited to the 12 coherent photographs of landscapes, trees, wildlife, people outdoors, Predjama Castle, and seasonal scenes.
 - Every exported featured photograph belongs to exactly one collection. Do not duplicate aerial water, flight, cave-water, night-drone, or award images across otherwise unrelated categories.
 - The two National Geographic winners belong only to `Award-winning`. Selected-work cards open the collection page, not an image hash or a raw image.
+- Gallery listings are reverse chronological by capture date, newest first.
+- `20221010-G0399782.jpg` shows legs in water and belongs only to `Water & Ice`; it must never appear in `In Flight`.
+- Earlier mistake: the filename was grouped with two nearby GoPro frames, including a valid paramotor water-skim photograph, without checking the actual image content. This produced a visually nonsensical In Flight assignment. The correction came directly from the user and was confirmed by inspecting the source image.
+- Selected-work and collection-hero covers are fixed as follows: `20250212-IMG_7268-Enhanced-NR.jpg` for Below Ground, `20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg` for In Flight, `20201029-DJI_0456.jpg` for After Dark, `20200727-DJI_0263.jpg` for Water & Ice, and `20211025-IMG_2309.jpg` for Land & Life.
 
 ## Award Order And Logos
 
@@ -97,8 +101,3 @@
 - He received Postojna's municipal recognition for photography and promotion of the municipality in 2024.
 - He collaborates with the Karst Research Institute ZRC SAZU. Always use this official English word order; `Institute for Karst Research` is incorrect.
 - Caves are part of karst, not something `beneath the karst`. The earlier tagline made a false geographic distinction. Prefer direct language connecting flight, caves and the karst landscape.
-
-## UI Audio
-
-- Do not add typing sounds to autonomous UI, galleries, feeds, boot logs, or rotating content.
-- Typing sounds are reserved for interactive console-focus reveals opened by a user action. This photography site currently has no audio behavior.

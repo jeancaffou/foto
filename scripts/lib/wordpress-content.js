@@ -123,9 +123,63 @@ function makeExcerpt(explicitExcerpt, content, maxLength = 220) {
   return `${shortened.slice(0, wordBoundary > maxLength * 0.65 ? wordBoundary : maxLength).trim()}…`;
 }
 
+function getEmbedUrl(rawUrl) {
+  let url;
+
+  try {
+    url = new URL(decodeHtmlEntities(rawUrl));
+  } catch {
+    return null;
+  }
+
+  const hostname = url.hostname.replace(/^www\./, "");
+  let videoId = "";
+
+  if (hostname === "youtu.be") {
+    videoId = url.pathname.split("/").filter(Boolean)[0] || "";
+  } else if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+    const parts = url.pathname.split("/").filter(Boolean);
+    videoId = url.searchParams.get("v") || (["shorts", "embed"].includes(parts[0]) ? parts[1] : "") || "";
+  }
+
+  if (/^[\w-]{6,}$/.test(videoId)) {
+    return {
+      src: `https://www.youtube-nocookie.com/embed/${videoId}`,
+      title: "YouTube video",
+      allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    };
+  }
+
+  if (hostname === "tiktok.com" || hostname === "m.tiktok.com") {
+    const match = url.pathname.match(/\/video\/(\d+)/);
+    if (match) {
+      return {
+        src: `https://www.tiktok.com/player/v1/${match[1]}`,
+        title: "TikTok video",
+        allow: "encrypted-media; picture-in-picture"
+      };
+    }
+  }
+
+  return null;
+}
+
+function renderWordPressEmbeds(value) {
+  return String(value ?? "").replace(
+    /(<div\s+class=["']wp-block-embed__wrapper["']>)\s*(https?:\/\/[^\s<]+)\s*(<\/div>)/gi,
+    (wrapper, openingTag, rawUrl, closingTag) => {
+      const embed = getEmbedUrl(rawUrl);
+      if (!embed) return wrapper;
+
+      return `${openingTag}<iframe src="${embed.src}" title="${embed.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="${embed.allow}" allowfullscreen></iframe>${closingTag}`;
+    }
+  );
+}
+
 module.exports = {
   decodeHtmlEntities,
   getMediaPaths,
   makeExcerpt,
+  renderWordPressEmbeds,
   rewriteWordPressUrls
 };

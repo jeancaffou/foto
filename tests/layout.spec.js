@@ -77,10 +77,15 @@ test("paginates the complete press archive without dropping entries", async ({ p
 });
 
 test("renders category galleries and opens the local-image lightbox", async ({ page }, testInfo) => {
+  await page.goto("/");
+  await page.locator(".work-card").first().click();
+  await expect(page).toHaveURL(/\/work\/award-winning\/$/);
+  await expect(page.locator(".gallery-tile")).toHaveCount(2);
+
   await page.goto("/work/from-above/");
 
   await expect(page.locator("h1")).toHaveText("From Above");
-  await expect(page.locator(".gallery-tile")).toHaveCount(37);
+  await expect(page.locator(".gallery-tile")).toHaveCount(11);
   await expect(page.locator('.gallery-categories a[aria-current="page"]')).toHaveText("From Above");
   await expect(page.locator('a[href*="blog.kafol.net"]')).toHaveCount(0);
 
@@ -114,6 +119,30 @@ test("renders local press archive pages with publisher links and readable scans"
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
+});
+
+test("renders the migrated journal archive and canonical post pages", async ({ page }, testInfo) => {
+  await page.goto("/blog/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toContainText("Photo stories from");
+  await expect(page.locator(".blog-card")).toHaveCount(12);
+  await expect(page.locator('.blog-pagination a[href="/blog/page/2/"]')).toBeVisible();
+  await page.screenshot({ path: testInfo.outputPath("journal-archive.png"), fullPage: true });
+
+  await page.goto("/2023/10/druga-zmaga-na-national-geographic.html");
+  await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+  await expect(page.locator("h1")).toHaveText("Druga zmaga na National Geographic");
+  await expect(page.locator(".post-copy")).toBeVisible();
+  expect(await page.locator(".tiled-gallery__item").count()).toBeGreaterThan(0);
+
+  await page.locator('.post-copy img[role="button"]').first().click();
+  await expect(page.locator(".post-lightbox")).toBeVisible();
+  await page.locator(".post-lightbox__close").click();
+  await expect(page.locator(".post-lightbox")).not.toBeVisible();
+
+  const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  expect(horizontalOverflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("journal-post.png"), fullPage: true });
 });
 
 test("headshot loads cleanly and restores color on hover-capable screens", async ({ page }, testInfo) => {

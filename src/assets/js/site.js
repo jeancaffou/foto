@@ -78,3 +78,70 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
+
+const postGalleryImages = Array.from(document.querySelectorAll(".post-copy .tiled-gallery__item img[data-url]"));
+
+if (postGalleryImages.length) {
+  const dialog = document.createElement("dialog");
+  dialog.className = "post-lightbox";
+  dialog.setAttribute("aria-label", "Photo viewer");
+  dialog.innerHTML = `
+    <div class="post-lightbox__frame">
+      <button class="post-lightbox__close" type="button" aria-label="Close photo viewer">Close</button>
+      <button class="post-lightbox__nav post-lightbox__nav--previous" type="button" aria-label="Previous photograph">←</button>
+      <figure>
+        <img src="" alt="">
+        <figcaption></figcaption>
+      </figure>
+      <button class="post-lightbox__nav post-lightbox__nav--next" type="button" aria-label="Next photograph">→</button>
+    </div>`;
+  document.body.append(dialog);
+
+  const lightboxImage = dialog.querySelector("img");
+  const caption = dialog.querySelector("figcaption");
+  let activeIndex = 0;
+
+  const renderPostImage = (index) => {
+    activeIndex = (index + postGalleryImages.length) % postGalleryImages.length;
+    const source = postGalleryImages[activeIndex];
+    lightboxImage.src = source.dataset.url;
+    lightboxImage.alt = source.alt;
+    caption.textContent = `${source.alt || "Photograph"} · ${activeIndex + 1} / ${postGalleryImages.length}`;
+  };
+
+  const openPostImage = (index) => {
+    renderPostImage(index);
+    dialog.showModal();
+    document.body.classList.add("lightbox-open");
+  };
+
+  const closePostImage = () => {
+    dialog.close();
+    document.body.classList.remove("lightbox-open");
+  };
+
+  postGalleryImages.forEach((image, index) => {
+    image.setAttribute("role", "button");
+    image.tabIndex = 0;
+    image.setAttribute("aria-label", `Open image ${index + 1} of ${postGalleryImages.length} in full-screen`);
+    image.addEventListener("click", () => openPostImage(index));
+    image.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      openPostImage(index);
+    });
+  });
+
+  dialog.querySelector(".post-lightbox__close").addEventListener("click", closePostImage);
+  dialog.querySelector(".post-lightbox__nav--previous").addEventListener("click", () => renderPostImage(activeIndex - 1));
+  dialog.querySelector(".post-lightbox__nav--next").addEventListener("click", () => renderPostImage(activeIndex + 1));
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) closePostImage();
+  });
+  dialog.addEventListener("close", () => document.body.classList.remove("lightbox-open"));
+  document.addEventListener("keydown", (event) => {
+    if (!dialog.open) return;
+    if (event.key === "ArrowLeft") renderPostImage(activeIndex - 1);
+    if (event.key === "ArrowRight") renderPostImage(activeIndex + 1);
+  });
+}

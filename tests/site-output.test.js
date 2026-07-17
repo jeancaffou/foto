@@ -1,0 +1,99 @@
+"use strict";
+
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const test = require("node:test");
+const posts = require("../src/_data/wordpressPosts.json");
+
+const ROOT = path.resolve(__dirname, "..");
+const OUTPUT = path.resolve(ROOT, process.env.SITE_OUTPUT || "_site");
+
+function outputPath(urlPath) {
+  const cleanPath = urlPath.split(/[?#]/, 1)[0];
+  const relativePath = cleanPath.replace(/^\/+/, "");
+  if (relativePath.endsWith("/")) return path.join(OUTPUT, relativePath, "index.html");
+  return path.join(OUTPUT, relativePath);
+}
+
+function collectHtml(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return collectHtml(entryPath);
+    return entry.name.endsWith(".html") ? [entryPath] : [];
+  });
+}
+
+test("builds every canonical WordPress permalink and archive page", () => {
+  assert.ok(fs.existsSync(OUTPUT), `Missing site output: ${OUTPUT}`);
+  assert.equal(posts.length, 194);
+
+  posts.forEach((post) => {
+    assert.ok(fs.existsSync(outputPath(post.permalink)), `Missing post route: ${post.permalink}`);
+  });
+
+  const archivePages = Math.ceil(posts.length / 12);
+  assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "index.html")));
+  for (let page = 2; page <= archivePages; page += 1) {
+    assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "page", String(page), "index.html")), `Missing blog page ${page}`);
+  }
+
+  const archiveHtml = [
+    fs.readFileSync(path.join(OUTPUT, "blog", "index.html"), "utf8"),
+    ...Array.from({ length: archivePages - 1 }, (_, index) => (
+      fs.readFileSync(path.join(OUTPUT, "blog", "page", String(index + 2), "index.html"), "utf8")
+    ))
+  ].join("\n");
+  const archiveLinks = [...archiveHtml.matchAll(/<article class="blog-card[^"]*">[\s\S]*?<a href="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(archiveLinks.length, posts.length);
+  assert.deepEqual(new Set(archiveLinks), new Set(posts.map((post) => post.permalink)));
+});
+
+test("keeps homepage journal links and the National Geographic route canonical", () => {
+  const homepage = fs.readFileSync(path.join(OUTPUT, "index.html"), "utf8");
+  const expectedHomepagePosts = [
+    "/2025/02/ledena-jama-v-paradani.html",
+    "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html",
+    "/2023/12/letenje-nad-trzaskim-zalivom.html"
+  ];
+
+  expectedHomepagePosts.forEach((permalink) => assert.match(homepage, new RegExp(`href="${permalink.replaceAll("/", "\\/")}"`)));
+  assert.doesNotMatch(homepage, /Nikon Z6II|Nikon Z 6_2|href="\/work\/[^"]*#/i);
+
+  const natGeoPath = path.join(OUTPUT, "2023", "10", "druga-zmaga-na-national-geographic.html");
+  const natGeo = fs.readFileSync(natGeoPath, "utf8");
+  assert.match(natGeo, /<html lang="sl">/);
+  assert.match(natGeo, /Druga zmaga na National Geographic/);
+  assert.match(natGeo, /\/assets\/blog\//);
+});
+
+test("keeps built internal post links and localized assets resolvable", () => {
+  const htmlFiles = collectHtml(OUTPUT);
+  const legacyHost = /(?:blog\.kafol\.net|kafol\.net\/blog|\/wp-content\/uploads\/)/i;
+
+  htmlFiles.forEach((htmlFile) => {
+    const html = fs.readFileSync(htmlFile, "utf8");
+    assert.doesNotMatch(html, legacyHost, `Legacy WordPress URL remains in ${htmlFile}`);
+
+    for (const match of html.matchAll(/href="(\/\d{4}\/\d{2}\/[^"#?]+\.html)(?:[#?][^"]*)?"/g)) {
+      assert.ok(fs.existsSync(outputPath(match[1])), `Broken internal post link ${match[1]} in ${htmlFile}`);
+    }
+
+    for (const match of html.matchAll(/(?:href|src)="(\/assets\/[^"#?]+)(?:\?[^"#]*)?"/g)) {
+      const assetPath = path.join(OUTPUT, decodeURI(match[1]).replace(/^\/+/, ""));
+      assert.ok(fs.existsSync(assetPath), `Missing localized asset ${match[1]} in ${htmlFile}`);
+    }
+  });
+});
+
+test("renders migrated video blocks and avoids duplicate article leads", () => {
+  const youtubePost = fs.readFileSync(outputPath("/2024/01/markov-spodmol.html"), "utf8");
+  const tiktokPost = fs.readFileSync(outputPath("/2024/10/komet-tsuchinshan-atlas-c-2023-a3.html"), "utf8");
+  const duplicateLeadPost = fs.readFileSync(outputPath("/2021/08/najdena-lippertova-jama.html"), "utf8");
+  const standaloneLeadPost = fs.readFileSync(outputPath("/2025/10/koledar-2026.html"), "utf8");
+
+  assert.match(youtubePost, /youtube-nocookie\.com\/embed\/jSSJV66OBHs/);
+  assert.match(tiktokPost, /tiktok\.com\/player\/v1\/7428462808490134817/);
+  assert.doesNotMatch(duplicateLeadPost, /<figure class="article-lead shell">/);
+  assert.match(standaloneLeadPost, /<figure class="article-lead shell">/);
+});

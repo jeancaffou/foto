@@ -1,5 +1,6 @@
 node_modules/
 _site/
+_site_test/
 test-results/
 playwright-report/
 .cache/

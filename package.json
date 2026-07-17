@@ -4,13 +4,19 @@
   "private": true,
   "description": "Eleventy portfolio and photo journal for Žan Kafol",
   "scripts": {
+    "assets:featured": "node scripts/build-featured.js",
     "build": "eleventy",
     "dev": "eleventy --serve",
-    "test": "npm run build && playwright test"
+    "test": "npm run test:unit && playwright test && npm run test:output",
+    "test:unit": "node --test tests/featured-categories.test.js tests/wordpress-import.test.js",
+    "test:output": "SITE_OUTPUT=_site_test node --test tests/site-output.test.js",
+    "import:wordpress:data": "node scripts/import-wordpress.js",
+    "import:wordpress:media": "node scripts/sync-wordpress-media.js",
+    "import:wordpress:validate": "node --test tests/wordpress-import.test.js && node scripts/validate-wordpress-import.js",
+    "import:wordpress": "npm run import:wordpress:data && npm run import:wordpress:media && npm run import:wordpress:validate"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@playwright/test": "^1.55.0"
   }
 }
-

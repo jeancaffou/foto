@@ -411,8 +411,8 @@ a:focus-visible {
   height: 100%;
   filter: grayscale(1);
   image-rendering: auto;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   transition: filter 450ms ease;
 }
 
@@ -988,8 +988,8 @@ blockquote cite {
 
 @media (max-width: 900px) {
   .work-grid { grid-template-columns: repeat(2, 1fr); }
-  .about__inner { grid-template-columns: 0.85fr 1.1fr; }
-  .about__portrait { min-height: 430px; }
+  .about__inner { height: auto; grid-template-columns: 0.85fr 1.1fr; }
+  .about__portrait { min-height: clamp(240px, 36vw, 300px); }
   .about__facts { grid-column: 1 / -1; display: grid; padding: 0; border-top: 1px solid var(--line); border-left: 0; grid-template-columns: repeat(3, 1fr); }
   .about__facts div { padding: 1.25rem; border-right: 1px solid var(--line); border-bottom: 0; grid-template-columns: 28px 1fr; }
   .about__facts div:last-child { border-right: 0; }
@@ -1046,7 +1046,7 @@ blockquote cite {
   .feature-card { min-height: 88px; }
   .feature-card__logo img { height: 31px; max-height: 42px; }
   .feature-card--nikon .feature-card__logo img { height: 28px; }
-  .feature-card--postojna .feature-card__logo img { height: 44px; }
+  .feature-card--postojna .feature-card__logo img { height: 44px; max-height: 44px; }
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
   blockquote { margin-top: 1.8rem; }

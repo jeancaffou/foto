@@ -39,19 +39,22 @@ eleventyComputed:
     <header class="article-header shell">
       <a class="article-header__back" href="/blog/"><span aria-hidden="true">←</span> Journal</a>
       <p class="section-label">Photo story</p>
-      <h1>{{ post.title }}</h1>
+      <h1>{{ post.title | escape }}</h1>
       <div class="article-header__meta">
         <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
-        {% for category in post.categories %}<span>{{ category.name }}</span>{% endfor %}
+        {% for category in post.categories %}<span>{{ category.name | escape }}</span>{% endfor %}
       </div>
     </header>
 
+    {% set contentIncludesLead = post.content | contains(post.leadImage) %}
+    {% if not contentIncludesLead %}
     <figure class="article-lead shell">
       <img src="{{ post.leadImage }}" alt="" loading="eager" decoding="async">
     </figure>
+    {% endif %}
 
     <div class="post-copy shell">
-      {{ post.content | safe }}
+      {{ post.content | renderWordPressEmbeds | safe }}
     </div>
 
     <nav class="article-pagination shell" aria-label="Adjacent journal posts">
