@@ -32,14 +32,15 @@ test("builds every canonical WordPress permalink and archive page", () => {
     assert.ok(fs.existsSync(outputPath(post.permalink)), `Missing post route: ${post.permalink}`);
   });
 
-  const archivePages = Math.ceil(posts.length / 12);
+  const archivePages = Math.ceil(posts.length / 11);
   assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "index.html")));
   for (let page = 2; page <= archivePages; page += 1) {
     assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "page", String(page), "index.html")), `Missing blog page ${page}`);
   }
 
+  const firstArchiveHtml = fs.readFileSync(path.join(OUTPUT, "blog", "index.html"), "utf8");
   const archiveHtml = [
-    fs.readFileSync(path.join(OUTPUT, "blog", "index.html"), "utf8"),
+    firstArchiveHtml,
     ...Array.from({ length: archivePages - 1 }, (_, index) => (
       fs.readFileSync(path.join(OUTPUT, "blog", "page", String(index + 2), "index.html"), "utf8")
     ))
@@ -47,6 +48,10 @@ test("builds every canonical WordPress permalink and archive page", () => {
   const archiveLinks = [...archiveHtml.matchAll(/<article class="blog-card[^"]*">[\s\S]*?<a href="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(archiveLinks.length, posts.length);
   assert.deepEqual(new Set(archiveLinks), new Set(posts.map((post) => post.permalink)));
+  assert.equal((firstArchiveHtml.match(/<article class="blog-card/g) || []).length, 11);
+
+  const lastArchiveHtml = fs.readFileSync(path.join(OUTPUT, "blog", "page", String(archivePages), "index.html"), "utf8");
+  assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, posts.length % 11);
 });
 
 test("keeps homepage journal links and the National Geographic route canonical", () => {

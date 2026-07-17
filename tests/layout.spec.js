@@ -23,7 +23,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator('.work-card[href="/work/water-and-ice/"] img')).toHaveAttribute("src", /20231105-DJI_0307-Pano/);
   await expect(page.locator(".work-card__type").filter({ hasText: /^\d+ photographs$/ })).toHaveCount(0);
   await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award for Photography, 2024");
-  await expect(page.locator(".feature-card--postojna")).toContainText("Municipality of Postojna, Slovenia");
+  await expect(page.locator(".feature-card--postojna")).toContainText("Special achievements in photography and promotion of the Municipality of Postojna, Slovenia");
   await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
   await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);
   await expect(page.locator('.press-card[href*="/objava/919103"]')).toContainText("Županovo priznanje za fotografijo");
@@ -172,9 +172,13 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await page.goto("/blog/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.locator("h1")).toContainText("Photo stories from");
-  await expect(page.locator(".blog-card")).toHaveCount(12);
+  await expect(page.locator(".blog-card")).toHaveCount(11);
   await expect(page.locator('.blog-pagination a[href="/blog/page/2/"]')).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("journal-archive.png"), fullPage: true });
+
+  await page.goto("/blog/page/18/");
+  await expect(page.locator(".blog-card")).toHaveCount(7);
+  await expect(page.locator(".blog-pagination")).toContainText("Page 18 / 18");
 
   await page.goto("/2023/10/druga-zmaga-na-national-geographic.html");
   await expect(page.locator("html")).toHaveAttribute("lang", "sl");

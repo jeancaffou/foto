@@ -139,7 +139,7 @@ module.exports = {
       name: "Municipality of Postojna",
       logo: "/assets/images/logo-postojna.svg",
       title: "Mayor's Award for Photography, 2024",
-      detail: "Municipality of Postojna, Slovenia",
+      detail: "Special achievements in photography and promotion of the Municipality of Postojna, Slovenia",
       url: "https://www.postojna.si/objava/919103",
       className: "postojna"
     },
@@ -158,7 +158,7 @@ module.exports = {
     { name: "STA", logo: "/assets/images/publication-sta.svg" },
     { name: "Delo", logo: "/assets/images/publication-delo.svg" },
     { name: "Primorske novice", logo: "/assets/images/publication-primorske-novice.svg" },
-    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg" }
+    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg?v=20260717d" }
   ],
   ambassador: {
     name: "Visit Postojnsko",
