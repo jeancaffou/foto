@@ -21,18 +21,46 @@ module.exports = {
   ],
   press: [
     {
-      title: "Če si amater, še ne pomeni, da si slab",
-      source: "RTV SLO",
-      year: "2023",
-      image: "/assets/images/portrait.png",
-      url: "https://www.rtvslo.si/kultura/ce-si-amater-se-ne-pomeni-da-si-slab-meni-veckrat-nagrajeni-fotograf-zan-kafol/689184"
+      title: "Fotografija Postojne iz zraka in pod zemljo",
+      source: "Radio 94",
+      year: "2026",
+      image: "/assets/images/press-radio94.jpg",
+      url: "https://www.youtube.com/watch?v=TYeM4MJ5kCQ"
     },
     {
-      title: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire",
-      source: "RTV SLO",
+      title: "Dvakratni zmagovalec National Geographica",
+      source: "Dobro jutro, RTV SLO",
       year: "2023",
-      image: "/assets/images/award-portrait.webp",
-      url: "https://www.rtvslo.si/zabava-in-slog/ture-avanture/da-si-lahko-zares-ustvarjalen-moras-vcasih-krsiti-ustaljene-okvire/689209"
+      image: "/assets/images/press-dobro-jutro.jpg",
+      url: "https://www.youtube.com/watch?v=PE-eHr3zWnk"
+    },
+    {
+      title: "Razsvetljenje v Rakovem Škocjanu",
+      source: "Primorska kronika, TV Koper",
+      year: "2023",
+      image: "/assets/images/press-primorska-kronika.jpg",
+      url: "https://www.youtube.com/watch?v=OrNQ_4JSaoY"
+    },
+    {
+      title: "Znova izbranec National Geographica",
+      source: "Prvi dnevnik, RTV SLO",
+      year: "2023",
+      image: "/assets/images/press-prvi-dnevnik.jpg",
+      url: "https://www.youtube.com/watch?v=fw4Psa0lcx0"
+    },
+    {
+      title: "Žan Kafol: Na sončni strani",
+      source: "TV Koper, RTV SLO",
+      year: "2023",
+      image: "/assets/images/press-soncna-stran.jpg",
+      url: "https://www.youtube.com/watch?v=bkEhJ0gXGU4"
+    },
+    {
+      title: "Poček: življenje ob vadišču",
+      source: "Tednik, RTV SLO",
+      year: "2023",
+      image: "/assets/images/press-tednik.jpg",
+      url: "https://www.youtube.com/watch?v=b9XX16krqrk"
     }
   ],
   features: [
@@ -41,7 +69,7 @@ module.exports = {
       logo: "/assets/images/logo-national-geographic.svg",
       title: "Two-time overall winner",
       detail: "Cerkniško polje, 2022 · Razsvetljenje, 2023",
-      url: "https://blog.kafol.net/2023/10/druga-zmaga-na-national-geographic.html"
+      url: "/2023/10/druga-zmaga-na-national-geographic.html"
     },
     {
       name: "Nikon",
@@ -53,8 +81,8 @@ module.exports = {
   ],
   publications: ["RTV Slovenija", "N1", "STA", "Delo", "Primorske novice", "Radio 94"],
   posts: [
-    { title: "Ledena jama v Paradani", excerpt: "Led, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Jan 11, 2025", category: "Cave", url: "https://blog.kafol.net/" },
-    { title: "Severni sij nad Slovenijo", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "https://blog.kafol.net/" },
-    { title: "Letenje nad Tržaškim zalivom", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Mar 18, 2024", category: "Flight", url: "https://blog.kafol.net/" }
+    { title: "Ledena jama v Paradani", excerpt: "Led, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Jan 11, 2025", category: "Cave", url: "/blog/" },
+    { title: "Severni sij nad Slovenijo", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/blog/" },
+    { title: "Letenje nad Tržaškim zalivom", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Mar 18, 2024", category: "Flight", url: "/blog/" }
   ]
 };

@@ -25,6 +25,23 @@
 - Earlier mistake: the source was cropped to 4:5, contrast-stretched, sharpened, darkened, and filtered again in CSS.
 - Preferred rule: keep a landscape crop from `Zan-Kafol-1024x683.jpg` that removes unused sky and side margins without cutting the head, shoulders, or torso. Use grayscale conversion only; do not add contrast, brightness, sharpening, or additional CSS filters.
 - Source status: direct user correction on 2026-07-17.
+- User correction: the hero must use the two National Geographic Slovenia winning photographs, `Cerkniško polje` and `Razsvetljenje`.
+- Earlier mistake: the hero used unrelated images in rigid equal columns with a visible black divider.
+- Preferred rule: let the landscape and vertical formats use unequal widths, overlap them, and crossfade the image pixels through the overlap. Keep both photographs in the same row on mobile and never hide the join behind a hard black seam.
+- User correction: the about facts must use the map-pin, karst-water, and camera icons shown in the reference.
+- Earlier mistake: text labels such as `Home`, `Collaboration`, and `Practice` were substituted for the visual icon column.
+- Preferred rule: keep accessible hidden terms, but render the three fact rows with line icons and compact factual text. Blend the portrait into the dark background without artificial contrast or a visible light rectangle.
+- User correction: press coverage must represent the actual interview and broadcast archive.
+- Earlier mistake: only two cards were shown and both reused generic portrait images unrelated to the linked media.
+- Preferred rule: use real local stills from the specific Radio 94 and RTV Slovenija appearances. The verified initial set contains Radio 94, Dobro jutro, Primorska kronika, Prvi dnevnik, Na sončni strani, and Tednik.
+
+## WordPress Migration
+
+- Never link internal content to `blog.kafol.net`; that WordPress site is being replaced by this Eleventy build. Internal links must be relative or root-relative.
+- Preserve the legacy permalink format exactly: `/%year%/%monthnum%/%postname%.html`.
+- The audited dump contains 194 published posts. Preserve each post's text and rendered HTML rather than re-authoring it.
+- Preserve Jetpack tiled galleries, Gutenberg blocks, classic HTML, embeds, and custom layout fragments. Rewrite only obsolete absolute site/media URLs to local equivalents.
+- Source content and uploads live under the ignored `context/` directory and must not be committed.
 
 ## Portfolio Copy
 

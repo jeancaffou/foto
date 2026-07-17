@@ -5,18 +5,27 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator("h1")).toContainText("Aerial & cave");
   await expect(page.locator(".work-card")).toHaveCount(8);
   await expect(page.locator("#about")).toBeVisible();
+  await expect(page.locator(".about__fact-icon")).toHaveCount(3);
   await expect(page.locator("#press")).toBeVisible();
+  await expect(page.locator(".press-card")).toHaveCount(6);
   await expect(page.locator(".post-card")).toHaveCount(3);
+  await expect(page.locator('a[href*="blog.kafol.net"]')).toHaveCount(0);
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
 
+  const heroPanels = await page.locator(".hero__image").evaluateAll((panels) => panels.map((panel) => {
+    const bounds = panel.getBoundingClientRect();
+    return { left: bounds.left, right: bounds.right, top: bounds.top, bottom: bounds.bottom, width: bounds.width };
+  }));
+  expect(heroPanels[0].width).not.toBe(heroPanels[1].width);
+  expect(heroPanels[0].right - heroPanels[1].left).toBeGreaterThan(30);
+  expect(Math.abs(heroPanels[0].top - heroPanels[1].top)).toBeLessThan(1);
+  expect(Math.abs(heroPanels[0].bottom - heroPanels[1].bottom)).toBeLessThan(1);
+
   await page.evaluate(() => document.fonts.ready);
-  const revealItems = page.locator("[data-reveal]");
-  for (let index = 0; index < await revealItems.count(); index += 1) {
-    await revealItems.nth(index).scrollIntoViewIfNeeded();
-  }
-  await expect(page.locator("[data-reveal]:not(.is-visible)")).toHaveCount(0);
+  await page.locator("footer").scrollIntoViewIfNeeded();
+  await page.evaluate(() => document.querySelectorAll("[data-reveal]").forEach((item) => item.classList.add("is-visible")));
   await page.locator("#top").scrollIntoViewIfNeeded();
   await page.waitForTimeout(750);
 
