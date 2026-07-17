@@ -1,0 +1,16 @@
+{
+  "name": "zan-kafol-photo-stories",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eleventy portfolio and photo journal for Žan Kafol",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "test": "npm run build && playwright test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@playwright/test": "^1.55.0"
+  }
+}
+
