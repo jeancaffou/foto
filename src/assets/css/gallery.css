@@ -10,7 +10,6 @@
   min-height: clamp(380px, 48vw, 650px);
   align-items: flex-end;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
   background-image: var(--gallery-cover);
   background-position: center;
   background-size: cover;

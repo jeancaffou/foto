@@ -7,7 +7,9 @@
   --line: rgba(224, 218, 205, 0.16);
   --gold: #bc7b31;
   --gold-light: #d69b50;
-  --shell: min(94vw, 1540px);
+  --shell-max: 1540px;
+  --gutter: max(3vw, calc((100vw - var(--shell-max)) / 2));
+  --shell: calc(100vw - (2 * var(--gutter)));
   --font: "Jost", "Trebuchet MS", sans-serif;
 }
 
@@ -304,11 +306,11 @@ a:focus-visible {
 
 .works {
   width: var(--shell);
-  padding-block: clamp(0.2rem, 0.3vw, 0.35rem);
+  padding-block: clamp(0.65rem, 0.85vw, 0.9rem);
 }
 
 .works > .section-label {
-  margin-bottom: clamp(0.4rem, 0.5vw, 0.55rem);
+  margin-bottom: clamp(0.55rem, 0.65vw, 0.7rem);
 }
 
 .work-grid {
@@ -396,7 +398,7 @@ a:focus-visible {
   height: min(23vw, 360px);
   min-height: 0;
   margin-inline: auto;
-  grid-template-columns: 36% 27% 37%;
+  grid-template-columns: min(34.5vw, 540px) 27% 1fr;
   align-items: center;
   gap: 0;
 }
@@ -414,13 +416,18 @@ a:focus-visible {
   image-rendering: auto;
   object-fit: contain;
   object-position: center bottom;
-  transform: scale(1);
-  transition: filter 450ms ease, transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: filter 450ms ease;
 }
 
-.about__portrait:hover img {
-  filter: grayscale(0);
-  transform: scale(1.035);
+@media (hover: hover) {
+  .about__portrait img {
+    transition: filter 450ms ease, transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .about__portrait:hover img {
+    filter: grayscale(0);
+    transform: scale(1.035);
+  }
 }
 
 .about__halo {
@@ -451,14 +458,6 @@ a:focus-visible {
 .about__copy .about__lead {
   color: #d8d3c9;
   font-size: 0.8rem;
-}
-
-.about__copy .about__ambassador-copy {
-  color: #c5c0b6;
-}
-
-.about__ambassador-copy a {
-  color: var(--gold-light);
 }
 
 .text-link {
@@ -519,13 +518,14 @@ a:focus-visible {
 
 .editorial-band {
   display: grid;
+  padding-inline: var(--gutter);
   border-bottom: 1px solid var(--line);
   grid-template-columns: 1.08fr 0.92fr;
 }
 
 .band-section {
   min-width: 0;
-  padding: clamp(0.7rem, 0.9vw, 1rem) max(3vw, calc((100vw - 1540px) / 2));
+  padding-block: clamp(0.7rem, 0.9vw, 1rem);
 }
 
 .band-section > .section-label,
@@ -764,8 +764,9 @@ a:focus-visible {
 
 .publication-mark {
   display: flex;
-  height: 16px;
+  height: 18px;
   align-items: center;
+  justify-content: center;
 }
 
 .publication-list__marks {
@@ -779,8 +780,9 @@ a:focus-visible {
 .publication-mark img {
   width: auto;
   max-width: 76px;
-  height: 100%;
+  height: 16px;
   object-fit: contain;
+  filter: grayscale(1) brightness(0) invert(1);
 }
 
 .ambassador-mark {
@@ -800,8 +802,8 @@ a:focus-visible {
 }
 
 .ambassador-mark img {
-  width: 92px;
-  height: 24px;
+  width: 38px;
+  height: 30px;
   object-fit: contain;
   object-position: left center;
   transition: opacity 180ms ease;
@@ -1046,12 +1048,12 @@ blockquote cite {
   .about__facts div { padding: 1.25rem; border-right: 1px solid var(--line); border-bottom: 0; grid-template-columns: 28px 1fr; }
   .about__facts div:last-child { border-right: 0; }
   .editorial-band { grid-template-columns: 1fr; }
-  .featured { padding-right: 3vw; border-right: 0; border-bottom: 1px solid var(--line); }
-  .press { padding-left: 3vw; }
+  .featured { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .press { padding-left: 0; }
 }
 
 @media (max-width: 760px) {
-  :root { --shell: calc(100vw - 2.2rem); }
+  :root { --gutter: 1.1rem; }
   .site-header { min-height: 86px; }
   .brand__name { font-size: 1rem; }
   .brand__role { font-size: 0.51rem; }
@@ -1090,7 +1092,7 @@ blockquote cite {
   .about__facts { width: 100%; margin-inline: auto; order: 3; grid-template-columns: 1fr; }
   .about__facts div { padding-inline: 0; border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: 28px 1fr; }
   .about__facts div:last-child { border-bottom: 0; }
-  .band-section { padding: 2.2rem 1.1rem; }
+  .band-section { padding-block: 2.2rem; }
   .press-grid { grid-template-columns: repeat(2, 1fr); }
   .press-card { grid-template-columns: 64px 1fr; }
   .press-card__image { height: auto; }
@@ -1102,7 +1104,7 @@ blockquote cite {
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
   .publication-list { grid-template-columns: 1fr; }
-  .publication-mark { height: 15px; }
+  .publication-mark { height: 18px; }
   blockquote { margin-top: 1.8rem; }
   .journal__heading { display: flex; }
   .post-grid { grid-template-columns: 1fr; }

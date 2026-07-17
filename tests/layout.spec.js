@@ -18,7 +18,8 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".feature-card")).toHaveCount(3);
   await expect(page.locator(".publication-mark img")).toHaveCount(6);
   await expect(page.locator(".ambassador-mark img")).toHaveAttribute("alt", "Visit Postojnsko");
-  await expect(page.locator(".about__ambassador-copy")).toContainText("Tourist ambassador for Visit Postojnsko (Tourism Postojna)");
+  await expect(page.locator(".about__copy")).not.toContainText("Tourist ambassador");
+  await expect(page.locator(".ambassador-mark")).toContainText("Tourist ambassador for Visit Postojnsko (Tourism Postojna)");
   await expect(page.locator('.work-card[href="/work/water-and-ice/"] img')).toHaveAttribute("src", /20231105-DJI_0307-Pano/);
   await expect(page.locator(".work-card__type").filter({ hasText: /^\d+ photographs$/ })).toHaveCount(0);
   await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award for Photography, 2024");
@@ -50,8 +51,10 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   expect(Math.abs(heroPanels[0].top - heroPanels[1].top)).toBeLessThan(1);
   expect(Math.abs(heroPanels[0].bottom - heroPanels[1].bottom)).toBeLessThan(1);
 
-  const alignedEdges = await page.locator(".works, .about__inner, .featured > .section-label").evaluateAll((items) => items.map((item) => item.getBoundingClientRect().left));
-  expect(Math.max(...alignedEdges) - Math.min(...alignedEdges)).toBeLessThan(1);
+  const alignedLeftEdges = await page.locator(".works, .about__inner, .featured").evaluateAll((items) => items.map((item) => item.getBoundingClientRect().left));
+  expect(Math.max(...alignedLeftEdges) - Math.min(...alignedLeftEdges)).toBeLessThan(0.1);
+  const alignedRightEdges = await page.locator(".works, .about__inner, .press").evaluateAll((items) => items.map((item) => item.getBoundingClientRect().right));
+  expect(Math.max(...alignedRightEdges) - Math.min(...alignedRightEdges)).toBeLessThan(0.1);
 
   await page.evaluate(() => document.fonts.ready);
   await page.locator("footer").scrollIntoViewIfNeeded();
@@ -96,6 +99,14 @@ test("renders category galleries and opens the local-image lightbox", async ({ p
   await expect(page.locator(".gallery-tile")).toHaveCount(11);
   await expect(page.locator('.gallery-categories a[aria-current="page"]')).toHaveText("From Above");
   await expect(page.locator('a[href*="blog.kafol.net"]')).toHaveCount(0);
+
+  const galleryHeroEdges = await page.locator(".gallery-hero, .gallery-hero__shade, .gallery-categories").evaluateAll((items) => items.map((item) => {
+    const bounds = item.getBoundingClientRect();
+    return { top: bounds.top, bottom: bounds.bottom };
+  }));
+  expect(Math.abs(galleryHeroEdges[0].bottom - galleryHeroEdges[1].bottom)).toBeLessThan(0.1);
+  expect(Math.abs(galleryHeroEdges[0].bottom - galleryHeroEdges[2].top)).toBeLessThan(0.1);
+  await expect(page.locator(".gallery-hero")).toHaveCSS("border-bottom-width", "0px");
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
@@ -158,14 +169,35 @@ test("headshot loads cleanly and restores color on hover-capable screens", async
   const portrait = page.locator(".about__portrait img");
   await portrait.scrollIntoViewIfNeeded();
   await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+  await expect(portrait).toBeVisible();
+  expect((await portrait.boundingBox()).height).toBeGreaterThan(100);
   await expect(portrait).toHaveCSS("filter", "grayscale(1)");
   if (testInfo.project.name === "mobile") return;
   await expect(page.locator(".about__portrait")).toHaveClass(/is-visible/);
   await page.waitForTimeout(750);
+  const frameBefore = await page.locator(".about__portrait").evaluate((frame) => {
+    const bounds = frame.getBoundingClientRect();
+    return { left: bounds.left, top: bounds.top, width: bounds.width, height: bounds.height };
+  });
+  if ((await page.viewportSize()).width > 900) {
+    const imageBefore = await portrait.evaluate((image) => {
+      const bounds = image.getBoundingClientRect();
+      return { left: bounds.left, top: bounds.top, width: bounds.width, height: bounds.height };
+    });
+    expect(Math.abs(imageBefore.left - frameBefore.left)).toBeLessThan(1);
+    expect(Math.abs(imageBefore.top - frameBefore.top)).toBeLessThan(1);
+    expect(Math.abs(imageBefore.width - frameBefore.width)).toBeLessThan(1);
+    expect(Math.abs(imageBefore.height - frameBefore.height)).toBeLessThan(1);
+  }
   await portrait.hover();
   await expect(portrait).toHaveCSS("filter", "grayscale(0)");
   const transform = await portrait.evaluate((image) => getComputedStyle(image).transform);
   expect(transform).not.toBe("none");
+  const frameAfter = await page.locator(".about__portrait").evaluate((frame) => {
+    const bounds = frame.getBoundingClientRect();
+    return { left: bounds.left, top: bounds.top, width: bounds.width, height: bounds.height };
+  });
+  expect(frameAfter).toEqual(frameBefore);
 });
 
 test("mobile navigation opens, links remain usable, and closes with Escape", async ({ page }, testInfo) => {
