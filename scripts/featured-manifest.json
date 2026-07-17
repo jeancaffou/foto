@@ -15,37 +15,37 @@
     {
       "id": "from-above",
       "label": "From Above",
-      "kicker": "11 photographs",
+      "kicker": "Karst from the air",
       "file": "20250612-DJI_20250612182344_0620_D.jpg"
     },
     {
       "id": "below-ground",
       "label": "Below Ground",
-      "kicker": "24 photographs",
+      "kicker": "Caves & underground rivers",
       "file": "20250212-IMG_7268-Enhanced-NR.jpg"
     },
     {
       "id": "in-flight",
       "label": "In Flight",
-      "kicker": "9 photographs",
+      "kicker": "Paragliding & movement",
       "file": "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg"
     },
     {
       "id": "after-dark",
       "label": "After Dark",
-      "kicker": "23 photographs",
+      "kicker": "Night skies & storms",
       "file": "20201029-DJI_0456.jpg"
     },
     {
       "id": "water-and-ice",
       "label": "Water & Ice",
-      "kicker": "21 photographs",
-      "file": "20200727-DJI_0263.jpg"
+      "kicker": "Flooded poljes & winter",
+      "file": "20231105-DJI_0307-Pano.jpg"
     },
     {
       "id": "land-and-life",
       "label": "Land & Life",
-      "kicker": "12 photographs",
+      "kicker": "Nature & life outdoors",
       "file": "20211025-IMG_2309.jpg"
     }
   ],
@@ -148,7 +148,7 @@
     {
       "id": "water-and-ice",
       "label": "Water & Ice",
-      "cover": "20200727-DJI_0263.jpg",
+      "cover": "20231105-DJI_0307-Pano.jpg",
       "files": [
         "20171229-_MG_8375-2.jpg",
         "20171229-_MG_8375.jpg",

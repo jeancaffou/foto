@@ -152,7 +152,20 @@ module.exports = {
       className: "nikon"
     }
   ],
-  publications: ["RTV Slovenija", "N1", "STA", "Delo", "Primorske novice", "Radio 94"],
+  publications: [
+    { name: "RTV Slovenija", logo: "/assets/images/publication-rtv-slovenija.svg" },
+    { name: "N1", logo: "/assets/images/publication-n1.svg" },
+    { name: "STA", logo: "/assets/images/publication-sta.svg" },
+    { name: "Delo", logo: "/assets/images/publication-delo.svg" },
+    { name: "Primorske novice", logo: "/assets/images/publication-primorske-novice.svg" },
+    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg" }
+  ],
+  ambassador: {
+    name: "Visit Postojnsko",
+    label: "Tourist ambassador for Visit Postojnsko (Tourism Postojna)",
+    logo: "/assets/images/logo-visit-postojnsko.svg",
+    url: "https://visit-postojna.si/"
+  },
   posts: [
     { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/2025/02/ledena-jama-v-paradani.html" },
     { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" },

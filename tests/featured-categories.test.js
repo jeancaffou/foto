@@ -32,14 +32,14 @@ test("assigns every featured photograph to exactly one collection", () => {
   });
 });
 
-test("keeps collection counts and selected-work labels synchronized", () => {
+test("uses editorial descriptors instead of collection counts in selected work", () => {
   const categories = new Map(manifest.categories.map((category) => [category.id, category]));
 
   manifest.selectedWorkTiles.forEach((tile) => {
     if (tile.id.startsWith("natgeo-")) return;
     const category = categories.get(tile.id);
     assert.ok(category, `Missing category for ${tile.id}`);
-    assert.equal(tile.kicker, `${category.files.length} photographs`);
+    assert.doesNotMatch(tile.kicker, /^\d+ photographs$/);
   });
 });
 
@@ -48,7 +48,7 @@ test("uses the requested collection covers and lists newest photographs first", 
     "below-ground": "20250212-IMG_7268-Enhanced-NR.jpg",
     "in-flight": "20211114-vlcsnap-2021-11-14-19h39m09s315-Edit-2.jpg",
     "after-dark": "20201029-DJI_0456.jpg",
-    "water-and-ice": "20200727-DJI_0263.jpg",
+    "water-and-ice": "20231105-DJI_0307-Pano.jpg",
     "land-and-life": "20211025-IMG_2309.jpg"
   };
 

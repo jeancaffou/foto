@@ -16,6 +16,11 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator('.press-card[href="/press/zan-kafol-od-zgoraj-od-blizu/"]')).toHaveCount(1);
   await expect(page.locator('.press-card[href*="/objava/919103"]')).toHaveCount(1);
   await expect(page.locator(".feature-card")).toHaveCount(3);
+  await expect(page.locator(".publication-mark img")).toHaveCount(6);
+  await expect(page.locator(".ambassador-mark img")).toHaveAttribute("alt", "Visit Postojnsko");
+  await expect(page.locator(".about__ambassador-copy")).toContainText("Tourist ambassador for Visit Postojnsko (Tourism Postojna)");
+  await expect(page.locator('.work-card[href="/work/water-and-ice/"] img')).toHaveAttribute("src", /20231105-DJI_0307-Pano/);
+  await expect(page.locator(".work-card__type").filter({ hasText: /^\d+ photographs$/ })).toHaveCount(0);
   await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award for Photography, 2024");
   await expect(page.locator(".feature-card--postojna")).toContainText("Municipality of Postojna, Slovenia");
   await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
@@ -44,6 +49,9 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   expect(heroPanels[0].right - heroPanels[1].left).toBeGreaterThan(30);
   expect(Math.abs(heroPanels[0].top - heroPanels[1].top)).toBeLessThan(1);
   expect(Math.abs(heroPanels[0].bottom - heroPanels[1].bottom)).toBeLessThan(1);
+
+  const alignedEdges = await page.locator(".works, .about__inner, .featured > .section-label").evaluateAll((items) => items.map((item) => item.getBoundingClientRect().left));
+  expect(Math.max(...alignedEdges) - Math.min(...alignedEdges)).toBeLessThan(1);
 
   await page.evaluate(() => document.fonts.ready);
   await page.locator("footer").scrollIntoViewIfNeeded();
@@ -156,6 +164,8 @@ test("headshot loads cleanly and restores color on hover-capable screens", async
   await page.waitForTimeout(750);
   await portrait.hover();
   await expect(portrait).toHaveCSS("filter", "grayscale(0)");
+  const transform = await portrait.evaluate((image) => getComputedStyle(image).transform);
+  expect(transform).not.toBe("none");
 });
 
 test("mobile navigation opens, links remain usable, and closes with Escape", async ({ page }, testInfo) => {

@@ -303,6 +303,7 @@ a:focus-visible {
 }
 
 .works {
+  width: var(--shell);
   padding-block: clamp(0.2rem, 0.3vw, 0.35rem);
 }
 
@@ -413,11 +414,13 @@ a:focus-visible {
   image-rendering: auto;
   object-fit: contain;
   object-position: center bottom;
-  transition: filter 450ms ease;
+  transform: scale(1);
+  transition: filter 450ms ease, transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .about__portrait:hover img {
   filter: grayscale(0);
+  transform: scale(1.035);
 }
 
 .about__halo {
@@ -448,6 +451,14 @@ a:focus-visible {
 .about__copy .about__lead {
   color: #d8d3c9;
   font-size: 0.8rem;
+}
+
+.about__copy .about__ambassador-copy {
+  color: #c5c0b6;
+}
+
+.about__ambassador-copy a {
+  color: var(--gold-light);
 }
 
 .text-link {
@@ -737,10 +748,10 @@ a:focus-visible {
 }
 
 .publication-list {
-  display: flex;
+  display: grid;
   margin-top: 0.4rem;
   align-items: center;
-  flex-wrap: wrap;
+  grid-template-columns: auto 1fr;
   gap: 0.35rem 0.9rem;
 }
 
@@ -752,11 +763,52 @@ a:focus-visible {
 }
 
 .publication-mark {
-  color: #c3bfb6;
-  font-size: 0.64rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
+  display: flex;
+  height: 16px;
+  align-items: center;
+}
+
+.publication-list__marks {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem clamp(0.8rem, 1.35vw, 1.4rem);
+}
+
+.publication-mark img {
+  width: auto;
+  max-width: 76px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ambassador-mark {
+  display: flex;
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--line);
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.ambassador-mark__label {
+  color: var(--gold-light);
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ambassador-mark img {
+  width: 92px;
+  height: 24px;
+  object-fit: contain;
+  object-position: left center;
+  transition: opacity 180ms ease;
+}
+
+.ambassador-mark:hover img {
+  opacity: 0.76;
 }
 
 blockquote {
@@ -1049,6 +1101,8 @@ blockquote cite {
   .feature-card--postojna .feature-card__logo img { height: 44px; max-height: 44px; }
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
+  .publication-list { grid-template-columns: 1fr; }
+  .publication-mark { height: 15px; }
   blockquote { margin-top: 1.8rem; }
   .journal__heading { display: flex; }
   .post-grid { grid-template-columns: 1fr; }
