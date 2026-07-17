@@ -41,12 +41,8 @@ title: Žan Kafol — Aerial & Cave Photographer
     </a>
   </section>
 
-  <section class="works section shell" id="work" aria-labelledby="work-title">
-    <div class="section-heading" data-reveal>
-      <p class="section-label">Selected works</p>
-      <h2 id="work-title">Light, land<br>and limestone</h2>
-      <p>Flight opens one view of the karst. Caving reveals another.</p>
-    </div>
+  <section class="works shell" id="work" aria-labelledby="work-title">
+    <p class="section-label" id="work-title" data-reveal>Selected works</p>
     <div class="work-grid">
       {% for work in site.works %}
       <a class="work-card" href="https://blog.kafol.net/" data-reveal style="--delay: {{ loop.index0 * 55 }}ms">
@@ -168,7 +164,9 @@ title: Žan Kafol — Aerial & Cave Photographer
     </div>
     <div class="footer-group">
       <p class="footer-label">Follow</p>
-      {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">{{ item.label }}</a>{% endfor %}
+      <div class="footer-socials">
+        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>

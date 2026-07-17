@@ -16,6 +16,16 @@
 - Responsive layouts must reflow deliberately. Do not shrink desktop grids until they become unreadable.
 - Motion should be sparse and meaningful. Respect `prefers-reduced-motion`.
 
+## Visual Fidelity Correction
+
+- User correction: the first implementation was much too tall and did not follow the supplied composition closely enough.
+- Earlier mistake: the 1440px render grew to 3532px, added a large heading above the work grid, used oversized vertical spacing, and changed the reference's compact editorial bands into long standalone sections.
+- Preferred rule: compare against the 1086×1448 reference at its actual width. Preserve the shallow hero, four-column/two-row work grid, compact about band, split featured/press band, short journal row, and short footer.
+- User correction: the first headshot derivative was badly cropped and aggressively processed.
+- Earlier mistake: the source was cropped to 4:5, contrast-stretched, sharpened, darkened, and filtered again in CSS.
+- Preferred rule: keep a landscape crop from `Zan-Kafol-1024x683.jpg` that removes unused sky and side margins without cutting the head, shoulders, or torso. Use grayscale conversion only; do not add contrast, brightness, sharpening, or additional CSS filters.
+- Source status: direct user correction on 2026-07-17.
+
 ## Portfolio Copy
 
 - Use `Žan Kafol` with the correct diacritic and prefer `software engineer` for his technical role.

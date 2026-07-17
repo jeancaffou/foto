@@ -4,10 +4,10 @@ module.exports = {
   email: "foto@kafol.net",
   location: "Postojna, Slovenia",
   social: [
-    { label: "Instagram", url: "https://www.instagram.com/jeancaffou/" },
-    { label: "Facebook", url: "https://www.facebook.com/jeancaffou" },
-    { label: "TikTok", url: "https://www.tiktok.com/@jeancaffou" },
-    { label: "YouTube", url: "https://www.youtube.com/jeancaffou" }
+    { label: "Instagram", url: "https://www.instagram.com/jeancaffou/", icon: "/assets/images/logo-instagram.svg" },
+    { label: "Facebook", url: "https://www.facebook.com/jeancaffou", icon: "/assets/images/logo-facebook.svg" },
+    { label: "TikTok", url: "https://www.tiktok.com/@jeancaffou", icon: "/assets/images/logo-tiktok.svg" },
+    { label: "YouTube", url: "https://www.youtube.com/jeancaffou", icon: "/assets/images/logo-youtube.svg" }
   ],
   works: [
     { title: "Planinsko polje", type: "Aerial", image: "/assets/images/cerknisko-polje.jpg", position: "center" },
