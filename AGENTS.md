@@ -2,7 +2,6 @@
 
 ## Workflow
 
-- Run an Eleventy build after each implementation milestone.
 - Commit milestones incrementally.
 - Validate desktop and mobile layouts with Playwright before finishing.
 - Do not modify or commit the supplied `context/` folder or design reference image.
