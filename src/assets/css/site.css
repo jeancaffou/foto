@@ -518,7 +518,8 @@ a:focus-visible {
 
 .editorial-band {
   display: grid;
-  padding-inline: var(--gutter);
+  width: var(--shell);
+  margin-inline: auto;
   border-bottom: 1px solid var(--line);
   grid-template-columns: 1.08fr 0.92fr;
 }
