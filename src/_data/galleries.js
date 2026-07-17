@@ -60,7 +60,7 @@ const selected = manifest.selectedWorkTiles.map((tile) => {
     type: tile.kicker,
     image: imageData(tile.file, tile.label).thumb,
     position: "center",
-    url: `/work/${galleryId}/#${stem(tile.file)}`
+    url: `/work/${galleryId}/`
   };
 });
 

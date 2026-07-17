@@ -61,6 +61,14 @@
 
 - User correction: `Wild Places` was too generic and did not accurately describe the exported set.
 - Preferred replacement: `Land & Life` at `/work/land-and-life/`, limited to the 12 coherent photographs of landscapes, trees, wildlife, people outdoors, Predjama Castle, and seasonal scenes.
+- Every exported featured photograph belongs to exactly one collection. Do not duplicate aerial water, flight, cave-water, night-drone, or award images across otherwise unrelated categories.
+- The two National Geographic winners belong only to `Award-winning`. Selected-work cards open the collection page, not an image hash or a raw image.
+
+## Award Order And Logos
+
+- Keep the feature order `National Geographic`, `Municipality of Postojna`, `Nikon`.
+- Use the supplied `coat_of_arms_line_art_smooth.svg` as the Municipality of Postojna mark, localized as a transparent white line-art SVG.
+- Keep the Nikon wordmark smaller than the National Geographic and municipal marks. The visible Nikon recognition is the 2010 `I AM Nikon` photo contest; never reintroduce `Nikon Z6II` as the award title.
 
 ## WordPress Migration
 
@@ -69,6 +77,7 @@
 - The audited dump contains 194 published posts. Preserve each post's text and rendered HTML rather than re-authoring it.
 - Preserve Jetpack tiled galleries, Gutenberg blocks, classic HTML, embeds, and custom layout fragments. Rewrite only obsolete absolute site/media URLs to local equivalents.
 - Source content and uploads live under the ignored `context/` directory and must not be committed.
+- Automated browser tests write to `_site_test/`, never `_site/`. Multiple Eleventy processes writing the same output directory caused transient old/mixed pages during development; keep test and local-dev outputs isolated.
 
 ## Portfolio Copy
 

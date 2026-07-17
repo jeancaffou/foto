@@ -715,11 +715,12 @@ a:focus-visible {
 }
 
 .feature-card--nikon .feature-card__logo img {
-  height: 42px;
+  height: 30px;
 }
 
 .feature-card--postojna .feature-card__logo img {
-  height: 42px;
+  height: 48px;
+  max-height: 48px;
 }
 
 .feature-card strong {
@@ -1044,8 +1045,8 @@ blockquote cite {
   .feature-grid { grid-template-columns: 1fr; }
   .feature-card { min-height: 88px; }
   .feature-card__logo img { height: 31px; max-height: 42px; }
-  .feature-card--nikon .feature-card__logo img,
-  .feature-card--postojna .feature-card__logo img { height: 42px; }
+  .feature-card--nikon .feature-card__logo img { height: 28px; }
+  .feature-card--postojna .feature-card__logo img { height: 44px; }
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
   blockquote { margin-top: 1.8rem; }

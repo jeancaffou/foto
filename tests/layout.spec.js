@@ -18,12 +18,15 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".feature-card")).toHaveCount(3);
   await expect(page.locator(".feature-card--postojna")).toContainText("Mayor's Award for Photography, 2024");
   await expect(page.locator(".feature-card--postojna")).toContainText("Municipality of Postojna, Slovenia");
+  await expect(page.locator(".feature-card").nth(1)).toHaveClass(/feature-card--postojna/);
+  await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);
   await expect(page.locator('.press-card[href*="/objava/919103"]')).toContainText("Županovo priznanje za fotografijo");
   await expect(page.locator(".about__facts")).toContainText("Karst Research Institute");
   await expect(page.locator(".hero__intro")).toContainText("Photo stories shaped by flight");
   await expect(page.locator(".post-card")).toHaveCount(3);
   await expect(page.locator('a[href*="blog.kafol.net"]')).toHaveCount(0);
   await expect(page.locator('.work-card[href^="/work/"]')).toHaveCount(8);
+  await expect(page.locator('.work-card[href*="#"]')).toHaveCount(0);
   await expect(page.locator('.work-card[href^="/work/land-and-life/"]')).toHaveCount(1);
   await expect(page.locator('.work-card[href*="wild-places"]')).toHaveCount(0);
   await expect(page.locator('.work-card[href^="/work/award-winning/"]').nth(1)).toContainText("Enlightened (All Roads Lead to Rakov Škocjan)");

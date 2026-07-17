@@ -136,26 +136,26 @@ module.exports = {
       className: "natgeo"
     },
     {
+      name: "Municipality of Postojna",
+      logo: "/assets/images/logo-postojna.svg",
+      title: "Mayor's Award for Photography, 2024",
+      detail: "Municipality of Postojna, Slovenia",
+      url: "https://www.postojna.si/objava/919103",
+      className: "postojna"
+    },
+    {
       name: "Nikon",
       logo: "/assets/images/logo-nikon.svg",
       title: "Awarded photographer, 2010",
       detail: "I AM Nikon photo contest",
       url: "https://iprom.si/blog/nikonova-kampanja-in-nagradni-natecaj-jaz-sem-navdusila-slovenijo/",
       className: "nikon"
-    },
-    {
-      name: "Municipality of Postojna",
-      logo: "/assets/images/logo-postojna.png",
-      title: "Mayor's Award for Photography, 2024",
-      detail: "Municipality of Postojna, Slovenia",
-      url: "https://www.postojna.si/objava/919103",
-      className: "postojna"
     }
   ],
   publications: ["RTV Slovenija", "N1", "STA", "Delo", "Primorske novice", "Radio 94"],
   posts: [
-    { title: "Ice Cave in Paradana", excerpt: "Led, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Jan 11, 2025", category: "Cave", url: "/blog/" },
-    { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/blog/" },
-    { title: "Flying over the Gulf of Trieste", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Mar 18, 2024", category: "Flight", url: "/blog/" }
+    { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/2025/02/ledena-jama-v-paradani.html" },
+    { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" },
+    { title: "Flying over the Gulf of Trieste", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Dec 25, 2023", category: "Flight", url: "/2023/12/letenje-nad-trzaskim-zalivom.html" }
   ]
 };
