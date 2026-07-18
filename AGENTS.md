@@ -71,7 +71,7 @@
 ## Award Order And Logos
 
 - Keep the feature order `National Geographic`, `Municipality of Postojna`, `Nikon`.
-- Use the supplied `coat_of_arms_line_art_smooth.svg` as the Municipality of Postojna mark, localized as a transparent white line-art SVG.
+- Use the user-supplied `coatofarms-postojna.svg` as the Municipality of Postojna mark, localized at `src/assets/images/logo-postojna.svg`. It replaces the earlier `coat_of_arms_line_art_smooth.svg`; do not restore that older traced version. The replacement is a transparent white portrait-format coat of arms supplied directly by the user on 2026-07-18.
 - Keep the Nikon wordmark smaller than the National Geographic and municipal marks. The visible Nikon recognition is the 2010 `I AM Nikon` photo contest; never reintroduce `Nikon Z6II` as the award title.
 
 ## WordPress Migration
