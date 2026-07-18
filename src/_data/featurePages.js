@@ -7,12 +7,12 @@ module.exports = [
     section: "Featured & awarded",
     date: "2024-04-23",
     displayDate: "April 23, 2024",
-    summary: "Žan Kafol received the Mayor's Award for special achievements in photography and promotion of the Municipality of Postojna.",
+    summary: "Žan Kafol received the Mayor's Award from Mayor Igor Marentič for special achievements in photography and promotion of the Municipality of Postojna.",
     images: [
       {
         src: "/assets/images/feature-mayors-award-postojna-2024.jpg",
-        alt: "Žan Kafol receiving the Mayor's Award from the mayor of Postojna",
-        caption: "Mayor's Award ceremony, Postojna · Photograph by Valter Leban"
+        alt: "Žan Kafol receiving the Mayor's Award from Mayor Igor Marentič",
+        caption: "Žan Kafol with Mayor Igor Marentič at the Mayor's Award ceremony, Postojna · Photograph by Valter Leban"
       }
     ],
     originalUrl: "https://www.postojna.si/objava/919103",
