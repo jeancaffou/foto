@@ -567,6 +567,29 @@ a:focus-visible {
   margin-bottom: 0;
 }
 
+.press__heading > .section-label a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: color 180ms ease;
+}
+
+.press__heading > .section-label a span {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  transition: transform 180ms ease;
+}
+
+.press__heading > .section-label a:hover,
+.press__heading > .section-label a:focus-visible {
+  color: var(--paper-bright);
+}
+
+.press__heading > .section-label a:hover span,
+.press__heading > .section-label a:focus-visible span {
+  transform: translateX(0.2rem);
+}
+
 .press-pager {
   display: flex;
   align-items: center;

@@ -80,6 +80,15 @@ test("keeps homepage journal links and the National Geographic route canonical",
 test("builds local landing pages for every featured and press card", () => {
   assert.equal(site.press.filter((item) => /^https?:/.test(item.url)).length, 0);
   assert.equal(site.features.filter((item) => /^https?:/.test(item.url)).length, 0);
+  assert.equal(site.press.filter((item) => !item.description).length, 0);
+
+  const archivePath = outputPath("/press/");
+  assert.ok(fs.existsSync(archivePath), "Missing complete press archive");
+  const archiveHtml = fs.readFileSync(archivePath, "utf8");
+  assert.equal((archiveHtml.match(/<article class="press-archive-card">/g) || []).length, site.press.length);
+  assert.match(archiveHtml, /href="\/press\/na-soncni-strani\/"/);
+  assert.match(archiveHtml, /focused entirely on paragliding/);
+  assert.doesNotMatch(archiveHtml, /Na sončni strani about photography|Na sončni strani about[^<]*karst/i);
 
   [...pressFeatures, ...featurePages].forEach((item) => {
     assert.ok(fs.existsSync(outputPath(item.permalink)), `Missing landing page: ${item.permalink}`);
@@ -92,6 +101,9 @@ test("builds local landing pages for every featured and press card", () => {
   assert.match(nikonPage, /Second place, 2010/);
   assert.match(nikonPage, /feature-i-am-nikon-jaz-sem-raketa\.jpg/);
   assert.match(nikonPage, /feature-i-am-nikon-series-6816\.jpg/);
+
+  const mayorPage = fs.readFileSync(outputPath("/featured/mayors-award-postojna-2024/"), "utf8");
+  assert.match(mayorPage, /Mayor Igor Marentič/);
 });
 
 test("keeps built internal post links and localized assets resolvable", () => {

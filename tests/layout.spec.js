@@ -7,6 +7,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator("#about")).toBeVisible();
   await expect(page.locator(".about__fact-icon")).toHaveCount(3);
   await expect(page.locator("#press")).toBeVisible();
+  await expect(page.locator("#press-title a")).toHaveAttribute("href", "/press/");
   await expect(page.locator(".press-card")).toHaveCount(14);
   await expect(page.locator('.press-card[href="/press/ce-si-amater-se-ne-pomeni-da-si-slab/"]')).toHaveCount(1);
   await expect(page.locator('.press-card[href="/press/da-si-lahko-zares-ustvarjalen/"]')).toHaveCount(1);
@@ -119,6 +120,30 @@ test("paginates the complete press archive without dropping entries", async ({ p
   await expect(page.locator("[data-press-next]")).toBeDisabled();
 });
 
+test("renders the complete editorial press archive with large local thumbnails", async ({ page }, testInfo) => {
+  await page.goto("/press/");
+
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toContainText("Press &");
+  await expect(page.locator(".press-archive-card")).toHaveCount(14);
+  await expect(page.locator(".press-archive-card__description")).toHaveCount(14);
+  await expect(page.locator('.press-archive-card a[href^="/"]')).toHaveCount(14);
+  await expect(page.locator('.press-archive-card a[href^="http"]')).toHaveCount(0);
+
+  const paraglidingFeature = page.locator('.press-archive-card:has(a[href="/press/na-soncni-strani/"])');
+  await expect(paraglidingFeature).toContainText("paragliding");
+  await expect(paraglidingFeature.locator(".press-archive-card__description")).not.toContainText(/photography|karst/i);
+
+  const firstImage = page.locator(".press-archive-card__image").first();
+  const imageBounds = await firstImage.boundingBox();
+  expect(imageBounds.width).toBeGreaterThan(testInfo.project.name === "mobile" ? 300 : 320);
+  expect(imageBounds.height).toBeGreaterThan(testInfo.project.name === "mobile" ? 160 : 170);
+
+  const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  expect(horizontalOverflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("press-archive.png"), fullPage: true });
+});
+
 test("renders category galleries and opens the local-image lightbox", async ({ page }, testInfo) => {
   await page.goto("/");
   await page.locator(".work-card").first().click();
@@ -160,6 +185,7 @@ test("renders local press archive pages with publisher links and readable scans"
   await expect(page.locator(".press-detail__meta")).toContainText("October 21, 2023");
   await expect(page.locator(".press-detail__source")).toHaveAttribute("href", "https://www.delo.si/nedelo/ce-se-hoces-umakniti-gres-gor-ali-pa-dol");
   await expect(page.locator('.press-detail__scan img[src="/assets/images/press-nedelo.jpg"]')).toBeVisible();
+  await expect(page.locator(".press-detail__back")).toHaveAttribute("href", "/press/");
 
   await page.goto("/press/zan-kafol-od-zgoraj-od-blizu/");
   await expect(page.locator("h1")).toHaveText("Žan Kafol: od zgoraj, od blizu");
@@ -167,6 +193,10 @@ test("renders local press archive pages with publisher links and readable scans"
   await expect(page.locator(".press-detail__meta")).toContainText("Issue 134, page 20");
   await expect(page.locator(".press-detail__source")).toHaveAttribute("href", /Prepih%20November%2021c-11-22%20WEB\.pdf$/);
   await expect(page.locator('.press-detail__scan img[src="/assets/images/press-prepih-2022-article.jpg"]')).toBeVisible();
+
+  await page.goto("/press/na-soncni-strani/");
+  await expect(page.locator(".press-detail__summary")).toContainText("focused entirely on paragliding");
+  await expect(page.locator(".press-detail__summary")).not.toContainText(/photography|karst/i);
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);

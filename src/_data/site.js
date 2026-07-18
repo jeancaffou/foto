@@ -19,7 +19,8 @@ module.exports = {
       year: "2026",
       image: "/assets/images/press-radio94.jpg",
       url: "/press/fotografija-postojne-iz-zraka-in-pod-zemljo/",
-      kind: "video"
+      kind: "video",
+      description: "A Radio 94 conversation about photographing Postojna from the air and below ground."
     },
     {
       title: "Županovo priznanje za fotografijo",
@@ -27,7 +28,8 @@ module.exports = {
       year: "2024",
       image: "/assets/images/press-postojna-award.jpg",
       url: "/featured/mayors-award-postojna-2024/",
-      kind: "award"
+      kind: "award",
+      description: "Coverage of the 2024 Mayor's Award for special achievements in photography and promotion of the Municipality of Postojna, Slovenia."
     },
     {
       title: "Prepih na obisku: Žan Kafol",
@@ -35,7 +37,8 @@ module.exports = {
       year: "2024",
       image: "/assets/images/press-prepih-2024.jpg",
       url: "/press/prepih-na-obisku-zan-kafol/",
-      kind: "article"
+      kind: "article",
+      description: "A full interview about aerial photography, caves, karst landscapes and the work behind the photographs."
     },
     {
       title: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire",
@@ -43,7 +46,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-rtvslo-creative.jpg",
       url: "/press/da-si-lahko-zares-ustvarjalen/",
-      kind: "article"
+      kind: "article",
+      description: "An RTV Slovenija interview about creative decisions, established conventions and finding a personal photographic approach."
     },
     {
       title: "Če si amater, še ne pomeni, da si slab",
@@ -51,7 +55,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-rtvslo-interview.jpg",
       url: "/press/ce-si-amater-se-ne-pomeni-da-si-slab/",
-      kind: "article"
+      kind: "article",
+      description: "A conversation about photography outside commercial practice, awarded work and the value of sustained amateur work."
     },
     {
       title: "Dvakratni zmagovalec National Geographica",
@@ -59,7 +64,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-dobro-jutro.jpg",
       url: "/press/dvakratni-zmagovalec-national-geographica/",
-      kind: "video"
+      kind: "video",
+      description: "A studio conversation following the second overall National Geographic Slovenia photo-competition win."
     },
     {
       title: "Če se hočeš umakniti, greš gor ali pa dol",
@@ -67,7 +73,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-nedelo.jpg",
       url: "/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/",
-      kind: "article"
+      kind: "article",
+      description: "A neDelo profile connecting flight, cave exploration and photography."
     },
     {
       title: "Žanu Kafolu se je v poletni noči vse poklopilo",
@@ -75,7 +82,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-radio94-natgeo-2023.jpg",
       url: "/press/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
-      kind: "audio"
+      kind: "audio",
+      description: "Radio 94 coverage of Enlightened (All Roads Lead to Rakov Škocjan) and the 2023 National Geographic Slovenia win."
     },
     {
       title: "Razsvetljenje v Rakovem Škocjanu",
@@ -83,7 +91,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-primorska-kronika.jpg",
       url: "/press/razsvetljenje-v-rakovem-skocjanu/",
-      kind: "video"
+      kind: "video",
+      description: "A Primorska kronika report on the award-winning photograph made beneath the Little Natural Bridge in Rakov Škocjan."
     },
     {
       title: "Znova izbranec National Geographica",
@@ -91,7 +100,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-prvi-dnevnik.jpg",
       url: "/press/znova-izbranec-national-geographica/",
-      kind: "video"
+      kind: "video",
+      description: "A Prvi dnevnik report on Žan Kafol's second overall National Geographic Slovenia photo-competition win."
     },
     {
       title: "Žan Kafol: Na sončni strani",
@@ -99,7 +109,8 @@ module.exports = {
       year: "2023",
       image: "/assets/images/press-soncna-stran.jpg",
       url: "/press/na-soncni-strani/",
-      kind: "video"
+      kind: "video",
+      description: "A television conversation for Na sončni strani focused entirely on paragliding."
     },
     {
       title: "Žan Kafol: od zgoraj, od blizu",
@@ -107,7 +118,8 @@ module.exports = {
       year: "2022",
       image: "/assets/images/press-prepih-2022.jpg",
       url: "/press/zan-kafol-od-zgoraj-od-blizu/",
-      kind: "article"
+      kind: "article",
+      description: "A Prepih feature about the aerial and close-range perspectives in Žan Kafol's photography."
     },
     {
       title: "Nedeljski klepet: Žan Kafol",
@@ -115,7 +127,8 @@ module.exports = {
       year: "2022",
       image: "/assets/images/press-radio94-nedeljski.jpg",
       url: "/press/nedeljski-klepet-zan-kafol/",
-      kind: "audio"
+      kind: "audio",
+      description: "A Sunday conversation on Radio 94 about photography, paragliding, caves and Postojna."
     },
     {
       title: "Žan Kafol zmagal na natečaju National Geographica",
@@ -123,7 +136,8 @@ module.exports = {
       year: "2022",
       image: "/assets/images/press-radio94-natgeo-2022.jpg",
       url: "/press/zan-kafol-zmagal-na-natecaju-national-geographica/",
-      kind: "audio"
+      kind: "audio",
+      description: "Radio 94 coverage of Cerkniško polje and the 2022 National Geographic Slovenia photo-competition win."
     }
   ],
   features: [

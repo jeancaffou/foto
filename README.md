@@ -37,6 +37,8 @@ The source dump is `context/blog.sql`; uploads are read from `context/wp-content
 - `src/index.njk`: homepage composition
 - `src/blog.njk`: paginated journal archive
 - `src/post.njk`: legacy post template with exact WordPress permalinks
+- `src/press-index.njk`: complete press and interview archive
+- `src/press.njk`: individual press and interview pages
 - `src/_includes/layouts/`: shared document layouts
 - `src/_data/site.js`: featured work, press, journal, and social data
 - `src/_data/wordpressPosts.json`: imported post content and metadata

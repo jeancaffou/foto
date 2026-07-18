@@ -135,7 +135,7 @@ module.exports = [
     date: "2023",
     displayDate: "2023",
     youtubeId: "bkEhJ0gXGU4",
-    summary: "A longer television conversation for Na sončni strani about photography, flight and the karst landscape.",
+    summary: "A television conversation for Na sončni strani focused entirely on paragliding.",
     originalUrl: "https://www.youtube.com/watch?v=bkEhJ0gXGU4",
     originalLabel: "Watch on YouTube"
   },

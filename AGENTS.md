@@ -40,6 +40,7 @@
 - Žan received the `Županovo priznanje` in 2024 for special achievements in photography and promotion of the Municipality of Postojna. Use the supplied `context/OBČINA POSTOJNA PODELITEV OBČINSKIH PRIZNANJ 23.4.2024 - Valter Leban-0306.jpg` for this coverage.
 - The supplied `context/nedelo1.jpg` is the readable neDelo article scan. Keep it local, expose it from the neDelo press card, and use the article line `If you want to get away, you go up or down` for the homepage quote.
 - Do not add the Poček/Tednik appearance back without a direct request.
+- `Na sončni strani` correction: the segment was entirely about paragliding. Earlier copy incorrectly blended in photography and the karst landscape because those topics appear elsewhere in Žan's public work. Keep this appearance described only as a paragliding conversation. Source status: direct user correction on 2026-07-18.
 
 ## Award Presentation
 

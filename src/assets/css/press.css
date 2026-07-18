@@ -1,11 +1,174 @@
-.press-detail-page {
+.press-detail-page,
+.press-archive-page {
   background:
     radial-gradient(circle at 72% 8%, rgba(188, 123, 49, 0.11), transparent 34rem),
     var(--ink);
 }
 
-.press-detail-page .site-header {
+.press-detail-page .site-header,
+.press-archive-page .site-header {
   position: relative;
+}
+
+.press-archive {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.press-archive__header {
+  padding-block: clamp(4rem, 8vw, 7rem) clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.press-archive__header .section-label {
+  margin-bottom: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+.press-archive__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  align-items: end;
+  gap: clamp(2rem, 8vw, 9rem);
+}
+
+.press-archive__intro h1 {
+  margin: 0;
+  color: var(--paper-bright);
+  font-size: clamp(3.4rem, 7.2vw, 7.2rem);
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+}
+
+.press-archive__intro > p {
+  max-width: 32rem;
+  margin: 0 0 0.35rem;
+  color: #aaa69d;
+  font-size: clamp(0.92rem, 1.2vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.press-archive__listing {
+  display: grid;
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+  border-top: 1px solid var(--line);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.4rem, 3vw, 3.5rem);
+}
+
+.press-archive-card {
+  min-width: 0;
+  padding-block: clamp(1.4rem, 2.5vw, 2.4rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.press-archive-card > a {
+  display: block;
+}
+
+.press-archive-card__image {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(224, 218, 205, 0.18);
+  background: #111414;
+}
+
+.press-archive-card__image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 62%, rgba(3, 4, 4, 0.48));
+  content: "";
+  pointer-events: none;
+}
+
+.press-archive-card__image img {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(0.72) brightness(0.82);
+  object-fit: cover;
+  transition: filter 350ms ease, transform 650ms cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.press-archive-card:hover .press-archive-card__image img,
+.press-archive-card:focus-within .press-archive-card__image img {
+  filter: grayscale(0.12) brightness(0.94);
+  transform: scale(1.025);
+}
+
+.press-archive-card__kind {
+  position: absolute;
+  z-index: 1;
+  right: 0.85rem;
+  bottom: 0.7rem;
+  color: var(--paper-bright);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.press-archive-card__body {
+  padding-top: clamp(1rem, 1.7vw, 1.45rem);
+}
+
+.press-archive-card__meta {
+  display: flex;
+  margin: 0 0 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--gold-light);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.press-archive-card h2 {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--paper-bright);
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  font-weight: 350;
+  letter-spacing: -0.018em;
+  line-height: 1.18;
+}
+
+.press-archive-card__description {
+  max-width: 37rem;
+  margin: 0.75rem 0 0;
+  color: #99958d;
+  font-size: clamp(0.82rem, 1vw, 0.94rem);
+  line-height: 1.62;
+}
+
+.press-archive-card__read {
+  display: inline-flex;
+  margin-top: 1.1rem;
+  align-items: center;
+  gap: 0.65rem;
+  color: #c7c2b8;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.press-archive-card__read span {
+  color: var(--gold-light);
+  transition: transform 180ms ease;
+}
+
+.press-archive-card:hover .press-archive-card__read,
+.press-archive-card:focus-within .press-archive-card__read {
+  color: var(--paper-bright);
+}
+
+.press-archive-card:hover .press-archive-card__read span,
+.press-archive-card:focus-within .press-archive-card__read span {
+  transform: translateX(0.2rem);
 }
 
 .press-detail {
@@ -167,6 +330,35 @@
 }
 
 @media (max-width: 760px) {
+  .press-archive__header {
+    padding-top: 3.2rem;
+  }
+
+  .press-archive__intro {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .press-archive__intro h1 {
+    font-size: clamp(3rem, 16vw, 4.6rem);
+  }
+
+  .press-archive__intro > p {
+    max-width: 28rem;
+  }
+
+  .press-archive__listing {
+    grid-template-columns: 1fr;
+  }
+
+  .press-archive-card {
+    padding-block: 1.4rem;
+  }
+
+  .press-archive-card h2 {
+    font-size: clamp(1.25rem, 6vw, 1.65rem);
+  }
+
   .press-detail__header {
     padding-top: 2.8rem;
   }
