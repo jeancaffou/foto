@@ -178,7 +178,7 @@ module.exports = {
     name: "Visit Postojnsko",
     label: "Tourist ambassador for Visit Postojnsko (Tourism Postojna)",
     logo: "/assets/images/logo-visit-postojnsko.svg",
-    url: "https://visit-postojna.si/"
+    url: "https://postojnsko.si/"
   },
   posts: [
     { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/2025/02/ledena-jama-v-paradani.html" },
