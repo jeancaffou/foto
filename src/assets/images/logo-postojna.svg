@@ -3,8 +3,13 @@
   <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
   <defs>
     <style>
-      .st0 {
-        fill: #fff;
+      path,
+      polygon {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 14px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
     </style>
   </defs>
