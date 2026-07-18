@@ -67,6 +67,8 @@ test("keeps homepage journal links and the National Geographic route canonical",
 
   expectedHomepagePosts.forEach((permalink) => assert.match(homepage, new RegExp(`href="${permalink.replaceAll("/", "\\/")}"`)));
   assert.doesNotMatch(homepage, /Nikon Z6II|Nikon Z 6_2|href="\/work\/[^"]*#/i);
+  assert.match(homepage, /<cite><a href="\/press\/ce-se-hoces-umakniti-gres-gor-ali-pa-dol\/">Žan Kafol, neDelo, 2023<\/a><\/cite>/);
+  assert.doesNotMatch(homepage, /<cite><a href="\/assets\/images\/press-nedelo\.jpg"/);
 
   const natGeoPath = path.join(OUTPUT, "2023", "10", "druga-zmaga-na-national-geographic.html");
   const natGeo = fs.readFileSync(natGeoPath, "utf8");
