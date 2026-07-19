@@ -786,6 +786,7 @@ a:focus-visible {
 .publication-list {
   display: grid;
   margin-top: 0.4rem;
+  padding-block: 0.2rem;
   align-items: center;
   grid-template-columns: auto 1fr;
   gap: 0.35rem 0.9rem;
@@ -800,7 +801,7 @@ a:focus-visible {
 
 .publication-mark {
   display: flex;
-  height: 18px;
+  height: 24px;
   align-items: center;
   justify-content: center;
 }
@@ -815,8 +816,8 @@ a:focus-visible {
 
 .publication-mark img {
   width: auto;
-  max-width: 76px;
-  height: 16px;
+  max-width: 96px;
+  height: 21px;
   object-fit: contain;
   filter: grayscale(1) brightness(0) invert(1);
 }
@@ -1140,7 +1141,7 @@ blockquote cite {
   .feature-card strong { font-size: 0.78rem; }
   .feature-card > span:last-child { font-size: 0.62rem; }
   .publication-list { grid-template-columns: 1fr; }
-  .publication-mark { height: 18px; }
+  .publication-mark { height: 22px; }
   blockquote { margin-top: 1.8rem; }
   .journal__heading { display: flex; }
   .post-grid { grid-template-columns: 1fr; }
