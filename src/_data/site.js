@@ -171,10 +171,10 @@ module.exports = {
     { name: "24ur", logo: "/assets/images/publication-24ur.svg" },
     { name: "RTV Slovenija", logo: "/assets/images/publication-rtv-slovenija.svg" },
     { name: "N1", logo: "/assets/images/publication-n1.svg" },
-    { name: "STA", logo: "/assets/images/publication-sta.svg" },
+    { name: "STA", logo: "/assets/images/publication-sta.svg?v=20260719b" },
     { name: "Delo", logo: "/assets/images/publication-delo.svg" },
-    { name: "Primorske novice", logo: "/assets/images/publication-primorske-novice.svg" },
-    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg?v=20260719a" }
+    { name: "Primorske novice", logo: "/assets/images/publication-primorske-novice.svg?v=20260719d", className: "primorske-novice" },
+    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg?v=20260719d", className: "radio94" }
   ],
   ambassador: {
     name: "Visit Postojnsko",
@@ -182,6 +182,23 @@ module.exports = {
     logo: "/assets/images/logo-visit-postojnsko.svg",
     url: "https://postojnsko.si/"
   },
+  quotes: [
+    {
+      text: "If you want to get away, you go up or down.",
+      source: "Žan Kafol, neDelo, 2023",
+      url: "/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/"
+    },
+    {
+      text: "If you're an amateur that doesn't mean you're bad, and if you're a professional, that doesn't mean you're good.",
+      source: "Žan Kafol, RTV Slovenija, 2023",
+      url: "/press/ce-si-amater-se-ne-pomeni-da-si-slab/"
+    },
+    {
+      text: "To be truly creative, you have to sometimes break established conventions.",
+      source: "Žan Kafol, RTV Slovenija, 2023",
+      url: "/press/da-si-lahko-zares-ustvarjalen/"
+    }
+  ],
   posts: [
     { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/2025/02/ledena-jama-v-paradani.html" },
     { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" },

@@ -63,6 +63,15 @@ if (pressSection) {
   }
 }
 
+const pressQuotes = Array.from(document.querySelectorAll("[data-press-quote]"));
+
+if (pressQuotes.length > 1) {
+  const selectedQuote = Math.floor(Math.random() * pressQuotes.length);
+  pressQuotes.forEach((quote, index) => {
+    quote.hidden = index !== selectedQuote;
+  });
+}
+
 const revealItems = document.querySelectorAll("[data-reveal]");
 
 if ("IntersectionObserver" in window) {

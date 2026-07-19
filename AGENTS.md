@@ -1,11 +1,5 @@
 # AGENTS
 
-## Workflow
-
-- Commit milestones incrementally.
-- Validate desktop and mobile layouts with Playwright before finishing.
-- Do not modify or commit the supplied `context/` folder or design reference image.
-
 ## Visual Direction
 
 - Preserve the dark, restrained, image-led editorial direction of the supplied design.
@@ -75,7 +69,15 @@
 - Postojna coat-of-arms paint correction: the supplied SVG's original black and white filled shapes must not be displayed as fills. Render every path and polygon with `fill: none` and a thicker white outline so the line art remains legible at the compact homepage size. Source status: direct user correction on 2026-07-18.
 - Keep the Nikon wordmark smaller than the National Geographic and municipal marks. The visible Nikon recognition is the 2010 `I AM Nikon` photo contest; never reintroduce `Nikon Z6II` as the award title.
 - Published-in logo correction: use the user-supplied `radio94.svg` for Radio 94, localized at `src/assets/images/publication-radio-94.svg`. It must render as white outlines with transparent interiors and no filled shapes. Include the official local 24ur SVG and the existing National Geographic SVG in the monochrome Published in strip. Source status: direct user correction on 2026-07-19.
-- Published-in sizing correction: the `16px` marks were slightly unreadable. Use a `21px` logo height in a `24px` row with a modest vertical inset. Radio 94's non-scaling `1.15px` line was too heavy at that size; use `0.65px`. Source status: direct user correction on 2026-07-19.
+- Published-in sizing correction: the `16px` marks were slightly unreadable. Use a `21px` logo height in a `24px` row with a modest vertical inset. Source status: direct user correction on 2026-07-19.
+- Radio 94 preservation correction: do not redraw, simplify, reinterpret, or replace the supplied Radio 94 artwork. An earlier attempt completely changed the logo while trying to simplify its outline geometry. Preserve the restored SVG exactly and adjust apparent line weight only through publication-strip CSS. Source status: direct user correction on 2026-07-19.
+- Publication asset correction: use the exact STA logo from `https://upload.wikimedia.org/wikipedia/sl/6/67/Logotip_STA.svg`, localized as `src/assets/images/publication-sta.svg`. Use the user-supplied `primorskenovice.svg`, localized as `src/assets/images/publication-primorske-novice.svg`, instead of a hand-built placeholder. Source status: direct user correction on 2026-07-19.
+- Quote placement correction: quotes belong below Press & Interviews, not Featured & Awarded. Rotate randomly among locally cited quotations on page load, preserve a no-JavaScript fallback, and translate Slovenian source text into natural English directly rather than using machine-translation services. Source status: direct user correction on 2026-07-19.
+
+## Working Preferences
+
+- Do not make incremental Git commits after each small correction. Keep related changes together and commit only when the user asks or when an explicitly requested larger batch is complete.
+- Do not run Playwright after routine copy, data, or isolated asset changes. Run it only when the user asks or when a change materially affects layout or responsive behavior.
 
 ## WordPress Migration
 

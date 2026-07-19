@@ -546,8 +546,7 @@ a:focus-visible {
 .featured > .section-label,
 .featured > .feature-grid,
 .featured > .publication-list,
-.featured > .ambassador-mark,
-.featured > blockquote {
+.featured > .ambassador-mark {
   margin-left: 0;
 }
 
@@ -880,6 +879,17 @@ blockquote cite {
   color: #77736c;
   font-size: 0.58rem;
   font-style: normal;
+}
+
+.press-quotes {
+  min-height: 4.6rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.press-quotes blockquote {
+  margin: 0;
 }
 
 .journal {

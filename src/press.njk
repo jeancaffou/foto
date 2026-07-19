@@ -58,6 +58,17 @@ eleventyComputed:
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
     </div>
+    {% elif pressItem.scans %}
+    <div class="press-detail__gallery press-detail__gallery--single shell">
+      {% for scan in pressItem.scans %}
+      <figure>
+        <a href="{{ scan.src }}" target="_blank" aria-label="Open page {{ loop.index }} of the article scan at full size">
+          <img src="{{ scan.src }}" alt="{{ scan.alt }}" loading="eager" decoding="async">
+        </a>
+        <figcaption>Published in {{ pressItem.publication }} · Page {{ loop.index }} of {{ pressItem.scans | length }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
     {% elif pressItem.scan %}
     <figure class="press-detail__scan shell">
       <a href="{{ pressItem.scan }}" target="_blank" aria-label="Open article scan at full size">

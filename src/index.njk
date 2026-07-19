@@ -115,17 +115,13 @@ title: Žan Kafol — Aerial & Cave Photographer
       <div class="publication-list" data-reveal aria-label="Selected publications">
         <span class="publication-list__label">Published in</span>
         <div class="publication-list__marks">
-          {% for publication in site.publications %}<span class="publication-mark"><img src="{{ publication.logo }}" alt="{{ publication.name }}"></span>{% endfor %}
+          {% for publication in site.publications %}<span class="publication-mark{% if publication.className %} publication-mark--{{ publication.className }}{% endif %}"><img src="{{ publication.logo }}" alt="{{ publication.name }}"></span>{% endfor %}
         </div>
       </div>
       <a class="ambassador-mark" href="{{ site.ambassador.url }}" target="_blank" rel="noreferrer" data-reveal>
         <span class="ambassador-mark__label">Tourist ambassador for Visit Postojnsko (Tourism Postojna)</span>
         <img src="{{ site.ambassador.logo }}" alt="{{ site.ambassador.name }}">
       </a>
-      <blockquote data-reveal>
-        <p>If you want to get away, you go up or down.</p>
-        <cite><a href="/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/">Žan Kafol, neDelo, 2023</a></cite>
-      </blockquote>
     </section>
 
     <section class="press band-section" id="press" aria-labelledby="press-title" data-press data-page-size="6">
@@ -151,6 +147,14 @@ title: Žan Kafol — Aerial & Cave Photographer
             <p>{{ item.source }}, {{ item.year }}</p>
           </div>
         </a>
+        {% endfor %}
+      </div>
+      <div class="press-quotes" data-press-quotes data-reveal aria-live="polite">
+        {% for quote in site.quotes %}
+        <blockquote data-press-quote{% if not loop.first %} hidden{% endif %}>
+          <p>{{ quote.text }}</p>
+          <cite><a href="{{ quote.url }}">{{ quote.source }}</a></cite>
+        </blockquote>
         {% endfor %}
       </div>
     </section>

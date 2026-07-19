@@ -83,7 +83,17 @@ module.exports = [
     originalUrl: "https://www.delo.si/nedelo/ce-se-hoces-umakniti-gres-gor-ali-pa-dol",
     originalLabel: "Read the online article at Delo",
     scan: "/assets/images/press-nedelo.jpg",
-    scanAlt: "Full-page scan of the neDelo interview with Žan Kafol"
+    scanAlt: "Full-page scan of page one of the neDelo interview with Žan Kafol",
+    scans: [
+      {
+        src: "/assets/images/press-nedelo.jpg",
+        alt: "Full-page scan of page one of the neDelo interview with Žan Kafol"
+      },
+      {
+        src: "/assets/images/press-nedelo-2.jpg",
+        alt: "Full-page scan of page two of the neDelo interview with Žan Kafol"
+      }
+    ]
   },
   {
     id: "radio94-natgeo-2023",
