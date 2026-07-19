@@ -19,7 +19,9 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator('.press-card[href="/press/zan-kafol-od-zgoraj-od-blizu/"]')).toHaveCount(1);
   await expect(page.locator('.feature-card[href^="/"]')).toHaveCount(3);
   await expect(page.locator(".feature-card")).toHaveCount(3);
-  await expect(page.locator(".publication-mark img")).toHaveCount(6);
+  await expect(page.locator(".publication-mark img")).toHaveCount(8);
+  await expect(page.locator('.publication-mark img[alt="24ur"]')).toHaveAttribute("src", "/assets/images/publication-24ur.svg");
+  await expect(page.locator('.publication-mark img[alt="National Geographic"]')).toHaveAttribute("src", "/assets/images/logo-national-geographic.svg");
   await expect(page.locator(".ambassador-mark img")).toHaveAttribute("alt", "Visit Postojnsko");
   await expect(page.locator(".about__copy")).not.toContainText("Tourist ambassador");
   await expect(page.locator(".ambassador-mark")).toContainText("Tourist ambassador for Visit Postojnsko (Tourism Postojna)");

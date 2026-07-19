@@ -74,6 +74,7 @@
 - Use the user-supplied `coatofarms-postojna.svg` as the Municipality of Postojna mark, localized at `src/assets/images/logo-postojna.svg`. It replaces the earlier `coat_of_arms_line_art_smooth.svg`; do not restore that older traced version. The replacement is a transparent white portrait-format coat of arms supplied directly by the user on 2026-07-18.
 - Postojna coat-of-arms paint correction: the supplied SVG's original black and white filled shapes must not be displayed as fills. Render every path and polygon with `fill: none` and a thicker white outline so the line art remains legible at the compact homepage size. Source status: direct user correction on 2026-07-18.
 - Keep the Nikon wordmark smaller than the National Geographic and municipal marks. The visible Nikon recognition is the 2010 `I AM Nikon` photo contest; never reintroduce `Nikon Z6II` as the award title.
+- Published-in logo correction: use the user-supplied `radio94.svg` for Radio 94, localized at `src/assets/images/publication-radio-94.svg`. It must render as white outlines with transparent interiors and no filled shapes. Include the official local 24ur SVG and the existing National Geographic SVG in the monochrome Published in strip. Source status: direct user correction on 2026-07-19.
 
 ## WordPress Migration
 

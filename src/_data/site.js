@@ -167,12 +167,14 @@ module.exports = {
     }
   ],
   publications: [
+    { name: "National Geographic", logo: "/assets/images/logo-national-geographic.svg" },
+    { name: "24ur", logo: "/assets/images/publication-24ur.svg" },
     { name: "RTV Slovenija", logo: "/assets/images/publication-rtv-slovenija.svg" },
     { name: "N1", logo: "/assets/images/publication-n1.svg" },
     { name: "STA", logo: "/assets/images/publication-sta.svg" },
     { name: "Delo", logo: "/assets/images/publication-delo.svg" },
     { name: "Primorske novice", logo: "/assets/images/publication-primorske-novice.svg" },
-    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg?v=20260717d" }
+    { name: "Radio 94", logo: "/assets/images/publication-radio-94.svg?v=20260719a" }
   ],
   ambassador: {
     name: "Visit Postojnsko",
