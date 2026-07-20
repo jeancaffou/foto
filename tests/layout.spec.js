@@ -1,5 +1,23 @@
 const { test, expect } = require("@playwright/test");
 
+async function expectVisibleTextFloor(page, minimumPixels = 14.07) {
+  const undersized = await page.evaluate((minimum) => Array.from(document.body.querySelectorAll("*"))
+    .filter((element) => Array.from(element.childNodes).some((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()))
+    .filter((element) => {
+      const style = getComputedStyle(element);
+      const bounds = element.getBoundingClientRect();
+      return style.display !== "none" && style.visibility !== "hidden" && bounds.width > 0 && bounds.height > 0;
+    })
+    .map((element) => ({
+      element: `${element.tagName.toLowerCase()}${element.className ? `.${String(element.className).trim().replace(/\s+/g, ".")}` : ""}`,
+      fontSize: parseFloat(getComputedStyle(element).fontSize),
+      text: element.textContent.trim().replace(/\s+/g, " ").slice(0, 80)
+    }))
+    .filter((item) => item.fontSize < minimum), minimumPixels);
+
+  expect(undersized).toEqual([]);
+}
+
 test("renders the complete portfolio structure without horizontal overflow", async ({ page }, testInfo) => {
   await page.goto("/");
   await expect(page.locator("h1")).toContainText("Aerial & cave");
@@ -19,6 +37,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator('.press-card[href="/press/zan-kafol-od-zgoraj-od-blizu/"]')).toHaveCount(1);
   await expect(page.locator('.feature-card[href^="/"]')).toHaveCount(3);
   await expect(page.locator(".feature-card")).toHaveCount(3);
+  await expect(page.locator(".feature-card--natgeo")).toHaveAttribute("href", "/work/award-winning/");
   await expect(page.locator(".publication-mark img")).toHaveCount(8);
   await expect(page.locator('.publication-mark img[alt="24ur"]')).toHaveAttribute("src", "/assets/images/publication-24ur.svg");
   await expect(page.locator('.publication-mark img[alt="National Geographic"]')).toHaveAttribute("src", "/assets/images/logo-national-geographic.svg");
@@ -42,9 +61,10 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator('.work-card[href*="#"]')).toHaveCount(0);
   await expect(page.locator('.work-card[href^="/work/land-and-life/"]')).toHaveCount(1);
   await expect(page.locator('.work-card[href*="wild-places"]')).toHaveCount(0);
-  await expect(page.locator('.work-card[href^="/work/award-winning/"]').nth(1)).toContainText("Enlightened (All Roads Lead to Rakov Škocjan)");
-  await expect(page.locator(".feature-card--natgeo")).toContainText("Enlightened (All Roads Lead to Rakov Škocjan)");
+  await expect(page.locator('.work-card[href^="/work/award-winning/"]').nth(1)).toContainText("Enlightened (All Milky Ways Lead to Rakov Škocjan)");
+  await expect(page.locator(".feature-card--natgeo")).toContainText("Enlightened (All Milky Ways Lead to Rakov Škocjan)");
   await expect(page.getByText("Illumination", { exact: true })).toHaveCount(0);
+  await expectVisibleTextFloor(page);
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
@@ -131,6 +151,7 @@ test("renders the complete editorial press archive with large local thumbnails",
   await expect(page.locator(".press-archive-card__description")).toHaveCount(14);
   await expect(page.locator('.press-archive-card a[href^="/"]')).toHaveCount(14);
   await expect(page.locator('.press-archive-card a[href^="http"]')).toHaveCount(0);
+  await expectVisibleTextFloor(page);
 
   const paraglidingFeature = page.locator('.press-archive-card:has(a[href="/press/na-soncni-strani/"])');
   await expect(paraglidingFeature).toContainText("paragliding");
@@ -151,6 +172,29 @@ test("renders category galleries and opens the local-image lightbox", async ({ p
   await page.locator(".work-card").first().click();
   await expect(page).toHaveURL(/\/work\/award-winning\/$/);
   await expect(page.locator(".gallery-tile")).toHaveCount(2);
+  await expect(page.locator(".award-entry")).toHaveCount(2);
+  await expect(page.locator(".award-entry__description")).toHaveCount(2);
+  await expect(page.locator(".award-entry").first()).toContainText("Enlightened (All Milky Ways Lead to Rakov Škocjan)");
+  await expect(page.locator(".award-entry").first()).toContainText("Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)");
+  await expect(page.locator(".award-entry").last()).toContainText("Cerkniško polje");
+  await expect(page.locator(".award-entry").last()).toContainText("From Above category");
+  await expect(page.locator(".award-entry").last()).toContainText("overall winner");
+  await expect(page.locator(".award-entry").last()).toContainText("seasoned with grains of truth");
+  await expect(page.locator('.award-entry').first().locator('.award-entry__archive')).toHaveAttribute("href", "https://kafol.net/ng/2023.html");
+  await expect(page.locator('.award-entry').last().locator('.award-entry__archive')).toHaveAttribute("href", "https://kafol.net/ng/2022.html");
+  const awardContentOrder = await page.locator(".award-entry").evaluateAll((items) => items.map((item) => {
+    const copy = item.querySelector(".award-entry__copy").getBoundingClientRect();
+    const image = item.querySelector(".award-entry__image").getBoundingClientRect();
+    return copy.bottom <= image.top;
+  }));
+  expect(awardContentOrder).toEqual([true, true]);
+  const awardImageCenters = await page.locator(".award-entry__image").evaluateAll((items) => items.map((item) => {
+    const bounds = item.getBoundingClientRect();
+    return bounds.left + (bounds.width / 2);
+  }));
+  for (const center of awardImageCenters) expect(center).toBeCloseTo(page.viewportSize().width / 2, 0);
+  await expectVisibleTextFloor(page);
+  await page.screenshot({ path: testInfo.outputPath("award-gallery.png"), fullPage: true });
 
   await page.goto("/work/from-above/");
 
@@ -166,6 +210,7 @@ test("renders category galleries and opens the local-image lightbox", async ({ p
   expect(Math.abs(galleryHeroEdges[0].bottom - galleryHeroEdges[1].bottom)).toBeLessThan(0.1);
   expect(Math.abs(galleryHeroEdges[0].bottom - galleryHeroEdges[2].top)).toBeLessThan(0.1);
   await expect(page.locator(".gallery-hero")).toHaveCSS("border-bottom-width", "0px");
+  await expectVisibleTextFloor(page);
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
@@ -186,7 +231,7 @@ test("renders local press archive pages with publisher links and readable scans"
   await expect(page.locator(".press-detail__meta")).toContainText("neDelo");
   await expect(page.locator(".press-detail__meta")).toContainText("October 21, 2023");
   await expect(page.locator(".press-detail__source")).toHaveAttribute("href", "https://www.delo.si/nedelo/ce-se-hoces-umakniti-gres-gor-ali-pa-dol");
-  await expect(page.locator('.press-detail__scan img[src="/assets/images/press-nedelo.jpg"]')).toBeVisible();
+  await expect(page.locator('.press-detail__gallery img[src="/assets/images/press-nedelo.jpg"]')).toBeVisible();
   await expect(page.locator(".press-detail__back")).toHaveAttribute("href", "/press/");
 
   await page.goto("/press/zan-kafol-od-zgoraj-od-blizu/");
@@ -242,6 +287,7 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await expect(page.locator("h1")).toHaveText("Druga zmaga na National Geographic");
   await expect(page.locator(".post-copy")).toBeVisible();
   expect(await page.locator(".tiled-gallery__item").count()).toBeGreaterThan(0);
+  await expectVisibleTextFloor(page);
 
   await page.locator('.post-copy img[role="button"]').first().click();
   await expect(page.locator(".post-lightbox")).toBeVisible();

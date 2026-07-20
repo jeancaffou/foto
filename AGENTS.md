@@ -8,6 +8,7 @@
 - Maintain strong type hierarchy, warm amber accents, fine rules, and generous negative space.
 - Responsive layouts must reflow deliberately. Do not shrink desktop grids until they become unreadable.
 - Motion should be sparse and meaningful. Respect `prefers-reduced-motion`.
+- Keep all visible text at `0.88rem` or larger and use a restrained, tokenized type scale rather than scattered one-off sizes.
 
 ## Visual Fidelity Correction
 
@@ -19,7 +20,7 @@
 - Final source correction: use `context/20240312-IMG_3774.jpg` as supplied. A high-quality proportional downscale is acceptable, but do not crop, sharpen, stretch contrast, darken, retouch, or otherwise reinterpret the image.
 - Preferred display rule: keep the photograph in color, apply only CSS grayscale at rest, and restore its original color on hover. Load it eagerly and avoid persistent compositing hints that can create filter artifacts.
 - Source status: direct user correction on 2026-07-17.
-- User correction: the hero must use the two National Geographic Slovenia winning photographs, `Cerkniško polje` and `Razsvetljenje`.
+- User correction: the hero must use the two National Geographic Slovenia winning photographs, `Cerkniško polje` and `Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)`.
 - Earlier mistake: the hero used unrelated images in rigid equal columns with a visible black divider.
 - Preferred rule: let the landscape and vertical formats use unequal widths, overlap them, and crossfade the image pixels through the overlap. Keep both photographs in the same row on mobile and never hide the join behind a hard black seam.
 - User correction: the about facts must use the map-pin, karst-water, and camera icons shown in the reference.
@@ -57,6 +58,7 @@
 - Preferred replacement: `Land & Life` at `/work/land-and-life/`, limited to the 12 coherent photographs of landscapes, trees, wildlife, people outdoors, Predjama Castle, and seasonal scenes.
 - Every exported featured photograph belongs to exactly one collection. Do not duplicate aerial water, flight, cave-water, night-drone, or award images across otherwise unrelated categories.
 - The two National Geographic winners belong only to `Award-winning`. Selected-work cards open the collection page, not an image hash or a raw image.
+- On the `Award-winning` collection page, center each photograph horizontally in its own row and pair it with a factual description of its individual National Geographic Slovenia win.
 - Gallery listings are reverse chronological by capture date, newest first.
 - `20221010-G0399782.jpg` shows legs in water and belongs only to `Water & Ice`; it must never appear in `In Flight`.
 - Earlier mistake: the filename was grouped with two nearby GoPro frames, including a valid paramotor water-skim photograph, without checking the actual image content. This produced a visually nonsensical In Flight assignment. The correction came directly from the user and was confirmed by inspecting the source image.
@@ -101,8 +103,8 @@
 
 - Žan is based in Postojna, Slovenia.
 - His photography brings together aerial views, paragliding, caves, karst, nature, and night landscapes.
-- He won the National Geographic Slovenia photo competition overall in 2022 with `Cerkniško polje` and again in 2023 with `Razsvetljenje`.
-- The exact English title of `Razsvetljenje` is `Enlightened (All Roads Lead to Rakov Škocjan)`. Do not translate it as `Illumination`.
+- He won the National Geographic Slovenia photo competition overall in 2022 with `Cerkniško polje` and again in 2023 with `Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)`.
+- The exact English title of `Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)` is `Enlightened (All Milky Ways Lead to Rakov Škocjan)`.
 - He received Postojna's municipal recognition for photography and promotion of the municipality in 2024.
 - He collaborates with the Karst Research Institute ZRC SAZU. Always use this official English word order; `Institute for Karst Research` is incorrect.
 - Caves are part of karst, not something `beneath the karst`. The earlier tagline made a false geographic distinction. Prefer direct language connecting flight, caves and the karst landscape.

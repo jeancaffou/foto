@@ -50,14 +50,34 @@ eleventyComputed:
   </nav>
 
   <section class="gallery-shell shell" aria-label="{{ gallery.label }} photographs">
+    {% if gallery.id == "award-winning" %}
+    <div class="award-gallery" data-gallery-grid>
+      {% for image in gallery.images %}
+      <article class="award-entry award-entry--{{ image.orientation }}">
+        <div class="award-entry__copy">
+          <p class="award-entry__label">{{ image.award.label }}</p>
+          <h2>{{ image.title }}</h2>
+          {% if image.titleSl and image.titleSl != image.title %}<p class="award-entry__native"><span>Slovenian title</span>{{ image.titleSl }}</p>{% endif %}
+          <p class="award-entry__description">{{ image.award.description }}</p>
+          {% if image.award.story %}<p class="award-entry__story">{{ image.award.story }}</p>{% endif %}
+          {% if image.award.archiveUrl %}<a class="award-entry__archive" href="{{ image.award.archiveUrl }}" target="_blank" rel="noreferrer">View archived National Geographic publication <span aria-hidden="true">↗</span></a>{% endif %}
+        </div>
+        <button class="gallery-tile award-entry__image" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.title }}" aria-label="Open {{ image.alt }}">
+          <img src="{{ image.full }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="eager" decoding="async">
+        </button>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
     <div class="gallery-grid" data-gallery-grid>
       {% for image in gallery.images %}
-      <button class="gallery-tile" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-year="{{ image.year }}" aria-label="Open {{ image.alt }}">
+      <button class="gallery-tile" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.year }}" aria-label="Open {{ image.alt }}">
         <img src="{{ image.thumb }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if loop.index <= 6 %}eager{% else %}lazy{% endif %}" decoding="async">
         {% if image.year %}<span>{{ image.year }}</span>{% endif %}
       </button>
       {% endfor %}
     </div>
+    {% endif %}
   </section>
 </main>
 

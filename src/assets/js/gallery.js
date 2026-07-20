@@ -12,7 +12,7 @@
     const item = items[activeIndex];
     image.src = item.dataset.full;
     image.alt = item.dataset.alt;
-    caption.textContent = item.dataset.year || "";
+    caption.textContent = item.dataset.caption || "";
     history.replaceState(null, "", `#${item.id}`);
   };
 

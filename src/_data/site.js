@@ -83,7 +83,7 @@ module.exports = {
       image: "/assets/images/press-radio94-natgeo-2023.jpg",
       url: "/press/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
       kind: "audio",
-      description: "Radio 94 coverage of Enlightened (All Roads Lead to Rakov Škocjan) and the 2023 National Geographic Slovenia win."
+      description: "Radio 94 coverage of Enlightened (All Milky Ways Lead to Rakov Škocjan) and the 2023 National Geographic Slovenia win."
     },
     {
       title: "Razsvetljenje v Rakovem Škocjanu",
@@ -145,8 +145,8 @@ module.exports = {
       name: "National Geographic",
       logo: "/assets/images/logo-national-geographic.svg",
       title: "Two-time overall winner",
-      detail: "Cerkniško polje, 2022 · Enlightened (All Roads Lead to Rakov Škocjan), 2023",
-      url: "/2023/10/druga-zmaga-na-national-geographic.html",
+      detail: "Cerkniško polje, 2022 · Enlightened (All Milky Ways Lead to Rakov Škocjan), 2023",
+      url: "/work/award-winning/",
       className: "natgeo"
     },
     {

@@ -8,7 +8,7 @@
     },
     {
       "id": "natgeo-2023",
-      "label": "Enlightened (All Roads Lead to Rakov Škocjan)",
+      "label": "Enlightened (All Milky Ways Lead to Rakov Škocjan)",
       "kicker": "National Geographic Slovenia · 2023",
       "file": "20210810-IMG_1621.jpg"
     },
@@ -470,6 +470,14 @@
     },
     {
       "file": "20210228-DJI_0270-Pano.jpg",
+      "title": "Cerkniško polje",
+      "titleSl": "Cerkniško polje",
+      "award": {
+        "label": "National Geographic Slovenia · From Above and overall winner, 2022",
+        "description": "This aerial view won the From Above category and was selected by the jury as the overall winner of the 2022 National Geographic Slovenia photo competition.",
+        "story": "Lake Cerknica is an exceptional example of an intermittent karst lake: permanent surface water is uncommon in karst because drainage is predominantly subterranean. Its intermittent hydrological regime was first studied by Johann Weikhard von Valvasor, who envisioned a system of underground lakes. Like good science fiction, his explanation was seasoned with grains of truth.",
+        "archiveUrl": "https://kafol.net/ng/2022.html"
+      },
       "width": 3000,
       "height": 1203,
       "orientation": "landscape",
@@ -756,6 +764,13 @@
     },
     {
       "file": "20210810-IMG_1621.jpg",
+      "title": "Enlightened (All Milky Ways Lead to Rakov Škocjan)",
+      "titleSl": "Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)",
+      "award": {
+        "label": "National Geographic Slovenia · Landscape and overall winner, 2023",
+        "description": "Made during the Perseid meteor shower at the entrance to Zelške Caves, beneath the Small Natural Bridge in Rakov Škocjan. It won the Landscape category and was selected by the expert jury as the overall winner.",
+        "archiveUrl": "https://kafol.net/ng/2023.html"
+      },
       "width": 2000,
       "height": 3000,
       "orientation": "portrait",

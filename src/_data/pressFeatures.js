@@ -106,7 +106,7 @@ module.exports = [
     image: "/assets/images/press-radio94-natgeo-2023.jpg",
     imageAlt: "Radio 94 coverage of Žan Kafol's 2023 National Geographic recognition",
     imageCaption: "Radio 94 · 2023",
-    summary: "Radio 94 coverage of Enlightened (All Roads Lead to Rakov Škocjan) and the 2023 National Geographic Slovenia win.",
+    summary: "Radio 94 coverage of Enlightened (All Milky Ways Lead to Rakov Škocjan) and the 2023 National Geographic Slovenia win.",
     originalUrl: "https://www.radio94.si/zanu-kafolu-se-je-v-poletni-noci-vse-poklopilo/",
     originalLabel: "Listen at Radio 94"
   },
