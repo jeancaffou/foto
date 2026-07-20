@@ -8,5 +8,6 @@ playwright-report/
 # Supplied reference material; production assets are copied into src/assets/images.
 context/
 ChatGPT Image*.png
+homepage-*.png
 
 /.idea/

@@ -124,7 +124,7 @@ a:focus-visible {
 .brand__role {
   margin-top: 0.65rem;
   color: var(--gold-light);
-  font-size: 0.64rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.21em;
   text-transform: uppercase;
@@ -139,7 +139,7 @@ a:focus-visible {
   position: relative;
   padding-block: 0.6rem;
   color: #ddd9d0;
-  font-size: 0.67rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -237,7 +237,7 @@ a:focus-visible {
 .section-label {
   margin: 0 0 1.15rem;
   color: var(--gold-light);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -280,7 +280,7 @@ a:focus-visible {
   align-items: center;
   gap: 0.8rem;
   color: rgba(222, 218, 207, 0.75);
-  font-size: 0.64rem;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -352,13 +352,13 @@ a:focus-visible {
 
 .work-card__title {
   color: #d1cdc4;
-  font-size: clamp(0.66rem, 0.72vw, 0.78rem);
+  font-size: clamp(0.76rem, 0.8vw, 0.86rem);
 }
 
 .work-card__type {
   margin-top: 0.1rem;
   color: var(--gold-light);
-  font-size: 0.5rem;
+  font-size: 0.64rem;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -451,13 +451,13 @@ a:focus-visible {
   max-width: 34rem;
   margin: 0 0 0.5rem;
   color: #aba89f;
-  font-size: 0.76rem;
+  font-size: 0.84rem;
   line-height: 1.45;
 }
 
 .about__copy .about__lead {
   color: #d8d3c9;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
 }
 
 .text-link {
@@ -466,7 +466,7 @@ a:focus-visible {
   align-items: center;
   gap: 1.3rem;
   color: var(--gold-light);
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   letter-spacing: 0.06em;
 }
 
@@ -512,7 +512,7 @@ a:focus-visible {
 .about__facts dd {
   margin: 0;
   color: #b8b3a9;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   line-height: 1.45;
 }
 
@@ -629,7 +629,7 @@ a:focus-visible {
 .press-pager__status {
   min-width: 2.7rem;
   color: #827d74;
-  font-size: 0.52rem;
+  font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-align: center;
 }
@@ -703,7 +703,7 @@ a:focus-visible {
 .press-card h3 {
   margin: 0 0 0.24rem;
   color: #d2cec5;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 350;
   line-height: 1.3;
   display: -webkit-box;
@@ -715,7 +715,7 @@ a:focus-visible {
 .press-card p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.54rem;
+  font-size: 0.66rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -771,14 +771,14 @@ a:focus-visible {
 
 .feature-card strong {
   color: #d8d3ca;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 450;
 }
 
 .feature-card > span:last-child {
   margin-top: 0.25rem;
   color: var(--muted);
-  font-size: 0.6rem;
+  font-size: 0.69rem;
   line-height: 1.35;
 }
 
@@ -793,7 +793,7 @@ a:focus-visible {
 
 .publication-list__label {
   color: var(--gold-light);
-  font-size: 0.56rem;
+  font-size: 0.66rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -832,7 +832,7 @@ a:focus-visible {
 
 .ambassador-mark__label {
   color: var(--gold-light);
-  font-size: 0.56rem;
+  font-size: 0.66rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -877,7 +877,7 @@ blockquote cite {
   display: block;
   margin-top: 0.2rem;
   color: #77736c;
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   font-style: normal;
 }
 
@@ -908,7 +908,7 @@ blockquote cite {
 
 .journal__heading .text-link {
   margin-top: 0;
-  font-size: 0.56rem;
+  font-size: 0.66rem;
 }
 
 .post-grid {
@@ -940,7 +940,7 @@ blockquote cite {
   margin: 0.55rem 0 0;
   gap: 0.7rem;
   color: #79756e;
-  font-size: 0.56rem;
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -965,7 +965,7 @@ blockquote cite {
 .post-card > a > p:not(.post-card__meta) {
   margin: 0;
   color: #88857e;
-  font-size: 0.71rem;
+  font-size: 0.8rem;
   line-height: 1.4;
 }
 
@@ -999,7 +999,7 @@ blockquote cite {
 .site-footer__brand p {
   margin: 0.45rem 0 0;
   color: #77746d;
-  font-size: 0.7rem;
+  font-size: 0.79rem;
 }
 
 .footer-group,
@@ -1009,7 +1009,7 @@ blockquote cite {
   align-items: flex-start;
   gap: 0.35rem;
   color: #858179;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
 }
 
 .site-footer__brand {
@@ -1021,7 +1021,7 @@ blockquote cite {
 .footer-label {
   margin: 0 0 0.65rem;
   color: #b1aca2;
-  font-size: 0.6rem;
+  font-size: 0.68rem;
   letter-spacing: 0.19em;
   text-transform: uppercase;
 }
@@ -1103,9 +1103,9 @@ blockquote cite {
   :root { --gutter: 1.1rem; }
   .site-header { min-height: 86px; }
   .brand__name { font-size: 1rem; }
-  .brand__role { font-size: 0.51rem; }
+  .brand__role { font-size: 0.64rem; }
   .menu-toggle { position: relative; z-index: 30; display: flex; padding: 0.7rem 0; border: 0; align-items: center; gap: 0.8rem; color: var(--paper); background: transparent; font: inherit; }
-  .menu-toggle__label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; }
+  .menu-toggle__label { font-size: 0.69rem; letter-spacing: 0.18em; text-transform: uppercase; }
   .menu-toggle__lines, .menu-toggle__lines::before { display: block; width: 24px; height: 1px; background: currentColor; transition: transform 220ms ease; }
   .menu-toggle__lines::before { content: ""; transform: translateY(-6px); }
   .menu-toggle[aria-expanded="true"] .menu-toggle__lines { transform: rotate(45deg); }
@@ -1127,8 +1127,8 @@ blockquote cite {
   .works > .section-label { margin-bottom: 1.4rem; }
   .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1.15rem 0.75rem; }
   .work-card img { aspect-ratio: 1.45 / 1; }
-  .work-card__title { font-size: 0.68rem; }
-  .work-card__type { font-size: 0.5rem; }
+  .work-card__title { font-size: 0.79rem; }
+  .work-card__type { font-size: 0.62rem; }
   .about__inner { width: var(--shell); height: auto; grid-template-columns: 1fr; gap: 0; }
   .about__portrait { min-height: 0; order: 2; }
   .about__portrait img { height: auto; }
@@ -1149,7 +1149,7 @@ blockquote cite {
   .feature-card--nikon .feature-card__logo img { height: 28px; }
   .feature-card--postojna .feature-card__logo img { height: 44px; max-height: 44px; }
   .feature-card strong { font-size: 0.78rem; }
-  .feature-card > span:last-child { font-size: 0.62rem; }
+  .feature-card > span:last-child { font-size: 0.72rem; }
   .publication-list { grid-template-columns: 1fr; }
   .publication-mark { height: 22px; }
   blockquote { margin-top: 1.8rem; }
