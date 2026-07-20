@@ -168,6 +168,11 @@ a:focus-visible {
   transform-origin: left;
 }
 
+.site-nav .language-switch {
+  color: var(--gold-light);
+  font-weight: 650;
+}
+
 .menu-toggle {
   display: none;
 }

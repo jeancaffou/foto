@@ -1,24 +1,38 @@
 ---
 layout: layouts/base.njk
-title: Žan Kafol — Aerial & Cave Photographer
+pagination:
+  data: homePages
+  size: 1
+  alias: homePage
+permalink: "{{ homePage.permalink }}"
+eleventyComputed:
+  pageLanguage: "{{ homePage.lang }}"
+  title: "{{ homePage.copy.home.title }}"
+  metaDescription: "{{ homePage.copy.home.metaDescription }}"
+  alternateUrl: "{{ homePage.alternateUrl }}"
 ---
+{% set pageSite = homePage.site %}
+{% set copy = homePage.copy %}
+{% set pressRoot = "/press/" %}
+{% if homePage.lang == "sl" %}{% set pressRoot = "/sl/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="#top" aria-label="Žan Kafol, home">
+  <a class="brand" href="#top" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#featured">Featured</a>
-    <a href="#press">Press</a>
-    <a href="#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="#work">{{ copy.common.nav.work }}</a>
+    <a href="#about">{{ copy.common.nav.about }}</a>
+    <a href="#featured">{{ copy.common.nav.featured }}</a>
+    <a href="#press">{{ copy.common.nav.press }}</a>
+    <a href="#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ homePage.alternateUrl }}" hreflang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
@@ -30,21 +44,21 @@ title: Žan Kafol — Aerial & Cave Photographer
     </div>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__content shell" data-reveal>
-      <p class="kicker">Stories in two directions</p>
-      <h1 id="hero-title">Aerial &amp; cave<br>photography</h1>
+      <p class="kicker">{{ copy.home.heroKicker }}</p>
+      <h1 id="hero-title">{{ copy.home.heroTitle | safe }}</h1>
       <span class="gold-rule" aria-hidden="true"></span>
-      <p class="hero__intro">Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <p class="hero__intro">{{ copy.home.heroIntro | safe }}</p>
     </div>
     <a class="hero__scroll" href="#work">
-      <span>Explore</span>
+      <span>{{ copy.home.explore }}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6"/></svg>
     </a>
   </section>
 
   <section class="works shell" id="work" aria-labelledby="work-title">
-    <p class="section-label" id="work-title" data-reveal>Selected works</p>
+    <p class="section-label" id="work-title" data-reveal>{{ copy.home.selectedWorks }}</p>
     <div class="work-grid">
-      {% for work in site.works %}
+      {% for work in pageSite.works %}
       <a class="work-card" href="{{ work.url }}" data-reveal style="--delay: {{ loop.index0 * 55 }}ms">
         <figure>
           <img src="{{ work.image }}" alt="{{ work.title }}" loading="{% if loop.index < 5 %}eager{% else %}lazy{% endif %}" style="object-position: {{ work.position }}">
@@ -62,39 +76,39 @@ title: Žan Kafol — Aerial & Cave Photographer
     <div class="about__inner shell">
       <div class="about__portrait" data-reveal>
         <div class="about__halo" aria-hidden="true"></div>
-        <img src="/assets/images/headshot.jpg" alt="Portrait of Žan Kafol" width="1200" height="800" loading="eager" decoding="async">
+        <img src="/assets/images/headshot.jpg" alt="{{ copy.home.portraitAlt }}" width="1200" height="800" loading="eager" decoding="async">
       </div>
       <div class="about__copy" data-reveal>
-        <p class="section-label">About</p>
+        <p class="section-label">{{ copy.home.about }}</p>
         <h2 id="about-title">Žan Kafol</h2>
-        <p class="about__lead">I’m a photographer and software engineer based in Postojna, Slovenia.</p>
-        <p>Photography grew alongside paragliding and caving. The camera moves between long views from the air, the darkness of the karst and night landscapes close to home.</p>
-        <a class="text-link" href="/blog/">More photo stories <span aria-hidden="true">→</span></a>
+        <p class="about__lead">{{ copy.home.aboutLead }}</p>
+        <p>{{ copy.home.aboutText }}</p>
+        <a class="text-link" href="/blog/">{{ copy.home.moreStories }} <span aria-hidden="true">→</span></a>
       </div>
       <dl class="about__facts" data-reveal>
         <div>
-          <dt class="sr-only">Location</dt>
+          <dt class="sr-only">{{ copy.home.facts.location }}</dt>
           <svg class="about__fact-icon" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M16 29s8-8.5 8-17a8 8 0 1 0-16 0c0 8.5 8 17 8 17Z"/>
             <circle cx="16" cy="12" r="3"/>
           </svg>
-          <dd>Postojna<br>Slovenia</dd>
+          <dd>{{ copy.home.facts.locationText | safe }}</dd>
         </div>
         <div>
-          <dt class="sr-only">Institute</dt>
+          <dt class="sr-only">{{ copy.home.facts.institute }}</dt>
           <svg class="about__fact-icon" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M3 9c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 15c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 21c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3M3 27c3.2 0 3.2-3 6.4-3s3.2 3 6.4 3 3.2-3 6.4-3 3.2 3 6.4 3"/>
           </svg>
-          <dd>Karst Research Institute<br>ZRC SAZU</dd>
+          <dd>{{ copy.home.facts.instituteText | safe }}</dd>
         </div>
         <div>
-          <dt class="sr-only">Photography practice</dt>
+          <dt class="sr-only">{{ copy.home.facts.practice }}</dt>
           <svg class="about__fact-icon" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M4 10h5l2-3h10l2 3h5v16H4V10Z"/>
             <circle cx="16" cy="18" r="5"/>
             <path d="M24 14h.01"/>
           </svg>
-          <dd>Aerial, cave, nature<br>and night photography</dd>
+          <dd>{{ copy.home.facts.practiceText | safe }}</dd>
         </div>
       </dl>
     </div>
@@ -102,9 +116,9 @@ title: Žan Kafol — Aerial & Cave Photographer
 
   <div class="editorial-band">
     <section class="featured band-section" id="featured" aria-labelledby="featured-title">
-      <p class="section-label" id="featured-title">Featured &amp; awarded</p>
+      <p class="section-label" id="featured-title">{{ copy.home.featured }}</p>
       <div class="feature-grid">
-        {% for item in site.features %}
+        {% for item in pageSite.features %}
         <a class="feature-card feature-card--{{ item.className }}" href="{{ item.url }}"{% if item.url[0] != "/" %} target="_blank" rel="noreferrer"{% endif %} data-reveal>
           <span class="feature-card__logo"><img src="{{ item.logo }}" alt="{{ item.name }}"></span>
           <strong>{{ item.title }}</strong>
@@ -112,31 +126,31 @@ title: Žan Kafol — Aerial & Cave Photographer
         </a>
         {% endfor %}
       </div>
-      <div class="publication-list" data-reveal aria-label="Selected publications">
-        <span class="publication-list__label">Published in</span>
+      <div class="publication-list" data-reveal aria-label="{{ copy.home.publicationsAria }}">
+        <span class="publication-list__label">{{ copy.home.publishedIn }}</span>
         <div class="publication-list__marks">
-          {% for publication in site.publications %}<span class="publication-mark{% if publication.className %} publication-mark--{{ publication.className }}{% endif %}"><img src="{{ publication.logo }}" alt="{{ publication.name }}"></span>{% endfor %}
+          {% for publication in pageSite.publications %}<span class="publication-mark{% if publication.className %} publication-mark--{{ publication.className }}{% endif %}"><img src="{{ publication.logo }}" alt="{{ publication.name }}"></span>{% endfor %}
         </div>
       </div>
-      <a class="ambassador-mark" href="{{ site.ambassador.url }}" target="_blank" rel="noreferrer" data-reveal>
-        <span class="ambassador-mark__label">Tourist ambassador for Visit Postojnsko (Tourism Postojna)</span>
-        <img src="{{ site.ambassador.logo }}" alt="{{ site.ambassador.name }}">
+      <a class="ambassador-mark" href="{{ pageSite.ambassador.url }}" target="_blank" rel="noreferrer" data-reveal>
+        <span class="ambassador-mark__label">{{ pageSite.ambassador.label }}</span>
+        <img src="{{ pageSite.ambassador.logo }}" alt="{{ pageSite.ambassador.name }}">
       </a>
     </section>
 
     <section class="press band-section" id="press" aria-labelledby="press-title" data-press data-page-size="6">
       <div class="press__heading">
-        <p class="section-label" id="press-title"><a href="/press/">Press &amp; interviews <span aria-hidden="true">→</span></a></p>
+        <p class="section-label" id="press-title"><a href="{{ pressRoot }}">{{ copy.home.press }} <span aria-hidden="true">→</span></a></p>
         <div class="press-pager" data-press-pager hidden>
-          <button type="button" data-press-prev aria-label="Previous press page" aria-controls="press-grid">←</button>
+          <button type="button" data-press-prev aria-label="{{ copy.home.previousPress }}" aria-controls="press-grid">←</button>
           <span class="press-pager__status" role="status" aria-live="polite" aria-atomic="true">
             <span data-press-page>01</span><span aria-hidden="true"> / </span><span data-press-total>01</span>
           </span>
-          <button type="button" data-press-next aria-label="Next press page" aria-controls="press-grid">→</button>
+          <button type="button" data-press-next aria-label="{{ copy.home.nextPress }}" aria-controls="press-grid">→</button>
         </div>
       </div>
       <div class="press-grid" id="press-grid">
-        {% for item in site.press %}
+        {% for item in pageSite.press %}
         <a class="press-card" href="{{ item.url }}"{% if item.url[0] != "/" %} target="_blank" rel="noreferrer"{% endif %} data-press-card>
           <div class="press-card__image">
             <img src="{{ item.image }}" alt="" loading="lazy">
@@ -150,7 +164,7 @@ title: Žan Kafol — Aerial & Cave Photographer
         {% endfor %}
       </div>
       <div class="press-quotes" data-press-quotes data-reveal aria-live="polite">
-        {% for quote in site.quotes %}
+        {% for quote in pageSite.quotes %}
         <blockquote data-press-quote{% if not loop.first %} hidden{% endif %}>
           <p>{{ quote.text }}</p>
           <cite><a href="{{ quote.url }}">{{ quote.source }}</a></cite>
@@ -162,11 +176,11 @@ title: Žan Kafol — Aerial & Cave Photographer
 
   <section class="journal section shell" aria-labelledby="journal-title">
     <div class="journal__heading" data-reveal>
-      <p class="section-label" id="journal-title">Blog posts</p>
-      <a class="text-link" href="/blog/">All posts <span aria-hidden="true">→</span></a>
+      <p class="section-label" id="journal-title">{{ copy.home.journal }}</p>
+      <a class="text-link" href="/blog/">{{ copy.home.allPosts }} <span aria-hidden="true">→</span></a>
     </div>
     <div class="post-grid">
-      {% for post in site.posts %}
+      {% for post in pageSite.posts %}
       <article class="post-card" data-reveal style="--delay: {{ loop.index0 * 70 }}ms">
         <a href="{{ post.url }}">
           <h3>{{ post.title }}</h3>
@@ -184,23 +198,23 @@ title: Žan Kafol — Aerial & Cave Photographer
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="#top">Back to top ↑</a>
+      <a href="#top">{{ copy.common.backToTop }}</a>
     </div>
   </div>
 </footer>

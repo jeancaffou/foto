@@ -1,32 +1,40 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: galleries.categories
+  data: galleryPages
   size: 1
-  alias: gallery
-permalink: "/work/{{ gallery.id }}/index.html"
+  alias: galleryPage
+permalink: "{{ galleryPage.permalink }}"
 galleryStyles: true
 bodyClass: gallery-page
 eleventyComputed:
-  title: "{{ gallery.label }} — Žan Kafol"
+  pageLanguage: "{{ galleryPage.lang }}"
+  title: "{{ galleryPage.gallery.label }} — Žan Kafol"
+  metaDescription: "{{ galleryPage.gallery.description }}"
+  alternateUrl: "{{ galleryPage.alternateUrl }}"
 ---
+{% set gallery = galleryPage.gallery %}
+{% set pageSite = galleryPage.site %}
+{% set copy = galleryPage.copy %}
+{% if galleryPage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set pressRoot = "/sl/press/" %}{% set workRoot = "/sl/work/" %}{% else %}{% set homeRoot = "/" %}{% set pressRoot = "/press/" %}{% set workRoot = "/work/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/#featured">Featured</a>
-    <a href="/press/">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ homeRoot }}#featured">{{ copy.common.nav.featured }}</a>
+    <a href="{{ pressRoot }}">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ galleryPage.alternateUrl }}" hreflang="{% if galleryPage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if galleryPage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
@@ -34,22 +42,22 @@ eleventyComputed:
   <section class="gallery-hero" style="--gallery-cover: url('{{ gallery.cover }}')" aria-labelledby="gallery-title">
     <div class="gallery-hero__shade" aria-hidden="true"></div>
     <div class="gallery-hero__content shell">
-      <p class="section-label">Selected works</p>
+      <p class="section-label">{{ copy.gallery.selectedWorks }}</p>
       <h1 id="gallery-title">{{ gallery.label }}</h1>
       <p>{{ gallery.description }}</p>
-      <span>{{ gallery.images.length }} photographs</span>
+      <span>{{ gallery.photoCountLabel }}</span>
     </div>
   </section>
 
-  <nav class="gallery-categories" aria-label="Photography collections">
+  <nav class="gallery-categories" aria-label="{{ copy.gallery.categoriesAria }}">
     <div class="shell">
-      {% for category in galleries.categories %}
-      <a href="/work/{{ category.id }}/"{% if category.id == gallery.id %} aria-current="page"{% endif %}>{{ category.label }}</a>
+      {% for category in galleryPage.categories %}
+      <a href="{{ workRoot }}{{ category.id }}/"{% if category.id == gallery.id %} aria-current="page"{% endif %}>{{ category.label }}</a>
       {% endfor %}
     </div>
   </nav>
 
-  <section class="gallery-shell shell" aria-label="{{ gallery.label }} photographs">
+  <section class="gallery-shell shell" aria-label="{{ gallery.label }} {{ copy.gallery.galleryAria }}">
     {% if gallery.id == "award-winning" %}
     <div class="award-gallery" data-gallery-grid>
       {% for image in gallery.images %}
@@ -57,12 +65,12 @@ eleventyComputed:
         <div class="award-entry__copy">
           <p class="award-entry__label">{{ image.award.label }}</p>
           <h2>{{ image.title }}</h2>
-          {% if image.titleSl and image.titleSl != image.title %}<p class="award-entry__native"><span>Slovenian title</span>{{ image.titleSl }}</p>{% endif %}
+          {% if image.titleSl and image.titleSl != image.title %}<p class="award-entry__native"><span>{{ copy.gallery.slovenianTitle }}</span>{{ image.titleSl }}</p>{% endif %}
           <p class="award-entry__description">{{ image.award.description }}</p>
           {% if image.award.story %}<p class="award-entry__story">{{ image.award.story }}</p>{% endif %}
-          {% if image.award.archiveUrl %}<a class="award-entry__archive" href="{{ image.award.archiveUrl }}" target="_blank" rel="noreferrer">View archived National Geographic publication <span aria-hidden="true">↗</span></a>{% endif %}
+          {% if image.award.archiveUrl %}<a class="award-entry__archive" href="{{ image.award.archiveUrl }}" target="_blank" rel="noreferrer">{{ copy.gallery.archive }} <span aria-hidden="true">↗</span></a>{% endif %}
         </div>
-        <button class="gallery-tile award-entry__image" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.title }}" aria-label="Open {{ image.alt }}">
+        <button class="gallery-tile award-entry__image" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.title }}" aria-label="{{ copy.gallery.open }} {{ image.alt }}">
           <img src="{{ image.full }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="eager" decoding="async">
         </button>
       </article>
@@ -71,7 +79,7 @@ eleventyComputed:
     {% else %}
     <div class="gallery-grid" data-gallery-grid>
       {% for image in gallery.images %}
-      <button class="gallery-tile" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.year }}" aria-label="Open {{ image.alt }}">
+      <button class="gallery-tile" id="{{ image.id }}" type="button" data-gallery-item data-full="{{ image.full }}" data-alt="{{ image.alt }}" data-caption="{{ image.year }}" aria-label="{{ copy.gallery.open }} {{ image.alt }}">
         <img src="{{ image.thumb }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if loop.index <= 6 %}eager{% else %}lazy{% endif %}" decoding="async">
         {% if image.year %}<span>{{ image.year }}</span>{% endif %}
       </button>
@@ -81,15 +89,15 @@ eleventyComputed:
   </section>
 </main>
 
-<dialog class="lightbox" data-lightbox aria-label="Image viewer">
+<dialog class="lightbox" data-lightbox aria-label="{{ copy.gallery.lightbox }}">
   <div class="lightbox__frame">
-    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close image viewer">Close</button>
-    <button class="lightbox__nav lightbox__nav--previous" type="button" data-lightbox-previous aria-label="Previous photograph">←</button>
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="{{ copy.gallery.close }}">{{ copy.gallery.close }}</button>
+    <button class="lightbox__nav lightbox__nav--previous" type="button" data-lightbox-previous aria-label="{{ copy.gallery.previous }}">←</button>
     <figure>
       <img src="" alt="" data-lightbox-image>
       <figcaption data-lightbox-caption></figcaption>
     </figure>
-    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next photograph">→</button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="{{ copy.gallery.next }}">→</button>
   </div>
 </dialog>
 
@@ -97,23 +105,23 @@ eleventyComputed:
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="/">Back home ↑</a>
+      <a href="{{ homeRoot }}">{{ copy.common.backHome }}</a>
     </div>
   </div>
 </footer>

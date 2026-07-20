@@ -7,6 +7,9 @@ const test = require("node:test");
 const posts = require("../src/_data/wordpressPosts.json");
 const pressFeatures = require("../src/_data/pressFeatures");
 const featurePages = require("../src/_data/featurePages");
+const galleryPages = require("../src/_data/galleryPages");
+const pressPages = require("../src/_data/pressPages");
+const featuredPageVariants = require("../src/_data/featuredPageVariants");
 const site = require("../src/_data/site");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -104,6 +107,42 @@ test("builds local landing pages for every featured and press card", () => {
 
   const mayorPage = fs.readFileSync(outputPath("/featured/mayors-award-postojna-2024/"), "utf8");
   assert.match(mayorPage, /Mayor Igor Marentič/);
+});
+
+test("builds the complete Slovenian non-blog route tree with reciprocal language links", () => {
+  const slHomepagePath = outputPath("/sl/");
+  assert.ok(fs.existsSync(slHomepagePath), "Missing Slovenian homepage");
+
+  [...galleryPages, ...pressPages, ...featuredPageVariants].forEach((page) => {
+    assert.ok(fs.existsSync(outputPath(page.permalink)), `Missing localized page: ${page.permalink}`);
+    const html = fs.readFileSync(outputPath(page.permalink), "utf8");
+    assert.match(html, new RegExp(`href="${page.alternateUrl.replaceAll("/", "\\/")}"`));
+  });
+
+  const homepage = fs.readFileSync(slHomepagePath, "utf8");
+  assert.match(homepage, /<html lang="sl">/);
+  assert.match(homepage, /Zračna in jamska<br>fotografija/);
+  assert.match(homepage, /href="\/" hreflang="en"/);
+  assert.match(homepage, /href="\/sl\/work\/award-winning\/"/);
+  assert.match(homepage, /href="\/2025\/02\/ledena-jama-v-paradani\.html"/);
+
+  const awardPage = fs.readFileSync(outputPath("/sl/work/award-winning/"), "utf8");
+  assert.match(awardPage, /Razsvetljenje \(Vse Mlečne ceste vodijo v Rakov Škocjan\)/);
+  assert.match(awardPage, /Presihajoče Cerkniško jezero je fenomen kraških pojavov/);
+});
+
+test("does not double-encode HTML entities in titles, metadata, or interface copy", () => {
+  const htmlFiles = collectHtml(OUTPUT);
+  const doubleEncoded = /&amp;(?:amp|#39|quot|lt|gt);/;
+
+  htmlFiles.forEach((htmlFile) => {
+    const html = fs.readFileSync(htmlFile, "utf8");
+    assert.doesNotMatch(html, doubleEncoded, `Double-encoded HTML entity in ${htmlFile}`);
+  });
+
+  const mayorPage = fs.readFileSync(outputPath("/featured/mayors-award-postojna-2024/"), "utf8");
+  assert.match(mayorPage, /<title>Mayor&#39;s Award, Postojna, 2024 — Municipality of Postojna<\/title>/);
+  assert.match(mayorPage, /← Featured &amp; awarded/);
 });
 
 test("keeps built internal post links and localized assets resolvable", () => {

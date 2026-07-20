@@ -1,47 +1,55 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: pressFeatures
+  data: pressPages
   size: 1
-  alias: pressItem
-permalink: "{{ pressItem.permalink }}"
+  alias: pressPage
+permalink: "{{ pressPage.permalink }}"
 pressStyles: true
 bodyClass: press-detail-page
 eleventyComputed:
-  title: "{{ pressItem.title }} — {{ pressItem.publication }}"
+  pageLanguage: "{{ pressPage.lang }}"
+  title: "{{ pressPage.item.title }} — {{ pressPage.item.publication }}"
+  metaDescription: "{{ pressPage.item.summary }}"
+  alternateUrl: "{{ pressPage.alternateUrl }}"
 ---
+{% set pressItem = pressPage.item %}
+{% set pageSite = pressPage.site %}
+{% set copy = pressPage.copy %}
+{% if pressPage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set pressRoot = "/sl/press/" %}{% else %}{% set homeRoot = "/" %}{% set pressRoot = "/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/#featured">Featured</a>
-    <a href="/press/" aria-current="page">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ homeRoot }}#featured">{{ copy.common.nav.featured }}</a>
+    <a href="{{ pressRoot }}" aria-current="page">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ pressPage.alternateUrl }}" hreflang="{% if pressPage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if pressPage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
 <main id="main" class="press-detail">
   <article>
     <header class="press-detail__header shell">
-      <a class="press-detail__back" href="/press/">← Press &amp; interviews</a>
-      <p class="section-label">Press archive</p>
+      <a class="press-detail__back" href="{{ pressRoot }}">{{ copy.press.back }}</a>
+      <p class="section-label">{{ copy.press.archiveLabel }}</p>
       <h1>{{ pressItem.title }}</h1>
       <div class="press-detail__meta">
         <strong>{{ pressItem.publication }}</strong>
         {% if pressItem.section %}<span>{{ pressItem.section }}</span>{% endif %}
         <time datetime="{{ pressItem.date }}">{{ pressItem.displayDate }}</time>
-        {% if pressItem.byline %}<span>Words by {{ pressItem.byline }}</span>{% endif %}
-        {% if pressItem.photoCredit %}<span>Photography by {{ pressItem.photoCredit }}</span>{% endif %}
+        {% if pressItem.byline %}<span>{{ copy.press.wordsBy }} {{ pressItem.byline }}</span>{% endif %}
+        {% if pressItem.photoCredit %}<span>{{ copy.press.photographyBy }} {{ pressItem.photoCredit }}</span>{% endif %}
       </div>
       {% if pressItem.summary %}<p class="press-detail__summary">{{ pressItem.summary }}</p>{% endif %}
       <a class="press-detail__source" href="{{ pressItem.originalUrl }}" target="_blank" rel="noreferrer">
@@ -62,19 +70,19 @@ eleventyComputed:
     <div class="press-detail__gallery press-detail__gallery--single shell">
       {% for scan in pressItem.scans %}
       <figure>
-        <a href="{{ scan.src }}" target="_blank" aria-label="Open page {{ loop.index }} of the article scan at full size">
+        <a href="{{ scan.src }}" target="_blank" aria-label="{{ copy.press.openPage }} {{ loop.index }} {{ copy.press.articleScan }}">
           <img src="{{ scan.src }}" alt="{{ scan.alt }}" loading="eager" decoding="async">
         </a>
-        <figcaption>Published in {{ pressItem.publication }} · Page {{ loop.index }} of {{ pressItem.scans | length }}</figcaption>
+        <figcaption>{{ copy.press.publishedIn }} {{ pressItem.publication }} · {{ copy.press.page }} {{ loop.index }} {{ copy.press.of }} {{ pressItem.scans | length }}</figcaption>
       </figure>
       {% endfor %}
     </div>
     {% elif pressItem.scan %}
     <figure class="press-detail__scan shell">
-      <a href="{{ pressItem.scan }}" target="_blank" aria-label="Open article scan at full size">
+      <a href="{{ pressItem.scan }}" target="_blank" aria-label="{{ copy.press.openScan }}">
         <img src="{{ pressItem.scan }}" alt="{{ pressItem.scanAlt }}" loading="eager" decoding="async">
       </a>
-      <figcaption>Published in {{ pressItem.publication }} · Open the scan at full size</figcaption>
+      <figcaption>{{ copy.press.publishedIn }} {{ pressItem.publication }} · {{ copy.press.openFull }}</figcaption>
     </figure>
     {% elif pressItem.image %}
     <figure class="press-detail__visual shell">
@@ -89,23 +97,23 @@ eleventyComputed:
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="/">Back home ↑</a>
+      <a href="{{ homeRoot }}">{{ copy.common.backHome }}</a>
     </div>
   </div>
 </footer>

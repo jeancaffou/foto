@@ -52,7 +52,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".feature-card").nth(2)).toHaveClass(/feature-card--nikon/);
   await expect(page.locator(".feature-card--nikon")).toContainText("I Am Nikon photo contest, second place, 2010");
   await expect(page.locator(".feature-card--nikon")).toContainText("Photo titled Jaz sem Raketa (I Am a Rocket) won second place on I Am Nikon photo contest");
-  await expect(page.locator('.press-card[href="/featured/mayors-award-postojna-2024/"]')).toContainText("Županovo priznanje za fotografijo");
+  await expect(page.locator('.press-card[href="/featured/mayors-award-postojna-2024/"]')).toContainText("Mayor's Award for Photography, 2024");
   await expect(page.locator(".about__facts")).toContainText("Karst Research Institute");
   await expect(page.locator(".hero__intro")).toContainText("Photo stories shaped by flight");
   await expect(page.locator(".post-card")).toHaveCount(3);
@@ -167,6 +167,48 @@ test("renders the complete editorial press archive with large local thumbnails",
   await page.screenshot({ path: testInfo.outputPath("press-archive.png"), fullPage: true });
 });
 
+test("renders equivalent Slovenian portfolio, gallery, press, and feature pages", async ({ page }) => {
+  await page.goto("/sl/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+  await expect(page.locator("h1")).toContainText("Zračna in jamska");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/");
+  await expect(page.locator('.work-card[href^="/sl/work/"]')).toHaveCount(8);
+  await expect(page.locator('.press-card[href^="/sl/"]')).toHaveCount(14);
+  await expect(page.locator('.post-card a[href^="/sl/"]')).toHaveCount(0);
+  await expect(page.locator(".about__copy")).toContainText("Motivom sledim od širokih pogledov iz zraka");
+  await expect(page.locator(".about__facts")).toContainText("Inštitut za raziskovanje krasa");
+  await expectVisibleTextFloor(page);
+
+  await page.goto("/sl/work/award-winning/");
+  await expect(page.locator("h1")).toHaveText("Nagrajene fotografije");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/work/award-winning/");
+  await expect(page.locator(".award-entry").first()).toContainText("Razsvetljenje (Vse Mlečne ceste vodijo v Rakov Škocjan)");
+  await expect(page.locator(".award-entry").first()).toContainText("Zmagovalka kategorije Pokrajina in skupna zmagovalka");
+  await expect(page.locator(".award-entry").last()).toContainText("Zmagovalka kategorije Od zgoraj in skupna zmagovalka");
+  await expect(page.locator(".award-entry").last()).toContainText("Presihajoče Cerkniško jezero je fenomen kraških pojavov");
+  await expectVisibleTextFloor(page);
+
+  await page.goto("/sl/press/");
+  await expect(page.locator("h1")).toContainText("Mediji in");
+  await expect(page.locator(".press-archive-card")).toHaveCount(14);
+  await expect(page.locator('.press-archive-card a[href^="/sl/"]')).toHaveCount(14);
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/press/");
+
+  await page.goto("/sl/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/");
+  await expect(page.locator(".press-detail__summary")).toContainText("letenje, raziskovanje jam in fotografijo");
+  await expect(page.locator(".press-detail__meta")).toContainText("21. oktober 2023");
+  await expect(page.locator(".press-detail__back")).toHaveAttribute("href", "/sl/press/");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/press/ce-se-hoces-umakniti-gres-gor-ali-pa-dol/");
+
+  await page.goto("/sl/featured/mayors-award-postojna-2024/");
+  await expect(page.locator("h1")).toHaveText("Županovo priznanje, Postojna, 2024");
+  await expect(page.locator(".press-detail__summary")).toContainText("posebne dosežke v fotografiji in promocijo Občine Postojna");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/featured/mayors-award-postojna-2024/");
+
+  const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  expect(horizontalOverflow).toBe(false);
+});
+
 test("renders category galleries and opens the local-image lightbox", async ({ page }, testInfo) => {
   await page.goto("/");
   await page.locator(".work-card").first().click();
@@ -256,7 +298,9 @@ test("renders local video, award, and Nikon landing pages", async ({ page }) => 
   await expect(page.locator('.press-detail__source[href*="youtube.com/watch?v=TYeM4MJ5kCQ"]')).toBeVisible();
 
   await page.goto("/featured/mayors-award-postojna-2024/");
+  await expect(page).toHaveTitle("Mayor's Award, Postojna, 2024 — Municipality of Postojna");
   await expect(page.locator("h1")).toHaveText("Mayor's Award, Postojna, 2024");
+  await expect(page.locator(".press-detail__back")).toHaveText("← Featured & awarded");
   await expect(page.locator(".press-detail__summary")).toContainText("promotion of the Municipality of Postojna");
   await expect(page.locator('img[src="/assets/images/feature-mayors-award-postojna-2024.jpg"]')).toBeVisible();
 

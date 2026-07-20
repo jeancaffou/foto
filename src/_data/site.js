@@ -23,7 +23,7 @@ module.exports = {
       description: "A Radio 94 conversation about photographing Postojna from the air and below ground."
     },
     {
-      title: "Županovo priznanje za fotografijo",
+      title: "Mayor's Award for Photography, 2024",
       source: "Municipality of Postojna",
       year: "2024",
       image: "/assets/images/press-postojna-award.jpg",

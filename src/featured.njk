@@ -1,40 +1,48 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: featurePages
+  data: featuredPageVariants
   size: 1
-  alias: featureItem
-permalink: "{{ featureItem.permalink }}"
+  alias: featurePage
+permalink: "{{ featurePage.permalink }}"
 pressStyles: true
 bodyClass: press-detail-page
 eleventyComputed:
-  title: "{{ featureItem.title }} — {{ featureItem.publication }}"
+  pageLanguage: "{{ featurePage.lang }}"
+  title: "{{ featurePage.item.title }} — {{ featurePage.item.publication }}"
+  metaDescription: "{{ featurePage.item.summary }}"
+  alternateUrl: "{{ featurePage.alternateUrl }}"
 ---
+{% set featureItem = featurePage.item %}
+{% set pageSite = featurePage.site %}
+{% set copy = featurePage.copy %}
+{% if featurePage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set pressRoot = "/sl/press/" %}{% else %}{% set homeRoot = "/" %}{% set pressRoot = "/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/#featured">Featured</a>
-    <a href="/press/">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ homeRoot }}#featured">{{ copy.common.nav.featured }}</a>
+    <a href="{{ pressRoot }}">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ featurePage.alternateUrl }}" hreflang="{% if featurePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if featurePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
 <main id="main" class="press-detail">
   <article>
     <header class="press-detail__header shell">
-      <a class="press-detail__back" href="/#featured">← Featured &amp; awarded</a>
-      <p class="section-label">Featured &amp; awarded</p>
+      <a class="press-detail__back" href="{{ homeRoot }}#featured">{{ copy.featured.back }}</a>
+      <p class="section-label">{{ copy.featured.label }}</p>
       <h1>{{ featureItem.title }}</h1>
       <div class="press-detail__meta">
         <strong>{{ featureItem.publication }}</strong>
@@ -49,7 +57,7 @@ eleventyComputed:
     <div class="press-detail__gallery shell{% if featureItem.images.length == 1 %} press-detail__gallery--single{% endif %}">
       {% for image in featureItem.images %}
       <figure>
-        <a href="{{ image.src }}" target="_blank" aria-label="Open image at full size">
+        <a href="{{ image.src }}" target="_blank" aria-label="{{ copy.featured.openImage }}">
           <img src="{{ image.src }}" alt="{{ image.alt }}" loading="{% if loop.first %}eager{% else %}lazy{% endif %}" decoding="async">
         </a>
         <figcaption>{{ image.caption }}</figcaption>
@@ -63,23 +71,23 @@ eleventyComputed:
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="/">Back home ↑</a>
+      <a href="{{ homeRoot }}">{{ copy.common.backHome }}</a>
     </div>
   </div>
 </footer>

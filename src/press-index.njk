@@ -1,54 +1,64 @@
 ---
 layout: layouts/base.njk
-permalink: /press/index.html
+pagination:
+  data: pressArchivePages
+  size: 1
+  alias: pressArchivePage
+permalink: "{{ pressArchivePage.permalink }}"
 pressStyles: true
 bodyClass: press-archive-page
-pageLanguage: en
-title: Press & interviews — Žan Kafol
-metaDescription: Interviews, television appearances, radio conversations and published features with Žan Kafol.
+eleventyComputed:
+  pageLanguage: "{{ pressArchivePage.lang }}"
+  title: "{{ pressArchivePage.copy.press.archiveTitle }}"
+  metaDescription: "{{ pressArchivePage.copy.press.archiveMeta }}"
+  alternateUrl: "{{ pressArchivePage.alternateUrl }}"
 ---
+{% set pageSite = pressArchivePage.site %}
+{% set copy = pressArchivePage.copy %}
+{% if pressArchivePage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set pressRoot = "/sl/press/" %}{% else %}{% set homeRoot = "/" %}{% set pressRoot = "/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/#featured">Featured</a>
-    <a href="/press/" aria-current="page">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ homeRoot }}#featured">{{ copy.common.nav.featured }}</a>
+    <a href="{{ pressRoot }}" aria-current="page">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ pressArchivePage.alternateUrl }}" hreflang="{% if pressArchivePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if pressArchivePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
 <main id="main" class="press-archive">
   <header class="press-archive__header shell">
-    <p class="section-label">Press archive</p>
+    <p class="section-label">{{ copy.press.archiveLabel }}</p>
     <div class="press-archive__intro">
-      <h1>Press &amp;<br>interviews</h1>
-      <p>Television appearances, radio conversations and published profiles covering photography, paragliding, caves and the karst landscape.</p>
+      <h1>{{ copy.press.archiveHeading | safe }}</h1>
+      <p>{{ copy.press.archiveIntro }}</p>
     </div>
   </header>
 
-  <section class="press-archive__listing shell" aria-label="Press and interview features">
-    {% for item in site.press %}
+  <section class="press-archive__listing shell" aria-label="{{ copy.press.listingAria }}">
+    {% for item in pageSite.press %}
     <article class="press-archive-card">
       <a href="{{ item.url }}">
         <figure class="press-archive-card__image">
           <img src="{{ item.image }}" alt="" loading="{% if loop.index <= 4 %}eager{% else %}lazy{% endif %}" decoding="async">
-          <span class="press-archive-card__kind">{% if item.kind == "video" %}Video{% elif item.kind == "audio" %}Radio{% elif item.kind == "award" %}Recognition{% else %}Article{% endif %}</span>
+          <span class="press-archive-card__kind">{% if item.kind == "video" %}{{ copy.press.kinds.video }}{% elif item.kind == "audio" %}{{ copy.press.kinds.audio }}{% elif item.kind == "award" %}{{ copy.press.kinds.award }}{% else %}{{ copy.press.kinds.article }}{% endif %}</span>
         </figure>
         <div class="press-archive-card__body">
           <p class="press-archive-card__meta"><span>{{ item.source }}</span><time>{{ item.year }}</time></p>
           <h2>{{ item.title }}</h2>
           <p class="press-archive-card__description">{{ item.description }}</p>
-          <span class="press-archive-card__read">View feature <span aria-hidden="true">→</span></span>
+          <span class="press-archive-card__read">{{ copy.press.viewFeature }} <span aria-hidden="true">→</span></span>
         </div>
       </a>
     </article>
@@ -60,23 +70,23 @@ metaDescription: Interviews, television appearances, radio conversations and pub
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="#main">Back to top ↑</a>
+      <a href="#main">{{ copy.common.backToTop }}</a>
     </div>
   </div>
 </footer>
