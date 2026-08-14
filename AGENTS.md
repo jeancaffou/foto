@@ -9,6 +9,8 @@
 - Responsive layouts must reflow deliberately. Do not shrink desktop grids until they become unreadable.
 - Motion should be sparse and meaningful. Respect `prefers-reduced-motion`.
 - Keep all visible text at `0.88rem` or larger and use a restrained, tokenized type scale rather than scattered one-off sizes.
+- Homepage newsletter placement correction: keep the invitation below the blog post grid, after `Blog posts`, and never insert it directly below `Selected works`.
+- Homepage newsletter copy should explain that the subscription delivers occasional photo stories from flight, caves and the karst landscape.
 
 ## Visual Fidelity Correction
 

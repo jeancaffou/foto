@@ -66,6 +66,15 @@ eleventyComputed:
       <p>{{ archivePage.totalPosts }} {{ copy.blog.posts }} <span aria-hidden="true">·</span> {{ copy.blog.page }} {{ archivePage.pageNumber + 1 }} {{ copy.blog.of }} {{ archivePage.pageCount }}</p>
     </header>
 
+    <aside class="newsletter-cta newsletter-cta--archive" aria-labelledby="newsletter-title">
+      <div class="newsletter-cta__copy">
+        <p class="section-label">{{ copy.blog.newsletter.label }}</p>
+        <h2 id="newsletter-title">{{ copy.blog.newsletter.title }}</h2>
+        <p>{{ copy.blog.newsletter.text }}</p>
+      </div>
+      <a class="newsletter-cta__link" href="{{ pageSite.newsletterUrl }}">{{ copy.blog.newsletter.action }} <span aria-hidden="true">↗</span></a>
+    </aside>
+
     <div class="blog-grid">
       {% for post in posts %}
       <article class="blog-card{% if loop.first %} blog-card--lead{% endif %}">

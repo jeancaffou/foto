@@ -5,6 +5,7 @@ module.exports = {
   eyebrow: "Aerial & cave photographer",
   email: "foto@kafol.net",
   location: "Postojna, Slovenia",
+  newsletterUrl: "https://kafol.net/newsletter/",
   social: [
     { label: "Instagram", url: "https://www.instagram.com/jeancaffou/", icon: "/assets/images/logo-instagram.svg" },
     { label: "Facebook", url: "https://www.facebook.com/jeancaffou", icon: "/assets/images/logo-facebook.svg" },

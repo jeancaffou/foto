@@ -197,6 +197,14 @@ eleventyComputed:
       </article>
       {% endfor %}
     </div>
+    <aside class="newsletter-cta newsletter-cta--compact" aria-labelledby="home-newsletter-title">
+      <div class="newsletter-cta__copy">
+        <p class="section-label">{{ copy.home.newsletter.label }}</p>
+        <h2 id="home-newsletter-title">{{ copy.home.newsletter.title }}</h2>
+        <p>{{ copy.home.newsletter.text }}</p>
+      </div>
+      <a class="newsletter-cta__link" href="{{ pageSite.newsletterUrl }}">{{ copy.home.newsletter.action }} <span aria-hidden="true">↗</span></a>
+    </aside>
   </section>
 </main>
 

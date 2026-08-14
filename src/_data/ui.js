@@ -42,7 +42,13 @@ module.exports = {
       previousPress: "Previous press page",
       nextPress: "Next press page",
       journal: "Blog posts",
-      allPosts: "All posts"
+      allPosts: "All posts",
+      newsletter: {
+        label: "Newsletter",
+        title: "Keep up with new photo stories",
+        text: "Subscribe for occasional updates from Žan Kafol, including new stories from flight, caves and the karst landscape.",
+        action: "Subscribe to the newsletter"
+      }
     },
     blog: {
       title: "Journal — Žan Kafol",
@@ -61,6 +67,12 @@ module.exports = {
       newer: "Newer stories",
       older: "Older stories",
       archiveNavigation: "Journal pages",
+      newsletter: {
+        label: "Stay connected",
+        title: "Keep up with new photo stories",
+        text: "Subscribe for occasional updates from Žan Kafol, including new stories from flight, caves and the karst landscape.",
+        action: "Subscribe to the newsletter"
+      },
       story: "Photo story",
       back: "Journal",
       allStories: "All stories",
@@ -151,7 +163,13 @@ module.exports = {
       previousPress: "Prejšnja stran medijskih objav",
       nextPress: "Naslednja stran medijskih objav",
       journal: "Zapisi na blogu",
-      allPosts: "Vsi zapisi"
+      allPosts: "Vsi zapisi",
+      newsletter: {
+        label: "E-novice",
+        title: "Nove fotografske zgodbe po e-pošti",
+        text: "Naroči se na občasne novice Žana Kafola, vključno z novimi zgodbami iz zraka, jam in kraške pokrajine.",
+        action: "Naroči se na e-novice"
+      }
     },
     blog: {
       title: "Blog — Žan Kafol",
@@ -170,6 +188,12 @@ module.exports = {
       newer: "Novejše zgodbe",
       older: "Starejše zgodbe",
       archiveNavigation: "Strani bloga",
+      newsletter: {
+        label: "Ostani povezan",
+        title: "Nove fotografske zgodbe po e-pošti",
+        text: "Naroči se na občasne novice Žana Kafola, vključno z novimi zgodbami iz zraka, jam in kraške pokrajine.",
+        action: "Naroči se na e-novice"
+      },
       story: "Fotografska zgodba",
       back: "Blog",
       allStories: "Vsi zapisi",
