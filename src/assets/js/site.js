@@ -88,7 +88,7 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
-const postGalleryImages = Array.from(document.querySelectorAll(".post-copy .tiled-gallery__item img[data-url]"));
+const postGalleryImages = Array.from(document.querySelectorAll(".post-copy .tiled-gallery__item img[data-url], .post-copy .eclipse-gallery img[data-url]"));
 
 if (postGalleryImages.length) {
   const dialog = document.createElement("dialog");

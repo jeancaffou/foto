@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: wordpressPosts
+  data: blogPosts
   size: 11
   alias: posts
   addAllPagesToCollections: true
@@ -49,10 +49,9 @@ eleventyComputed:
   <section class="blog-archive shell" aria-labelledby="archive-title">
     <header class="blog-archive__header">
       <div>
-        <p class="section-label">Archive</p>
         <h2 id="archive-title">Latest photo stories</h2>
       </div>
-      <p>{{ wordpressPosts.length }} posts <span aria-hidden="true">·</span> Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</p>
+      <p>{{ blogPosts.length }} posts <span aria-hidden="true">·</span> Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</p>
     </header>
 
     <div class="blog-grid">

@@ -63,8 +63,8 @@ module.exports = {
     { text: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire.", source: "Žan Kafol, RTV Slovenija, 2023", url: "/sl/press/da-si-lahko-zares-ustvarjalen/" }
   ],
   posts: [
+    { title: "Srpasto Sonce 🌒", excerpt: "Delni Sončev mrk nad Slovenijo, ujet skozi oblake in večerno meglico z Vremščice.", date: "12. avg. 2026", category: "Sončev mrk", url: "/2026/08/crescent-sun-vremscica.html" },
     { title: "Ledena jama v Paradani", excerpt: "Led, tema in ozek snop dnevne svetlobe v krasu Trnovskega gozda.", date: "13. feb. 2025", category: "Jame", url: "/2025/02/ledena-jama-v-paradani.html" },
-    { title: "Severni sij nad Slovenijo", excerpt: "Noč, ko je severni sij segel čez slovensko nebo.", date: "11. maj 2024", category: "Nočno nebo", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" },
-    { title: "Letenje nad Tržaškim zalivom", excerpt: "Dolg jadralni prelet nad Kraškim robom in Tržaškim zalivom.", date: "25. dec. 2023", category: "Letenje", url: "/2023/12/letenje-nad-trzaskim-zalivom.html" }
+    { title: "Severni sij nad Slovenijo", excerpt: "Noč, ko je severni sij segel čez slovensko nebo.", date: "11. maj 2024", category: "Nočno nebo", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" }
   ]
 };

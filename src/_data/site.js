@@ -200,8 +200,8 @@ module.exports = {
     }
   ],
   posts: [
+    { title: "Crescent Sun 🌒", excerpt: "A partial solar eclipse over Slovenia, seen through cloud and evening haze from Vremščica.", date: "Aug 12, 2026", category: "Solar eclipse", url: "/2026/08/crescent-sun-vremscica.html" },
     { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/2025/02/ledena-jama-v-paradani.html" },
-    { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" },
-    { title: "Flying over the Gulf of Trieste", excerpt: "A long paragliding line above the Karst edge and the Gulf of Trieste.", date: "Dec 25, 2023", category: "Flight", url: "/2023/12/letenje-nad-trzaskim-zalivom.html" }
+    { title: "Northern Lights over Slovenia", excerpt: "The night the northern lights reached across the Slovenian sky.", date: "May 11, 2024", category: "Night sky", url: "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html" }
   ]
 };

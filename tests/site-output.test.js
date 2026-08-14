@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
 const posts = require("../src/_data/wordpressPosts.json");
+const blogPosts = require("../src/_data/blogPosts");
 const pressFeatures = require("../src/_data/pressFeatures");
 const featurePages = require("../src/_data/featurePages");
 const galleryPages = require("../src/_data/galleryPages");
@@ -34,11 +35,11 @@ test("builds every canonical WordPress permalink and archive page", () => {
   assert.ok(fs.existsSync(OUTPUT), `Missing site output: ${OUTPUT}`);
   assert.equal(posts.length, 194);
 
-  posts.forEach((post) => {
+  blogPosts.forEach((post) => {
     assert.ok(fs.existsSync(outputPath(post.permalink)), `Missing post route: ${post.permalink}`);
   });
 
-  const archivePages = Math.ceil(posts.length / 11);
+  const archivePages = Math.ceil(blogPosts.length / 11);
   assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "index.html")));
   for (let page = 2; page <= archivePages; page += 1) {
     assert.ok(fs.existsSync(path.join(OUTPUT, "blog", "page", String(page), "index.html")), `Missing blog page ${page}`);
@@ -52,23 +53,26 @@ test("builds every canonical WordPress permalink and archive page", () => {
     ))
   ].join("\n");
   const archiveLinks = [...archiveHtml.matchAll(/<article class="blog-card[^"]*">[\s\S]*?<a href="([^"]+)"/g)].map((match) => match[1]);
-  assert.equal(archiveLinks.length, posts.length);
-  assert.deepEqual(new Set(archiveLinks), new Set(posts.map((post) => post.permalink)));
+  assert.equal(archiveLinks.length, blogPosts.length);
+  assert.deepEqual(new Set(archiveLinks), new Set(blogPosts.map((post) => post.permalink)));
   assert.equal((firstArchiveHtml.match(/<article class="blog-card/g) || []).length, 11);
+  assert.match(firstArchiveHtml, /href="\/2026\/08\/crescent-sun-vremscica\.html"/);
+  assert.match(firstArchiveHtml, /src="\/assets\/blog\/2026\/08\/20260812-IMG_1030\.jpg"/);
 
   const lastArchiveHtml = fs.readFileSync(path.join(OUTPUT, "blog", "page", String(archivePages), "index.html"), "utf8");
-  assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, posts.length % 11);
+  assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, blogPosts.length % 11);
 });
 
 test("keeps homepage journal links and the National Geographic route canonical", () => {
   const homepage = fs.readFileSync(path.join(OUTPUT, "index.html"), "utf8");
   const expectedHomepagePosts = [
+    "/2026/08/crescent-sun-vremscica.html",
     "/2025/02/ledena-jama-v-paradani.html",
-    "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html",
-    "/2023/12/letenje-nad-trzaskim-zalivom.html"
+    "/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html"
   ];
 
   expectedHomepagePosts.forEach((permalink) => assert.match(homepage, new RegExp(`href="${permalink.replaceAll("/", "\\/")}"`)));
+  assert.doesNotMatch(homepage, /href="\/2023\/12\/letenje-nad-trzaskim-zalivom\.html"/);
   assert.doesNotMatch(homepage, /Nikon Z6II|Nikon Z 6_2|href="\/work\/[^"]*#/i);
   assert.match(homepage, /<cite><a href="\/press\/ce-se-hoces-umakniti-gres-gor-ali-pa-dol\/">Žan Kafol, neDelo, 2023<\/a><\/cite>/);
   assert.doesNotMatch(homepage, /<cite><a href="\/assets\/images\/press-nedelo\.jpg"/);

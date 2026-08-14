@@ -319,11 +319,13 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.locator("h1")).toContainText("Photo stories from");
   await expect(page.locator(".blog-card")).toHaveCount(11);
+  await expect(page.locator(".blog-card").first()).toContainText("Crescent Sun");
+  await expect(page.locator(".blog-card").first().locator("img")).toHaveAttribute("src", /20260812-IMG_1030\.jpg/);
   await expect(page.locator('.blog-pagination a[href="/blog/page/2/"]')).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("journal-archive.png"), fullPage: true });
 
   await page.goto("/blog/page/18/");
-  await expect(page.locator(".blog-card")).toHaveCount(7);
+  await expect(page.locator(".blog-card")).toHaveCount(8);
   await expect(page.locator(".blog-pagination")).toContainText("Page 18 / 18");
 
   await page.goto("/2023/10/druga-zmaga-na-national-geographic.html");
