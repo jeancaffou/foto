@@ -1,4 +1,5 @@
 const galleries = require("./galleries");
+const imageDescriptions = require("./imageDescriptions");
 
 const categoryCopy = {
   "award-winning": {
@@ -77,11 +78,12 @@ const categories = galleries.categories.map((category) => {
       return {
         ...image,
         ...(award || {}),
-        alt: title
+        alt: imageDescriptions[image.full]?.sl || (title
           ? `${title}, fotografija Žana Kafola${image.year ? `, ${image.year}` : ""}`
-          : `${copy.label}, fotografija Žana Kafola${image.year ? `, ${image.year}` : ""}`
+          : `${copy.label}, fotografija Žana Kafola${image.year ? `, ${image.year}` : ""}`)
       };
-    })
+    }),
+    coverAlt: imageDescriptions[category.cover]?.sl || category.coverAlt
   };
 });
 

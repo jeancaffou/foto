@@ -1,47 +1,60 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: wordpressPosts
+  data: blogPostsByLanguage.all
   size: 1
   alias: post
   addAllPagesToCollections: true
 permalink: "{{ post.permalink }}"
 blogStyles: true
 bodyClass: article-page
-pageLanguage: sl
+seoType: article
 eleventyComputed:
-  title: "{{ post.title }} — Žan Kafol"
-  metaDescription: "{{ post.summary }}"
+  pageLanguage: "{{ post.lang }}"
+  title: "{{ post.seoTitle }}"
+  metaDescription: "{{ post.seoDescription }}"
   ogImage: "{{ post.leadImage }}"
+  ogImageAlt: "{{ post.leadImage | imageAlt(post.lang, post.title) }}"
+  alternateUrl: "{{ post.alternateUrl }}"
+  canonicalPath: "{{ post.canonicalPath }}"
+  xDefaultPath: "{{ post.xDefaultPath }}"
 ---
+{% set pageSite = post.site %}
+{% set copy = post.copy %}
+{% set homeRoot = "/" %}
+{% set blogRoot = "/en/blog/" %}
+{% set pressRoot = "/press/" %}
+{% if post.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set blogRoot = "/blog/" %}{% set pressRoot = "/sl/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/blog/" aria-current="page">Journal</a>
-    <a href="/press/">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ blogRoot }}" aria-current="page">{{ copy.blog.journal }}</a>
+    <a href="{{ pressRoot }}">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ post.alternateUrl }}" hreflang="{% if post.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if post.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
 <main id="main" class="article-main">
   <article>
     <header class="article-header shell">
-      <a class="article-header__back" href="/blog/"><span aria-hidden="true">←</span> Journal</a>
-      <p class="section-label">Photo story</p>
+      <a class="article-header__back" href="{{ blogRoot }}">{% if post.backLabel %}{{ post.backLabel }}{% else %}<span aria-hidden="true">←</span> {{ copy.blog.back }}{% endif %}</a>
+      <p class="section-label">{{ copy.blog.story }}</p>
       <h1>{{ post.title | escape }}</h1>
       <div class="article-header__meta">
-        <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
+        <time datetime="{{ post.date }}">{{ post.date | formatBlogDate(post.lang, "long") }}</time>
+        {% for item in post.metaItems %}<span>{{ item | escape }}</span>{% endfor %}
         {% for category in post.categories %}<span>{{ category.name | escape }}</span>{% endfor %}
       </div>
     </header>
@@ -49,23 +62,27 @@ eleventyComputed:
     {% set contentIncludesLead = post.content | contains(post.leadImage) %}
     {% if not contentIncludesLead %}
     <figure class="article-lead shell">
-      <img src="{{ post.leadImage }}" alt="" loading="eager" decoding="async">
+      <img src="{{ post.leadImage }}" alt="{{ post.leadImage | imageAlt(post.lang, post.title) }}" loading="eager" decoding="async">
     </figure>
     {% endif %}
 
     <div class="post-copy shell">
-      {{ post.content | renderWordPressEmbeds | safe }}
+      {% if post.sourceType == "wordpress" %}
+      {{ post.content | localizeWordPressContent(post.lang, post.id) | safe }}
+      {% else %}
+      {{ post.content | safe }}
+      {% endif %}
     </div>
 
-    <nav class="article-pagination shell" aria-label="Adjacent journal posts">
-      {% if pagination.href.previous %}
-      <a href="{{ pagination.href.previous }}"><span>Newer story</span><strong aria-hidden="true">←</strong></a>
+    <nav class="article-pagination shell" aria-label="{{ copy.blog.adjacentNavigation }}">
+      {% if post.newerUrl %}
+      <a href="{{ post.newerUrl }}"><span>{{ copy.blog.newerStory }}</span><strong aria-hidden="true">←</strong></a>
       {% else %}
       <span></span>
       {% endif %}
-      <a class="article-pagination__archive" href="/blog/">All stories</a>
-      {% if pagination.href.next %}
-      <a href="{{ pagination.href.next }}"><span>Older story</span><strong aria-hidden="true">→</strong></a>
+      <a class="article-pagination__archive" href="{{ blogRoot }}">{{ copy.blog.allStories }}</a>
+      {% if post.olderUrl %}
+      <a href="{{ post.olderUrl }}"><span>{{ copy.blog.olderStory }}</span><strong aria-hidden="true">→</strong></a>
       {% else %}
       <span></span>
       {% endif %}
@@ -77,23 +94,23 @@ eleventyComputed:
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="#main">Back to top ↑</a>
+      <a href="#main">{{ copy.common.backToTop }}</a>
     </div>
   </div>
 </footer>

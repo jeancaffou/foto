@@ -4,14 +4,19 @@ pagination:
   data: galleryPages
   size: 1
   alias: galleryPage
+  addAllPagesToCollections: true
 permalink: "{{ galleryPage.permalink }}"
 galleryStyles: true
 bodyClass: gallery-page
 eleventyComputed:
   pageLanguage: "{{ galleryPage.lang }}"
   title: "{{ galleryPage.gallery.label }} — Žan Kafol"
-  metaDescription: "{{ galleryPage.gallery.description }}"
+  metaDescription: "{{ galleryPage.seoDescription }}"
+  ogImage: "{{ galleryPage.gallery.cover }}"
+  ogImageAlt: "{{ galleryPage.gallery.coverAlt }}"
   alternateUrl: "{{ galleryPage.alternateUrl }}"
+  canonicalPath: "{{ galleryPage.canonicalPath }}"
+  xDefaultPath: "{{ galleryPage.xDefaultPath }}"
 ---
 {% set gallery = galleryPage.gallery %}
 {% set pageSite = galleryPage.site %}

@@ -1,16 +1,79 @@
 <!doctype html>
 <html lang="{{ pageLanguage or 'en' }}">
   <head>
+    {% set resolvedTitle = (title or site.name) | decodeHtmlEntities %}
+    {% set resolvedDescription = (metaDescription or 'Aerial, cave and nature photo stories by Žan Kafol, a photographer and software engineer based in Postojna, Slovenia.') | decodeHtmlEntities %}
+    {% set resolvedImage = ogImage or seo.defaultImage %}
+    {% set resolvedImageAlt = (ogImageAlt or resolvedTitle) | decodeHtmlEntities %}
+    {% set resolvedCanonicalPath = canonicalPath or page.url %}
+    {% set canonicalUrl = resolvedCanonicalPath | absoluteUrl(seo.origin) %}
+    {% set imageUrl = resolvedImage | absoluteUrl(seo.origin) %}
+    {% set imageWidth = resolvedImage | imageWidth %}
+    {% set imageHeight = resolvedImage | imageHeight %}
+    {% set imageMimeType = resolvedImage | imageMimeType %}
+    {% set locale = 'en_US' %}
+    {% set alternateLocale = 'sl_SI' %}
+    {% if pageLanguage == 'sl' %}{% set locale = 'sl_SI' %}{% set alternateLocale = 'en_US' %}{% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#080a0a">
-    <meta name="description" content="{{ (metaDescription or 'Aerial, cave and nature photo stories by Žan Kafol, a photographer and software engineer based in Postojna, Slovenia.') | safe }}">
-    <meta property="og:title" content="{{ (title or 'Žan Kafol — Aerial & Cave Photographer') | safe }}">
-    <meta property="og:description" content="{{ (metaDescription or 'Photo stories shaped by flight, caves and the karst landscape.') | safe }}">
-    <meta property="og:image" content="{{ (ogImage or '/assets/images/featured/full/20210228-DJI_0270-Pano.webp') | safe }}">
-    <title>{{ (title or site.name) | safe }}</title>
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="author" content="Žan Kafol">
+    <meta name="description" content="{{ resolvedDescription | escape }}">
+    <link rel="canonical" href="{{ canonicalUrl }}">
     {% if alternateUrl %}
-    {% if pageLanguage == "sl" %}<link rel="alternate" hreflang="en" href="{{ alternateUrl }}">{% else %}<link rel="alternate" hreflang="sl" href="{{ alternateUrl }}">{% endif %}
+    {% set alternateAbsolute = alternateUrl | absoluteUrl(seo.origin) %}
+    <link rel="alternate" hreflang="{{ pageLanguage }}" href="{{ canonicalUrl }}">
+    {% if pageLanguage == "sl" %}<link rel="alternate" hreflang="en" href="{{ alternateAbsolute }}">{% else %}<link rel="alternate" hreflang="sl" href="{{ alternateAbsolute }}">{% endif %}
+    {% if xDefaultPath %}
+    <link rel="alternate" hreflang="x-default" href="{{ xDefaultPath | absoluteUrl(seo.origin) }}">
+    {% elif pageLanguage == "en" %}
+    <link rel="alternate" hreflang="x-default" href="{{ canonicalUrl }}">
+    {% else %}
+    <link rel="alternate" hreflang="x-default" href="{{ alternateAbsolute }}">
+    {% endif %}
+    {% endif %}
+    <meta property="og:type" content="{% if seoType == 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:site_name" content="{{ seo.siteName }}">
+    <meta property="og:locale" content="{{ locale }}">
+    {% if alternateUrl %}<meta property="og:locale:alternate" content="{{ alternateLocale }}">{% endif %}
+    <meta property="og:url" content="{{ canonicalUrl }}">
+    <meta property="og:title" content="{{ resolvedTitle | escape }}">
+    <meta property="og:description" content="{{ resolvedDescription | escape }}">
+    <meta property="og:image" content="{{ imageUrl }}">
+    {% if imageMimeType %}<meta property="og:image:type" content="{{ imageMimeType }}">{% endif %}
+    {% if imageWidth %}<meta property="og:image:width" content="{{ imageWidth }}">{% endif %}
+    {% if imageHeight %}<meta property="og:image:height" content="{{ imageHeight }}">{% endif %}
+    <meta property="og:image:alt" content="{{ resolvedImageAlt | escape }}">
+    {% if seoType == 'article' and post %}
+    <meta property="article:published_time" content="{{ post.date | isoLjubljana }}">
+    <meta property="article:modified_time" content="{{ post.modified | isoLjubljana }}">
+    <meta property="article:author" content="Žan Kafol">
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ resolvedTitle | escape }}">
+    <meta name="twitter:description" content="{{ resolvedDescription | escape }}">
+    <meta name="twitter:image" content="{{ imageUrl }}">
+    <meta name="twitter:image:alt" content="{{ resolvedImageAlt | escape }}">
+    <title>{{ resolvedTitle | escape }}</title>
+    <link rel="alternate" type="application/atom+xml" hreflang="en" title="Žan Kafol — Photo journal" href="{{ '/en/blog/feed.xml' | absoluteUrl(seo.origin) }}">
+    <link rel="alternate" type="application/rss+xml" hreflang="sl" title="Žan Kafol — Fotografski blog" href="{{ '/feed/' | absoluteUrl(seo.origin) }}">
+    {% if post %}
+    <script type="application/ld+json">{{ post | blogPostingJsonLd(seo.origin) | safe }}</script>
+    {% elif archivePage %}
+    <script type="application/ld+json">{{ archivePage | collectionJsonLd(seo.origin) | safe }}</script>
+    {% elif homePage %}
+    <script type="application/ld+json">{{ homePage | profilePageJsonLd(seo.origin) | safe }}</script>
+    {% elif galleryPage %}
+    <script type="application/ld+json">{{ galleryPage | galleryPageJsonLd(seo.origin) | safe }}</script>
+    {% elif featurePage %}
+    <script type="application/ld+json">{{ featurePage | featurePageJsonLd(seo.origin) | safe }}</script>
+    {% elif pressPage %}
+    <script type="application/ld+json">{{ pressPage | pressPageJsonLd(seo.origin) | safe }}</script>
+    {% elif pressArchivePage %}
+    <script type="application/ld+json">{{ pressArchivePage | pressArchiveJsonLd(seo.origin) | safe }}</script>
+    {% else %}
+    <script type="application/ld+json">{{ page.url | genericPageJsonLd(resolvedTitle, resolvedDescription, pageLanguage, resolvedImage, seo.origin) | safe }}</script>
     {% endif %}
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Ž</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">

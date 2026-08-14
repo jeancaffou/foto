@@ -4,17 +4,23 @@ pagination:
   data: homePages
   size: 1
   alias: homePage
+  addAllPagesToCollections: true
 permalink: "{{ homePage.permalink }}"
 eleventyComputed:
   pageLanguage: "{{ homePage.lang }}"
   title: "{{ homePage.copy.home.title }}"
   metaDescription: "{{ homePage.copy.home.metaDescription }}"
+  ogImage: "{{ homePage.ogImage }}"
+  ogImageAlt: "{{ homePage.ogImageAlt }}"
   alternateUrl: "{{ homePage.alternateUrl }}"
+  canonicalPath: "{{ homePage.canonicalPath }}"
+  xDefaultPath: "{{ homePage.xDefaultPath }}"
 ---
 {% set pageSite = homePage.site %}
 {% set copy = homePage.copy %}
 {% set pressRoot = "/press/" %}
-{% if homePage.lang == "sl" %}{% set pressRoot = "/sl/press/" %}{% endif %}
+{% set blogRoot = "/en/blog/" %}
+{% if homePage.lang == "sl" %}{% set pressRoot = "/sl/press/" %}{% set blogRoot = "/blog/" %}{% endif %}
 <header class="site-header" data-header>
   <a class="brand" href="#top" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
@@ -61,7 +67,7 @@ eleventyComputed:
       {% for work in pageSite.works %}
       <a class="work-card" href="{{ work.url }}" data-reveal style="--delay: {{ loop.index0 * 55 }}ms">
         <figure>
-          <img src="{{ work.image }}" alt="{{ work.title }}" loading="{% if loop.index < 5 %}eager{% else %}lazy{% endif %}" style="object-position: {{ work.position }}">
+          <img src="{{ work.image }}" alt="{{ work.image | imageAlt(homePage.lang, work.title) }}" loading="{% if loop.index < 5 %}eager{% else %}lazy{% endif %}" style="object-position: {{ work.position }}">
           <figcaption>
             <span class="work-card__title">{{ work.title }}</span>
             <span class="work-card__type">{{ work.type }}</span>
@@ -76,14 +82,14 @@ eleventyComputed:
     <div class="about__inner shell">
       <div class="about__portrait" data-reveal>
         <div class="about__halo" aria-hidden="true"></div>
-        <img src="/assets/images/headshot.jpg" alt="{{ copy.home.portraitAlt }}" width="1200" height="800" loading="eager" decoding="async">
+        <img src="/assets/images/headshot.jpg" alt="{{ '/assets/images/headshot.jpg' | imageAlt(homePage.lang, copy.home.portraitAlt) }}" width="1200" height="800" loading="eager" decoding="async">
       </div>
       <div class="about__copy" data-reveal>
         <p class="section-label">{{ copy.home.about }}</p>
         <h2 id="about-title">Žan Kafol</h2>
         <p class="about__lead">{{ copy.home.aboutLead }}</p>
         <p>{{ copy.home.aboutText }}</p>
-        <a class="text-link" href="/blog/">{{ copy.home.moreStories }} <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="{{ blogRoot }}">{{ copy.home.moreStories }} <span aria-hidden="true">→</span></a>
       </div>
       <dl class="about__facts" data-reveal>
         <div>
@@ -153,7 +159,7 @@ eleventyComputed:
         {% for item in pageSite.press %}
         <a class="press-card" href="{{ item.url }}"{% if item.url[0] != "/" %} target="_blank" rel="noreferrer"{% endif %} data-press-card>
           <div class="press-card__image">
-            <img src="{{ item.image }}" alt="" loading="lazy">
+            <img src="{{ item.image }}" alt="{{ item.image | imageAlt(homePage.lang, item.title) }}" loading="lazy">
             <span class="press-card__kind press-card__kind--{{ item.kind }}" aria-hidden="true">{% if item.kind == "video" %}▶{% elif item.kind == "audio" %}♪{% elif item.kind == "award" %}★{% else %}↗{% endif %}</span>
           </div>
           <div>
@@ -176,8 +182,8 @@ eleventyComputed:
 
   <section class="journal section shell" aria-labelledby="journal-title">
     <div class="journal__heading" data-reveal>
-      <p class="section-label" id="journal-title">{{ copy.home.journal }}</p>
-      <a class="text-link" href="/blog/">{{ copy.home.allPosts }} <span aria-hidden="true">→</span></a>
+      <p class="section-label" id="journal-title"><a href="{{ blogRoot }}">{{ copy.home.journal }}</a></p>
+      <a class="text-link" href="{{ blogRoot }}">{{ copy.home.allPosts }} <span aria-hidden="true">→</span></a>
     </div>
     <div class="post-grid">
       {% for post in pageSite.posts %}

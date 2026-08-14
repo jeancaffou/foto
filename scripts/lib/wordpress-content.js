@@ -164,12 +164,16 @@ function getEmbedUrl(rawUrl) {
   return null;
 }
 
-function renderWordPressEmbeds(value) {
+function renderWordPressEmbeds(value, lang = "en") {
   return String(value ?? "").replace(
     /(<div\s+class=["']wp-block-embed__wrapper["']>)\s*(https?:\/\/[^\s<]+)\s*(<\/div>)/gi,
     (wrapper, openingTag, rawUrl, closingTag) => {
       const embed = getEmbedUrl(rawUrl);
       if (!embed) return wrapper;
+
+      if (lang === "sl") {
+        embed.title = embed.title === "YouTube video" ? "Videoposnetek YouTube" : "Videoposnetek TikTok";
+      }
 
       return `${openingTag}<iframe src="${embed.src}" title="${embed.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="${embed.allow}" allowfullscreen></iframe>${closingTag}`;
     }

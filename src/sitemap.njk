@@ -1,0 +1,34 @@
+---
+permalink: /sitemap.xml
+layout: false
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+{% for entry in collections.all %}
+  {% if entry.url and entry.url != '/sitemap.xml' and entry.url != '/robots.txt' and not (entry.url | contains('feed.xml')) %}
+  {% set entryPath = entry.data.canonicalPath or entry.url %}
+  {% set entryUrl = entryPath | absoluteUrl(seo.origin) %}
+  <url>
+    <loc>{{ entryUrl | xmlEscape }}</loc>
+    {% if entry.data.alternateUrl %}
+    <xhtml:link rel="alternate" hreflang="{{ entry.data.pageLanguage }}" href="{{ entryUrl | xmlEscape }}" />
+    <xhtml:link rel="alternate" hreflang="{% if entry.data.pageLanguage == 'sl' %}en{% else %}sl{% endif %}" href="{{ entry.data.alternateUrl | absoluteUrl(seo.origin) | xmlEscape }}" />
+    {% if entry.data.xDefaultPath %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ entry.data.xDefaultPath | absoluteUrl(seo.origin) | xmlEscape }}" />
+    {% elif entry.data.pageLanguage == 'en' %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ entryUrl | xmlEscape }}" />
+    {% else %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ entry.data.alternateUrl | absoluteUrl(seo.origin) | xmlEscape }}" />
+    {% endif %}
+    {% endif %}
+    {% if entry.data.post %}<lastmod>{{ entry.data.post.modified | isoLjubljana }}</lastmod>{% endif %}
+    {% for imagePath in entry.data | pageImageSources %}
+    <image:image><image:loc>{{ imagePath | absoluteUrl(seo.origin) | xmlEscape }}</image:loc></image:image>
+    {% endfor %}
+  </url>
+  {% endif %}
+{% endfor %}
+</urlset>

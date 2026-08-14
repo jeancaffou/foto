@@ -1,35 +1,49 @@
 ---
 layout: layouts/base.njk
 pagination:
-  data: blogPosts
-  size: 11
-  alias: posts
+  data: blogArchivePages
+  size: 1
+  alias: archivePage
   addAllPagesToCollections: true
+permalink: "{{ archivePage.permalink }}"
 blogStyles: true
 bodyClass: blog-page
-pageLanguage: en
-title: Journal — Žan Kafol
-metaDescription: Photo stories by Žan Kafol from the air, caves and the karst landscape.
+seoType: collection
 eleventyComputed:
-  permalink: "{% if pagination.pageNumber == 0 %}/blog/index.html{% else %}/blog/page/{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+  pageLanguage: "{{ archivePage.lang }}"
+  title: "{{ archivePage.title }}"
+  metaDescription: "{{ archivePage.metaDescription }}"
+  alternateUrl: "{{ archivePage.alternateUrl }}"
+  canonicalPath: "{{ archivePage.canonicalPath }}"
+  xDefaultPath: "{{ archivePage.xDefaultPath }}"
+  ogImage: "{{ archivePage.posts[0].leadImage }}"
+  ogImageAlt: "{{ archivePage.posts[0].leadImage | imageAlt(archivePage.lang, archivePage.posts[0].title) }}"
 ---
+{% set pageSite = archivePage.site %}
+{% set copy = archivePage.copy %}
+{% set posts = archivePage.posts %}
+{% set homeRoot = "/" %}
+{% set blogRoot = "/en/blog/" %}
+{% set pressRoot = "/press/" %}
+{% if archivePage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set blogRoot = "/blog/" %}{% set pressRoot = "/sl/press/" %}{% endif %}
 <header class="site-header" data-header>
-  <a class="brand" href="/" aria-label="Žan Kafol, home">
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
-    <span class="brand__role">{{ site.eyebrow }}</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-    <span class="menu-toggle__label">Menu</span>
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
   </button>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a href="/blog/" aria-current="page">Journal</a>
-    <a href="/press/">Press</a>
-    <a href="/#contact">Contact</a>
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ blogRoot }}" aria-current="page">{{ copy.blog.journal }}</a>
+    <a href="{{ pressRoot }}">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+    <a class="language-switch" href="{{ archivePage.alternateUrl }}" hreflang="{% if archivePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if archivePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 
@@ -40,18 +54,16 @@ eleventyComputed:
     </div>
     <div class="blog-hero__shade" aria-hidden="true"></div>
     <div class="blog-hero__content shell">
-      <p class="section-label">Photo journal</p>
-      <h1 id="blog-title">Photo stories from<br>flight, caves &amp; karst</h1>
-      <p>An archive of photographs, flights, cave visits and landscapes, published since 2006.</p>
+      <p class="section-label">{{ copy.blog.heroLabel }}</p>
+      <h1 id="blog-title">{{ copy.blog.heroTitle | safe }}</h1>
+      <p>{{ copy.blog.heroIntro }}</p>
     </div>
   </section>
 
   <section class="blog-archive shell" aria-labelledby="archive-title">
     <header class="blog-archive__header">
-      <div>
-        <h2 id="archive-title">Latest photo stories</h2>
-      </div>
-      <p>{{ blogPosts.length }} posts <span aria-hidden="true">·</span> Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</p>
+      <div><h2 id="archive-title">{{ copy.blog.latest }}</h2></div>
+      <p>{{ archivePage.totalPosts }} {{ copy.blog.posts }} <span aria-hidden="true">·</span> {{ copy.blog.page }} {{ archivePage.pageNumber + 1 }} {{ copy.blog.of }} {{ archivePage.pageCount }}</p>
     </header>
 
     <div class="blog-grid">
@@ -59,33 +71,33 @@ eleventyComputed:
       <article class="blog-card{% if loop.first %} blog-card--lead{% endif %}">
         <a href="{{ post.permalink }}">
           <figure class="blog-card__image">
-            <img src="{{ post.featuredImage }}" alt="" loading="{% if loop.index <= 4 %}eager{% else %}lazy{% endif %}" decoding="async">
+            <img src="{{ post.featuredImage }}" alt="{{ post.featuredImage | imageAlt(archivePage.lang, post.title) }}" loading="{% if loop.index <= 4 %}eager{% else %}lazy{% endif %}" decoding="async">
           </figure>
           <div class="blog-card__body">
             <div class="blog-card__meta">
-              <time datetime="{{ post.date }}">{{ post.date.substring(0, 10) }}</time>
+              <time datetime="{{ post.date }}">{{ post.date | formatBlogDate(archivePage.lang, "short") }}</time>
               {% if post.categories.length %}<span>{{ post.categories[0].name | escape }}</span>{% endif %}
             </div>
             <h3>{{ post.title | escape }}</h3>
-            {% if post.summary %}<p>{{ post.summary | escape }}</p>{% endif %}
-            <span class="blog-card__read">Read story <span aria-hidden="true">↗</span></span>
+            <p>{{ (post.summary or post.seoDescription) | escape }}</p>
+            <span class="blog-card__read">{{ copy.blog.read }} <span aria-hidden="true">↗</span></span>
           </div>
         </a>
       </article>
       {% endfor %}
     </div>
 
-    <nav class="blog-pagination" aria-label="Journal pages">
-      {% if pagination.href.previous %}
-      <a href="{{ pagination.href.previous }}"><span aria-hidden="true">←</span> Newer stories</a>
+    <nav class="blog-pagination" aria-label="{{ copy.blog.archiveNavigation }}">
+      {% if archivePage.previousUrl %}
+      <a href="{{ archivePage.previousUrl }}"><span aria-hidden="true">←</span> {{ copy.blog.newer }}</a>
       {% else %}
-      <span aria-hidden="true">← Newer stories</span>
+      <span aria-hidden="true">← {{ copy.blog.newer }}</span>
       {% endif %}
-      <span>Page {{ pagination.pageNumber + 1 }} / {{ pagination.pages.length }}</span>
-      {% if pagination.href.next %}
-      <a href="{{ pagination.href.next }}">Older stories <span aria-hidden="true">→</span></a>
+      <span>{{ copy.blog.page }} {{ archivePage.pageNumber + 1 }} / {{ archivePage.pageCount }}</span>
+      {% if archivePage.nextUrl %}
+      <a href="{{ archivePage.nextUrl }}">{{ copy.blog.older }} <span aria-hidden="true">→</span></a>
       {% else %}
-      <span>Older stories →</span>
+      <span>{{ copy.blog.older }} →</span>
       {% endif %}
     </nav>
   </section>
@@ -95,23 +107,23 @@ eleventyComputed:
   <div class="site-footer__inner shell">
     <div class="site-footer__brand">
       <span class="brand__name">Žan Kafol</span>
-      <span class="brand__role">{{ site.eyebrow }}</span>
-      <p>Photo stories shaped by flight,<br>caves and the karst landscape.</p>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Contact</p>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      <span>{{ site.location }}</span>
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
     </div>
     <div class="footer-group">
-      <p class="footer-label">Follow</p>
+      <p class="footer-label">{{ copy.common.follow }}</p>
       <div class="footer-socials">
-        {% for item in site.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
       </div>
     </div>
     <div class="site-footer__legal">
       <p>© {% year %} Žan Kafol</p>
-      <a href="/">Back home ↑</a>
+      <a href="{{ homeRoot }}">{{ copy.common.backHome }}</a>
     </div>
   </div>
 </footer>

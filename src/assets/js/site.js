@@ -91,18 +91,36 @@ if ("IntersectionObserver" in window) {
 const postGalleryImages = Array.from(document.querySelectorAll(".post-copy .tiled-gallery__item img[data-url], .post-copy .eclipse-gallery img[data-url]"));
 
 if (postGalleryImages.length) {
+  const isSlovenian = document.documentElement.lang.toLowerCase().startsWith("sl");
+  const lightboxCopy = isSlovenian ? {
+    viewer: "Pregledovalnik fotografij",
+    closeViewer: "Zapri pregledovalnik fotografij",
+    close: "Zapri",
+    previous: "Prejšnja fotografija",
+    next: "Naslednja fotografija",
+    photograph: "Fotografija",
+    open: (index, total) => `Odpri fotografijo ${index} od ${total} v celozaslonskem pogledu`
+  } : {
+    viewer: "Photo viewer",
+    closeViewer: "Close photo viewer",
+    close: "Close",
+    previous: "Previous photograph",
+    next: "Next photograph",
+    photograph: "Photograph",
+    open: (index, total) => `Open photograph ${index} of ${total} in full-screen view`
+  };
   const dialog = document.createElement("dialog");
   dialog.className = "post-lightbox";
-  dialog.setAttribute("aria-label", "Photo viewer");
+  dialog.setAttribute("aria-label", lightboxCopy.viewer);
   dialog.innerHTML = `
     <div class="post-lightbox__frame">
-      <button class="post-lightbox__close" type="button" aria-label="Close photo viewer">Close</button>
-      <button class="post-lightbox__nav post-lightbox__nav--previous" type="button" aria-label="Previous photograph">←</button>
+      <button class="post-lightbox__close" type="button" aria-label="${lightboxCopy.closeViewer}">${lightboxCopy.close}</button>
+      <button class="post-lightbox__nav post-lightbox__nav--previous" type="button" aria-label="${lightboxCopy.previous}">←</button>
       <figure>
         <img src="" alt="">
         <figcaption></figcaption>
       </figure>
-      <button class="post-lightbox__nav post-lightbox__nav--next" type="button" aria-label="Next photograph">→</button>
+      <button class="post-lightbox__nav post-lightbox__nav--next" type="button" aria-label="${lightboxCopy.next}">→</button>
     </div>`;
   document.body.append(dialog);
 
@@ -115,7 +133,7 @@ if (postGalleryImages.length) {
     const source = postGalleryImages[activeIndex];
     lightboxImage.src = source.dataset.url;
     lightboxImage.alt = source.alt;
-    caption.textContent = `${source.alt || "Photograph"} · ${activeIndex + 1} / ${postGalleryImages.length}`;
+    caption.textContent = `${source.alt || lightboxCopy.photograph} · ${activeIndex + 1} / ${postGalleryImages.length}`;
   };
 
   const openPostImage = (index) => {
@@ -132,7 +150,7 @@ if (postGalleryImages.length) {
   postGalleryImages.forEach((image, index) => {
     image.setAttribute("role", "button");
     image.tabIndex = 0;
-    image.setAttribute("aria-label", `Open image ${index + 1} of ${postGalleryImages.length} in full-screen`);
+    image.setAttribute("aria-label", lightboxCopy.open(index + 1, postGalleryImages.length));
     image.addEventListener("click", () => openPostImage(index));
     image.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;

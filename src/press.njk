@@ -4,6 +4,7 @@ pagination:
   data: pressPages
   size: 1
   alias: pressPage
+  addAllPagesToCollections: true
 permalink: "{{ pressPage.permalink }}"
 pressStyles: true
 bodyClass: press-detail-page
@@ -11,7 +12,11 @@ eleventyComputed:
   pageLanguage: "{{ pressPage.lang }}"
   title: "{{ pressPage.item.title }} — {{ pressPage.item.publication }}"
   metaDescription: "{{ pressPage.item.summary }}"
+  ogImage: "{{ pressPage.seoImage.src if pressPage.seoImage else seo.defaultImage }}"
+  ogImageAlt: "{{ pressPage.seoImage.alt if pressPage.seoImage else pressPage.item.title }}"
   alternateUrl: "{{ pressPage.alternateUrl }}"
+  canonicalPath: "{{ pressPage.canonicalPath }}"
+  xDefaultPath: "{{ pressPage.xDefaultPath }}"
 ---
 {% set pressItem = pressPage.item %}
 {% set pageSite = pressPage.site %}

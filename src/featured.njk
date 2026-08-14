@@ -4,6 +4,7 @@ pagination:
   data: featuredPageVariants
   size: 1
   alias: featurePage
+  addAllPagesToCollections: true
 permalink: "{{ featurePage.permalink }}"
 pressStyles: true
 bodyClass: press-detail-page
@@ -11,7 +12,11 @@ eleventyComputed:
   pageLanguage: "{{ featurePage.lang }}"
   title: "{{ featurePage.item.title }} — {{ featurePage.item.publication }}"
   metaDescription: "{{ featurePage.item.summary }}"
+  ogImage: "{{ featurePage.seoImage.src }}"
+  ogImageAlt: "{{ featurePage.seoImage.alt }}"
   alternateUrl: "{{ featurePage.alternateUrl }}"
+  canonicalPath: "{{ featurePage.canonicalPath }}"
+  xDefaultPath: "{{ featurePage.xDefaultPath }}"
 ---
 {% set featureItem = featurePage.item %}
 {% set pageSite = featurePage.site %}

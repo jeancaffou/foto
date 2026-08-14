@@ -1,4 +1,5 @@
 const manifest = require("../../scripts/featured-manifest.json");
+const imageDescriptions = require("./imageDescriptions");
 
 const descriptions = {
   "award-winning": "The two National Geographic Slovenia overall winners: Cerkniško polje in 2022 and Enlightened (All Milky Ways Lead to Rakov Škocjan) in 2023.",
@@ -27,16 +28,17 @@ function imageData(file, category) {
   if (!source) throw new Error(`Unknown gallery image: ${file}`);
   const id = stem(file);
   const year = source.captured ? source.captured.slice(0, 4) : "";
+  const full = `/assets/images/featured/full/${id}.webp`;
 
   return {
     ...source,
     id,
     year,
-    full: `/assets/images/featured/full/${id}.webp`,
+    full,
     thumb: `/assets/images/featured/thumb/${id}.webp`,
-    alt: source.title
+    alt: imageDescriptions[full]?.en || (source.title
       ? `${source.title}, photograph by Žan Kafol${year ? `, ${year}` : ""}`
-      : `${category} photograph by Žan Kafol${year ? `, ${year}` : ""}`
+      : `${category} photograph by Žan Kafol${year ? `, ${year}` : ""}`)
   };
 }
 
@@ -53,15 +55,20 @@ const categories = [
     files: awardFiles
   },
   ...manifest.categories
-].map((category) => ({
-  id: category.id,
-  label: category.label,
-  description: descriptions[category.id],
-  cover: imageData(category.cover, category.label).full,
-  images: [...category.files]
+].map((category) => {
+  const images = [...category.files]
     .sort((left, right) => captureKey(right).localeCompare(captureKey(left)))
-    .map((file) => imageData(file, category.label))
-}));
+    .map((file) => imageData(file, category.label));
+  const cover = imageData(category.cover, category.label);
+  return {
+    id: category.id,
+    label: category.label,
+    description: descriptions[category.id],
+    cover: cover.full,
+    coverAlt: cover.alt,
+    images
+  };
+});
 
 const selected = manifest.selectedWorkTiles.map((tile) => {
   const galleryId = tile.id.startsWith("natgeo-") ? "award-winning" : tile.id;

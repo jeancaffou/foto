@@ -1,0 +1,27 @@
+---
+permalink: /feed/index.html
+layout: false
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>{{ wordpressFeed.title | xmlEscape }}</title>
+    <link>{{ wordpressFeed.archiveUrl | absoluteUrl(seo.origin) | xmlEscape }}</link>
+    <description>{{ wordpressFeed.description | xmlEscape }}</description>
+    <language>sl-SI</language>
+    <lastBuildDate>{{ wordpressFeed.posts[0].date | rssDate }}</lastBuildDate>
+    <atom:link href="{{ wordpressFeed.permalink | absoluteUrl(seo.origin) | xmlEscape }}" rel="self" type="application/rss+xml" />
+    {% for post in wordpressFeed.posts %}
+    {% set itemImage = post.featuredImage or post.leadImage %}
+    <item>
+      <title>{{ post.title | xmlEscape }}</title>
+      <link>{{ post.permalink | absoluteUrl(seo.origin) | xmlEscape }}</link>
+      <guid isPermaLink="true">{{ post.permalink | absoluteUrl(seo.origin) | xmlEscape }}</guid>
+      <pubDate>{{ post.date | rssDate }}</pubDate>
+      <description>{{ (post.seoDescription or post.metaDescription or post.summary) | xmlEscape }}</description>
+      {% if itemImage %}<media:content url="{{ itemImage | absoluteUrl(seo.origin) | xmlEscape }}" medium="image"><media:description type="plain">{{ itemImage | imageAlt('sl', post.title) | xmlEscape }}</media:description></media:content>{% endif %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

@@ -56,6 +56,7 @@ test("renders the complete portfolio structure without horizontal overflow", asy
   await expect(page.locator(".about__facts")).toContainText("Karst Research Institute");
   await expect(page.locator(".hero__intro")).toContainText("Photo stories shaped by flight");
   await expect(page.locator(".post-card")).toHaveCount(3);
+  await expect(page.locator("#journal-title a")).toHaveAttribute("href", "/en/blog/");
   await expect(page.locator('a[href*="blog.kafol.net"]')).toHaveCount(0);
   await expect(page.locator('.work-card[href^="/work/"]')).toHaveCount(8);
   await expect(page.locator('.work-card[href*="#"]')).toHaveCount(0);
@@ -175,6 +176,7 @@ test("renders equivalent Slovenian portfolio, gallery, press, and feature pages"
   await expect(page.locator('.work-card[href^="/sl/work/"]')).toHaveCount(8);
   await expect(page.locator('.press-card[href^="/sl/"]')).toHaveCount(14);
   await expect(page.locator('.post-card a[href^="/sl/"]')).toHaveCount(0);
+  await expect(page.locator("#journal-title a")).toHaveAttribute("href", "/blog/");
   await expect(page.locator(".about__copy")).toContainText("Motivom sledim od širokih pogledov iz zraka");
   await expect(page.locator(".about__facts")).toContainText("Inštitut za raziskovanje krasa");
   await expectVisibleTextFloor(page);
@@ -316,29 +318,63 @@ test("renders local video, award, and Nikon landing pages", async ({ page }) => 
 
 test("renders the migrated journal archive and canonical post pages", async ({ page }, testInfo) => {
   await page.goto("/blog/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("h1")).toContainText("Photo stories from");
+  await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+  await expect(page.locator("h1")).toContainText("Fotografske zgodbe");
   await expect(page.locator(".blog-card")).toHaveCount(11);
-  await expect(page.locator(".blog-card").first()).toContainText("Crescent Sun");
+  await expect(page.locator(".blog-card").first()).toContainText("Srpasto Sonce");
   await expect(page.locator(".blog-card").first().locator("img")).toHaveAttribute("src", /20260812-IMG_1030\.jpg/);
   await expect(page.locator('.blog-pagination a[href="/blog/page/2/"]')).toBeVisible();
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/blog/");
+  if (testInfo.project.name === "mobile") {
+    await page.locator(".menu-toggle").click();
+    await expect(page.locator(".language-switch")).toBeVisible();
+    await page.locator(".menu-toggle").click();
+  } else {
+    await expect(page.locator(".language-switch")).toBeVisible();
+  }
   await page.screenshot({ path: testInfo.outputPath("journal-archive.png"), fullPage: true });
 
   await page.goto("/blog/page/18/");
   await expect(page.locator(".blog-card")).toHaveCount(8);
-  await expect(page.locator(".blog-pagination")).toContainText("Page 18 / 18");
+  await expect(page.locator(".blog-pagination")).toContainText("Stran 18 / 18");
+
+  await page.goto("/en/blog/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toContainText("Photo stories from");
+  await expect(page.locator(".blog-card").first()).toContainText("Crescent Sun");
+  await expect(page.locator('.blog-card a[href^="/en/"]')).toHaveCount(11);
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/blog/");
+
+  await page.goto("/2026/08/crescent-sun-vremscica.html");
+  await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+  await expect(page.locator("h1")).toHaveText("Srpasto Sonce 🌒");
+  await expect(page.locator(".eclipse-gallery figure")).toHaveCount(8);
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/2026/08/crescent-sun-vremscica.html");
 
   await page.goto("/2023/10/druga-zmaga-na-national-geographic.html");
   await expect(page.locator("html")).toHaveAttribute("lang", "sl");
   await expect(page.locator("h1")).toHaveText("Druga zmaga na National Geographic");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/2023/10/druga-zmaga-na-national-geographic.html");
   await expect(page.locator(".post-copy")).toBeVisible();
   expect(await page.locator(".tiled-gallery__item").count()).toBeGreaterThan(0);
   await expectVisibleTextFloor(page);
 
-  await page.locator('.post-copy img[role="button"]').first().click();
+  const slGalleryImage = page.locator('.post-copy img[role="button"]').first();
+  await expect(slGalleryImage).toHaveAttribute("aria-label", /Odpri fotografijo 1 od \d+ v celozaslonskem pogledu/);
+  await slGalleryImage.click();
   await expect(page.locator(".post-lightbox")).toBeVisible();
+  await expect(page.locator(".post-lightbox")).toHaveAttribute("aria-label", "Pregledovalnik fotografij");
+  await expect(page.locator(".post-lightbox__close")).toHaveText("Zapri");
+  await expect(page.locator(".post-lightbox__nav--previous")).toHaveAttribute("aria-label", "Prejšnja fotografija");
+  await expect(page.locator(".post-lightbox__nav--next")).toHaveAttribute("aria-label", "Naslednja fotografija");
   await page.locator(".post-lightbox__close").click();
   await expect(page.locator(".post-lightbox")).not.toBeVisible();
+
+  await page.goto("/en/2023/10/druga-zmaga-na-national-geographic.html");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("h1")).toHaveText("Second National Geographic Win");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/2023/10/druga-zmaga-na-national-geographic.html");
+  await expect(page.locator('.post-copy img[role="button"]').first()).toHaveAttribute("aria-label", /Open photograph 1 of \d+ in full-screen view/);
 
   const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(horizontalOverflow).toBe(false);
