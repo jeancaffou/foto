@@ -809,6 +809,11 @@
   gap: 1rem;
 }
 
+.article-page .newsletter-cta--article {
+  margin-top: clamp(3rem, 6vw, 6rem);
+  margin-bottom: 0;
+}
+
 .article-pagination > a:not(.article-pagination__archive) {
   display: flex;
   align-items: center;

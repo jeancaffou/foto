@@ -74,6 +74,15 @@ eleventyComputed:
       {% endif %}
     </div>
 
+    <aside class="newsletter-cta newsletter-cta--article shell" aria-labelledby="article-newsletter-title">
+      <div class="newsletter-cta__copy">
+        <p class="section-label">{{ copy.blog.newsletter.label }}</p>
+        <h2 id="article-newsletter-title">{{ copy.blog.newsletter.title }}</h2>
+        <p>{{ copy.blog.newsletter.text }}</p>
+      </div>
+      <a class="newsletter-cta__link" href="{{ pageSite.newsletterUrl }}">{{ copy.blog.newsletter.action }} <span aria-hidden="true">↗</span></a>
+    </aside>
+
     <nav class="article-pagination shell" aria-label="{{ copy.blog.adjacentNavigation }}">
       {% if post.newerUrl %}
       <a href="{{ post.newerUrl }}"><span>{{ copy.blog.newerStory }}</span><strong aria-hidden="true">←</strong></a>

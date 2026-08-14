@@ -218,6 +218,7 @@ test("emits complete bilingual metadata, structured data, feeds, and crawl files
     assert.ok(html, `Missing canonical variant ${canonical}`);
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="${variant.lang}" href="${canonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}">`));
     assert.match(html, new RegExp(`href="${alternate.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}">`));
+    assert.match(html, /<aside class="newsletter-cta newsletter-cta--article shell"[\s\S]*?href="https:\/\/kafol\.net\/newsletter\/"/);
   }
 
   assert.ok(fs.existsSync(path.join(OUTPUT, "sitemap.xml")));
