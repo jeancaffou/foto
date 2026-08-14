@@ -5,7 +5,8 @@ const descriptions = Object.assign(
   require("./blogImageDescriptions"),
   require("./image-descriptions/gallery.json"),
   require("./image-descriptions/site.json"),
-  require("./image-descriptions/authored-crescent-sun.json")
+  require("./image-descriptions/authored-crescent-sun.json"),
+  require("./image-descriptions/authored-planinska-jama.json")
 );
 
 for (const [src, description] of Object.entries(descriptions)) {

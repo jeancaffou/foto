@@ -31,13 +31,18 @@ test("keeps the committed WordPress source byte-for-byte unchanged", () => {
 
 test("integrates authored posts with migrated posts through one bilingual blog index", () => {
   for (const lang of ["en", "sl"]) {
-    assert.equal(blogPosts[lang].length, posts.length + 1);
-    const authored = blogPosts[lang].find((post) => post.sourceType === "authored");
-    assert.ok(authored, `Missing authored ${lang} post`);
-    assert.ok(authored.content.includes("eclipse-gallery"));
-    assert.equal(authored.newerUrl, null);
-    assert.equal(authored.olderUrl, null);
-    assert.ok(blogPosts[lang].some((post) => post.sourceType === "wordpress" && post.newerUrl === authored.permalink));
+    assert.equal(blogPosts[lang].length, posts.length + 2);
+    const authored = blogPosts[lang].filter((post) => post.sourceType === "authored");
+    assert.equal(authored.length, 2, `Missing authored ${lang} posts`);
+    const planinska = authored.find((post) => post.id === "no-time-to-pose-planinska-jama");
+    const eclipse = authored.find((post) => post.id === "crescent-sun-vremscica");
+    assert.ok(planinska.content.includes("photo-story-gallery"));
+    assert.ok(eclipse.content.includes("eclipse-gallery"));
+    assert.equal(planinska.newerUrl, null);
+    assert.equal(planinska.olderUrl, eclipse.permalink);
+    assert.equal(eclipse.newerUrl, planinska.permalink);
+    assert.equal(eclipse.olderUrl, null);
+    assert.ok(blogPosts[lang].some((post) => post.sourceType === "wordpress" && post.newerUrl === eclipse.permalink));
   }
 });
 

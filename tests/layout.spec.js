@@ -321,8 +321,8 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await expect(page.locator("html")).toHaveAttribute("lang", "sl");
   await expect(page.locator("h1")).toContainText("Fotografske zgodbe");
   await expect(page.locator(".blog-card")).toHaveCount(11);
-  await expect(page.locator(".blog-card").first()).toContainText("Srpasto Sonce");
-  await expect(page.locator(".blog-card").first().locator("img")).toHaveAttribute("src", /20260812-IMG_1030\.jpg/);
+  await expect(page.locator(".blog-card").first()).toContainText("Planinska jama: tehnično delo brez časa za poziranje");
+  await expect(page.locator(".blog-card").first().locator("img")).toHaveAttribute("src", /planinska-jama\/20260813-IMG_1131\.jpg/);
   await expect(page.locator('.blog-pagination a[href="/blog/page/2/"]')).toBeVisible();
   await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/blog/");
   if (testInfo.project.name === "mobile") {
@@ -335,15 +335,29 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await page.screenshot({ path: testInfo.outputPath("journal-archive.png"), fullPage: true });
 
   await page.goto("/blog/page/18/");
-  await expect(page.locator(".blog-card")).toHaveCount(8);
+  await expect(page.locator(".blog-card")).toHaveCount(9);
   await expect(page.locator(".blog-pagination")).toContainText("Stran 18 / 18");
 
   await page.goto("/en/blog/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.locator("h1")).toContainText("Photo stories from");
-  await expect(page.locator(".blog-card").first()).toContainText("Crescent Sun");
+  await expect(page.locator(".blog-card").first()).toContainText("Planina Cave: Technical Work, No Time to Pose");
   await expect(page.locator('.blog-card a[href^="/en/"]')).toHaveCount(11);
   await expect(page.locator(".language-switch")).toHaveAttribute("href", "/blog/");
+
+  await page.goto("/2026/08/no-time-to-pose-planinska-jama.html");
+  await expect(page.locator("html")).toHaveAttribute("lang", "sl");
+  await expect(page.locator("h1")).toHaveText("Planinska jama: tehnično delo brez časa za poziranje");
+  await expect(page.locator(".photo-story-gallery figure")).toHaveCount(25);
+  await expect(page.locator(".photo-story-figure")).toHaveCount(2);
+  await expect(page.locator('.photo-story-figure--map img[src$="lokacija-nacrt.jpg"]')).toBeVisible();
+  await expect(page.locator(".post-copy")).toContainText("Sebastjan Gantar");
+  await expect(page.locator(".post-copy")).toContainText("Cyril Mayaud");
+  await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/2026/08/no-time-to-pose-planinska-jama.html");
+
+  await page.goto("/en/2026/08/no-time-to-pose-planinska-jama.html");
+  await expect(page.locator("h1")).toHaveText("Planina Cave: Technical Work, No Time to Pose");
+  await expect(page.locator(".post-copy img[data-url]")).toHaveCount(27);
 
   await page.goto("/2026/08/crescent-sun-vremscica.html");
   await expect(page.locator("html")).toHaveAttribute("lang", "sl");

@@ -450,7 +450,8 @@
   text-align: center;
 }
 
-.post-copy .eclipse-gallery {
+.post-copy .eclipse-gallery,
+.post-copy .photo-story-gallery {
   display: grid;
   width: 100%;
   max-width: 1160px;
@@ -459,17 +460,32 @@
   gap: clamp(0.35rem, 0.8vw, 0.7rem);
 }
 
-.post-copy .eclipse-gallery figure {
+.post-copy .eclipse-gallery figure,
+.post-copy .photo-story-gallery figure {
   min-width: 0;
   margin: 0;
   background: #101313;
 }
 
-.post-copy .eclipse-gallery__wide {
+.post-copy .eclipse-gallery__wide,
+.post-copy .photo-story-gallery__wide {
   grid-column: 1 / -1;
 }
 
-.post-copy .eclipse-gallery img {
+.post-copy .photo-story-gallery__portrait {
+  grid-row: span 2;
+}
+
+.post-copy .photo-story-gallery__portrait--solo {
+  grid-column: 1 / -1;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.post-copy .eclipse-gallery img,
+.post-copy .photo-story-gallery img,
+.post-copy .photo-story-figure img {
   display: block;
   width: 100%;
   height: auto;
@@ -477,9 +493,22 @@
   cursor: zoom-in;
 }
 
-.post-copy .eclipse-gallery img:focus-visible {
+.post-copy .eclipse-gallery img:focus-visible,
+.post-copy .photo-story-gallery img:focus-visible,
+.post-copy .photo-story-figure img:focus-visible {
   outline: 2px solid var(--gold-light);
   outline-offset: 3px;
+}
+
+.post-copy .photo-story-figure {
+  width: 100%;
+  max-width: 1160px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.post-copy .photo-story-figure--map {
+  background: #f4f1eb;
 }
 
 .post-copy .wp-block-jetpack-tiled-gallery,
@@ -900,12 +929,22 @@
     gap: 0.25rem;
   }
 
-  .post-copy .eclipse-gallery {
+  .post-copy .eclipse-gallery,
+  .post-copy .photo-story-gallery {
     grid-template-columns: 1fr;
   }
 
-  .post-copy .eclipse-gallery__wide {
+  .post-copy .eclipse-gallery__wide,
+  .post-copy .photo-story-gallery__wide {
     grid-column: auto;
+  }
+
+  .post-copy .photo-story-gallery__portrait {
+    grid-row: auto;
+  }
+
+  .post-copy .photo-story-gallery__portrait--solo {
+    width: 100%;
   }
 
   .article-pagination > a:not(.article-pagination__archive) span {

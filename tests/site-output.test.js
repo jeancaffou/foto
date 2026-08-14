@@ -44,7 +44,7 @@ test("builds every legacy WordPress permalink, English counterpart, and bilingua
     const languagePosts = blogPostsByLanguage[lang];
     const archivePages = Math.ceil(languagePosts.length / 11);
     const archiveDirectory = path.join(OUTPUT, ...root.split("/"));
-    assert.equal(languagePosts.length, 195);
+    assert.equal(languagePosts.length, 196);
     assert.equal(archivePages, 18);
     assert.ok(fs.existsSync(path.join(archiveDirectory, "index.html")));
     for (let page = 2; page <= archivePages; page += 1) {
@@ -62,20 +62,21 @@ test("builds every legacy WordPress permalink, English counterpart, and bilingua
     assert.equal(archiveLinks.length, languagePosts.length);
     assert.deepEqual(new Set(archiveLinks), new Set(languagePosts.map((post) => post.permalink)));
     assert.equal((firstArchiveHtml.match(/<article class="blog-card/g) || []).length, 11);
+    assert.match(firstArchiveHtml, new RegExp(`href="${lang === "en" ? "\\/en" : ""}\\/2026\\/08\\/no-time-to-pose-planinska-jama\\.html"`));
     assert.match(firstArchiveHtml, new RegExp(`href="${lang === "en" ? "\\/en" : ""}\\/2026\\/08\\/crescent-sun-vremscica\\.html"`));
-    assert.match(firstArchiveHtml, /src="\/assets\/blog\/2026\/08\/20260812-IMG_1030\.jpg"/);
+    assert.match(firstArchiveHtml, /src="\/assets\/blog\/2026\/08\/planinska-jama\/20260813-IMG_1131\.jpg"/);
 
     const lastArchiveHtml = fs.readFileSync(path.join(archiveDirectory, "page", String(archivePages), "index.html"), "utf8");
-    assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, 8);
+    assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, 9);
   }
 });
 
 test("keeps homepage journal links and the National Geographic route canonical", () => {
   const homepage = fs.readFileSync(path.join(OUTPUT, "index.html"), "utf8");
   const expectedHomepagePosts = [
+    "/en/2026/08/no-time-to-pose-planinska-jama.html",
     "/en/2026/08/crescent-sun-vremscica.html",
-    "/en/2025/02/ledena-jama-v-paradani.html",
-    "/en/2024/05/severni-sij-aurora-borealis-v-sloveniji-maj-2024.html"
+    "/en/2025/02/ledena-jama-v-paradani.html"
   ];
 
   expectedHomepagePosts.forEach((permalink) => assert.match(homepage, new RegExp(`href="${permalink.replaceAll("/", "\\/")}"`)));

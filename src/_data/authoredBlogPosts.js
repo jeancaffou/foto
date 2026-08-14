@@ -3,8 +3,15 @@
 const site = require("./site");
 const siteSl = require("./siteSl");
 const ui = require("./ui");
-const descriptions = require("./image-descriptions/authored-crescent-sun.json");
-const sources = [require("./authored-posts/crescent-sun-vremscica")];
+const descriptions = Object.assign(
+  {},
+  require("./image-descriptions/authored-crescent-sun.json"),
+  require("./image-descriptions/authored-planinska-jama.json")
+);
+const sources = [
+  require("./authored-posts/crescent-sun-vremscica"),
+  require("./authored-posts/no-time-to-pose-planinska-jama")
+];
 
 function variant(source, lang) {
   const version = source.versions[lang];
