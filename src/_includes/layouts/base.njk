@@ -41,6 +41,8 @@
     <meta property="og:title" content="{{ resolvedTitle | escape }}">
     <meta property="og:description" content="{{ resolvedDescription | escape }}">
     <meta property="og:image" content="{{ imageUrl }}">
+    <meta property="og:image:url" content="{{ imageUrl }}">
+    <meta property="og:image:secure_url" content="{{ imageUrl }}">
     {% if imageMimeType %}<meta property="og:image:type" content="{{ imageMimeType }}">{% endif %}
     {% if imageWidth %}<meta property="og:image:width" content="{{ imageWidth }}">{% endif %}
     {% if imageHeight %}<meta property="og:image:height" content="{{ imageHeight }}">{% endif %}

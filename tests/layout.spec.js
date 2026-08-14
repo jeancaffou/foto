@@ -354,14 +354,14 @@ test("renders the migrated journal archive and canonical post pages", async ({ p
   await expect(page.locator(".post-copy")).toContainText("Sebastjan Gantar");
   await expect(page.locator(".post-copy")).toContainText("Cyril Mayaud");
   await expect(page.locator(".newsletter-cta--article")).toBeVisible();
-  await expect(page.locator(".newsletter-cta--article a")).toHaveAttribute("href", "https://kafol.net/newsletter/");
+  await expect(page.locator(".newsletter-cta--article a")).toHaveAttribute("href", "https://kafol.net/newsletter/?lang=sl");
   await expect(page.locator(".language-switch")).toHaveAttribute("href", "/en/2026/08/no-time-to-pose-planinska-jama.html");
 
   await page.goto("/en/2026/08/no-time-to-pose-planinska-jama.html");
   await expect(page.locator("h1")).toHaveText("Planina Cave: Technical Work, No Time to Pose");
   await expect(page.locator(".post-copy img[data-url]")).toHaveCount(27);
   await expect(page.locator(".newsletter-cta--article")).toContainText("Keep up with new photo stories");
-  await expect(page.locator(".newsletter-cta--article a")).toHaveAttribute("href", "https://kafol.net/newsletter/");
+  await expect(page.locator(".newsletter-cta--article a")).toHaveAttribute("href", "https://kafol.net/newsletter/?lang=en");
 
   await page.goto("/2026/08/crescent-sun-vremscica.html");
   await expect(page.locator("html")).toHaveAttribute("lang", "sl");

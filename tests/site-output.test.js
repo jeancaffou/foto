@@ -201,6 +201,8 @@ test("emits complete bilingual metadata, structured data, feeds, and crawl files
     assert.match(canonical || "", /^https:\/\/foto\.kafol\.net\//, `Missing absolute canonical in ${htmlFile}`);
     assert.ok(description?.trim(), `Missing description in ${htmlFile}`);
     assert.match(ogImage || "", /^https:\/\/foto\.kafol\.net\/assets\//, `Missing absolute OG image in ${htmlFile}`);
+    assert.match(html, /<meta property="og:image:url" content="https:\/\/foto\.kafol\.net\/assets\//, `Missing OG image URL in ${htmlFile}`);
+    assert.match(html, /<meta property="og:image:secure_url" content="https:\/\/foto\.kafol\.net\/assets\//, `Missing secure OG image URL in ${htmlFile}`);
     assert.ok(ogAlt?.trim(), `Missing OG image alt in ${htmlFile}`);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
     assert.doesNotMatch(html, /&amp;(?:amp|#39|quot|lt|gt);/, `Double-encoded metadata in ${htmlFile}`);
@@ -218,7 +220,8 @@ test("emits complete bilingual metadata, structured data, feeds, and crawl files
     assert.ok(html, `Missing canonical variant ${canonical}`);
     assert.match(html, new RegExp(`<link rel="alternate" hreflang="${variant.lang}" href="${canonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}">`));
     assert.match(html, new RegExp(`href="${alternate.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}">`));
-    assert.match(html, /<aside class="newsletter-cta newsletter-cta--article shell"[\s\S]*?href="https:\/\/kafol\.net\/newsletter\/"/);
+    const newsletterUrl = `https://kafol.net/newsletter/?lang=${variant.lang}`;
+    assert.match(html, new RegExp(`<aside class="newsletter-cta newsletter-cta--article shell"[\\s\\S]*?href="${newsletterUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
 
   assert.ok(fs.existsSync(path.join(OUTPUT, "sitemap.xml")));

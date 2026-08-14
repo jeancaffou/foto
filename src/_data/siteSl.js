@@ -30,6 +30,7 @@ module.exports = {
   ...site,
   eyebrow: "Zračni in jamski fotograf",
   location: "Postojna, Slovenija",
+  newsletterUrl: "https://kafol.net/newsletter/?lang=sl",
   works: galleries.selected,
   press: localizedPress,
   features: [
