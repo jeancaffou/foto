@@ -27,6 +27,8 @@ eleventyComputed:
     <span class="brand__role">{{ pageSite.eyebrow }}</span>
   </a>
 
+  <a class="language-switch" href="{{ homePage.alternateUrl }}" hreflang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
+
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
     <span class="menu-toggle__label">{{ copy.common.menu }}</span>
     <span class="menu-toggle__lines" aria-hidden="true"></span>
@@ -38,7 +40,6 @@ eleventyComputed:
     <a href="#featured">{{ copy.common.nav.featured }}</a>
     <a href="#press">{{ copy.common.nav.press }}</a>
     <a href="#contact">{{ copy.common.nav.contact }}</a>
-    <a class="language-switch" href="{{ homePage.alternateUrl }}" hreflang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if homePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
   </nav>
 </header>
 

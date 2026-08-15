@@ -440,7 +440,25 @@ test("mobile navigation opens, links remain usable, and closes with Escape", asy
   await page.goto("/");
 
   const menu = page.locator(".menu-toggle");
+  const languageSwitch = page.locator(".site-header > .language-switch");
   await expect(menu).toBeVisible();
+  await expect(languageSwitch).toBeVisible();
+  await expect(page.locator("#site-nav .language-switch")).toHaveCount(0);
+  const headerAlignment = await page.locator(".site-header").evaluate((header) => {
+    const top = (element) => {
+      const bounds = element.getBoundingClientRect();
+      return bounds.top;
+    };
+    return {
+      header: top(header),
+      brand: top(header.querySelector(".brand")),
+      language: top(header.querySelector(".language-switch")),
+      menu: top(header.querySelector(".menu-toggle"))
+    };
+  });
+  expect(Math.abs(headerAlignment.header - headerAlignment.brand)).toBeLessThan(1);
+  expect(Math.abs(headerAlignment.header - headerAlignment.language)).toBeLessThan(1);
+  expect(Math.abs(headerAlignment.header - headerAlignment.menu)).toBeLessThan(1);
   await menu.click();
   await expect(menu).toHaveAttribute("aria-expanded", "true");
   await expect(page.locator("#site-nav")).toHaveClass(/is-open/);
