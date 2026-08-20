@@ -1,0 +1,128 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: wordpressArchives
+  size: 1
+  alias: archivePage
+  addAllPagesToCollections: true
+permalink: "{{ archivePage.permalink }}"
+blogStyles: true
+bodyClass: blog-page taxonomy-page
+seoType: collection
+eleventyComputed:
+  pageLanguage: "{{ archivePage.lang }}"
+  title: "{{ archivePage.title }}"
+  metaDescription: "{{ archivePage.metaDescription }}"
+  alternateUrl: "{{ archivePage.alternateUrl }}"
+  canonicalPath: "{{ archivePage.canonicalPath }}"
+  xDefaultPath: "{{ archivePage.xDefaultPath }}"
+  ogImage: "{{ archivePage.ogImage }}"
+  ogImageAlt: "{{ archivePage.ogImage | imageAlt(archivePage.lang, archivePage.title) }}"
+---
+{% set pageSite = archivePage.site %}
+{% set copy = archivePage.copy %}
+{% set posts = archivePage.posts %}
+{% set homeRoot = "/" %}
+{% set blogRoot = "/en/blog/" %}
+{% set pressRoot = "/press/" %}
+{% if archivePage.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set blogRoot = "/blog/" %}{% set pressRoot = "/sl/press/" %}{% endif %}
+<header class="site-header" data-header>
+  <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
+    <span class="brand__name">Žan Kafol</span>
+    <span class="brand__role">{{ pageSite.eyebrow }}</span>
+  </a>
+
+  <a class="language-switch" href="{{ archivePage.alternateUrl }}" hreflang="{% if archivePage.lang == 'sl' %}en{% else %}sl{% endif %}" lang="{% if archivePage.lang == 'sl' %}en{% else %}sl{% endif %}" aria-label="{{ copy.common.switchAria }}">{{ copy.common.switchLabel }}</a>
+
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+    <span class="menu-toggle__label">{{ copy.common.menu }}</span>
+    <span class="menu-toggle__lines" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-nav" id="site-nav" aria-label="{{ copy.common.primaryNavigation }}">
+    <a href="{{ homeRoot }}#work">{{ copy.common.nav.work }}</a>
+    <a href="{{ homeRoot }}#about">{{ copy.common.nav.about }}</a>
+    <a href="{{ blogRoot }}" aria-current="page">{{ copy.blog.journal }}</a>
+    <a href="{{ pressRoot }}">{{ copy.common.nav.press }}</a>
+    <a href="{{ homeRoot }}#contact">{{ copy.common.nav.contact }}</a>
+  </nav>
+</header>
+
+<main id="main" class="taxonomy-main">
+  <section class="taxonomy-archive blog-archive shell" aria-labelledby="archive-title">
+    <header class="taxonomy-archive__header blog-archive__header">
+      <div>
+        <a class="taxonomy-archive__back" href="{{ blogRoot }}"><span aria-hidden="true">←</span> {{ copy.archive.back }}</a>
+        <p class="section-label">{{ archivePage.archiveLabel }}</p>
+        <h1 id="archive-title">{{ archivePage.heading | escape }}</h1>
+      </div>
+      <p>{{ archivePage.totalPosts }} {{ archivePage.storiesLabel }} <span aria-hidden="true">·</span> {{ copy.archive.page }} {{ archivePage.pageNumber + 1 }} {{ copy.blog.of }} {{ archivePage.pageCount }}</p>
+    </header>
+
+    <p class="taxonomy-archive__description">{{ archivePage.description | escape }}</p>
+
+    {% if posts.length %}
+    <div class="blog-grid">
+      {% for post in posts %}
+      <article class="blog-card{% if loop.first %} blog-card--lead{% endif %}">
+        <a href="{{ post.permalink }}">
+          <figure class="blog-card__image">
+            <img src="{{ post.featuredImage or post.leadImage }}" alt="{{ (post.featuredImage or post.leadImage) | imageAlt(archivePage.lang, post.title) }}" loading="{% if loop.index <= 4 %}eager{% else %}lazy{% endif %}" decoding="async">
+          </figure>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <time datetime="{{ post.date }}">{{ post.date | formatBlogDate(archivePage.lang, "short") }}</time>
+              {% if post.categories.length %}<span>{{ post.categories[0].name | escape }}</span>{% endif %}
+            </div>
+            <h3>{{ post.title | escape }}</h3>
+            <p>{{ (post.summary or post.seoDescription) | escape }}</p>
+            <span class="blog-card__read">{{ copy.blog.read }} <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+
+    <nav class="blog-pagination" aria-label="{{ archivePage.copy.archive.navigation }}">
+      {% if archivePage.previousUrl %}
+      <a href="{{ archivePage.previousUrl }}"><span aria-hidden="true">←</span> {{ copy.archive.newer }}</a>
+      {% else %}
+      <span aria-hidden="true">← {{ copy.archive.newer }}</span>
+      {% endif %}
+      <span>{{ copy.archive.page }} {{ archivePage.pageNumber + 1 }} / {{ archivePage.pageCount }}</span>
+      {% if archivePage.nextUrl %}
+      <a href="{{ archivePage.nextUrl }}">{{ copy.archive.older }} <span aria-hidden="true">→</span></a>
+      {% else %}
+      <span>{{ copy.archive.older }} →</span>
+      {% endif %}
+    </nav>
+    {% else %}
+    <p class="taxonomy-archive__empty">{{ archivePage.emptyText }}</p>
+    {% endif %}
+  </section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div class="site-footer__brand">
+      <span class="brand__name">Žan Kafol</span>
+      <span class="brand__role">{{ pageSite.eyebrow }}</span>
+      <p>{{ copy.common.footerText | safe }}</p>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">{{ copy.common.contact }}</p>
+      <a href="mailto:{{ pageSite.email }}">{{ pageSite.email }}</a>
+      <span>{{ pageSite.location }}</span>
+    </div>
+    <div class="footer-group">
+      <p class="footer-label">{{ copy.common.follow }}</p>
+      <div class="footer-socials">
+        {% for item in pageSite.social %}<a href="{{ item.url }}" target="_blank" rel="noreferrer" aria-label="{{ item.label }}"><img src="{{ item.icon }}" alt=""></a>{% endfor %}
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <p>© {% year %} Žan Kafol</p>
+      <a href="{{ homeRoot }}">{{ copy.common.backHome }}</a>
+    </div>
+  </div>
+</footer>

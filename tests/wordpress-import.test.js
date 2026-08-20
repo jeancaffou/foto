@@ -6,6 +6,7 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 const importedPosts = require("../src/_data/wordpressPosts.json");
+const importedTaxonomies = require("../src/_data/wordpressTaxonomies.json");
 const { parseTables } = require("../scripts/lib/mysql-dump");
 const {
   getMediaPaths,
@@ -19,6 +20,56 @@ test("committed journal keeps all 194 canonical WordPress permalinks", () => {
   const permalinks = importedPosts.map((post) => post.permalink);
   assert.equal(new Set(permalinks).size, 194);
   permalinks.forEach((permalink) => assert.match(permalink, /^\/\d{4}\/\d{2}\/[^/]+\.html$/));
+});
+
+test("imports every WordPress category and tag with published-post membership", () => {
+  const tables = parseTables(path.resolve(__dirname, "../context/blog.sql"), [
+    "kafol_posts",
+    "kafol_terms",
+    "kafol_term_taxonomy",
+    "kafol_term_relationships"
+  ]);
+  const published = new Set(tables.kafol_posts
+    .filter((post) => post.post_type === "post" && post.post_status === "publish")
+    .map((post) => Number(post.ID)));
+  const taxonomyRows = new Map(tables.kafol_term_taxonomy.map((row) => [Number(row.term_taxonomy_id), row]));
+  const imported = new Map([
+    ["category", new Map(importedTaxonomies.categories.map((term) => [term.termTaxonomyId, term]))],
+    ["post_tag", new Map(importedTaxonomies.tags.map((term) => [term.termTaxonomyId, term]))]
+  ]);
+  const memberships = new Map();
+
+  for (const relationship of tables.kafol_term_relationships) {
+    const postId = Number(relationship.object_id);
+    const taxonomy = taxonomyRows.get(Number(relationship.term_taxonomy_id));
+    if (!published.has(postId) || !["category", "post_tag"].includes(taxonomy?.taxonomy)) continue;
+    const key = `${taxonomy.taxonomy}:${taxonomy.term_taxonomy_id}`;
+    if (!memberships.has(key)) memberships.set(key, []);
+    memberships.get(key).push(postId);
+  }
+
+  for (const taxonomy of ["category", "post_tag"]) {
+    const sourceRows = tables.kafol_term_taxonomy.filter((row) => row.taxonomy === taxonomy);
+    assert.equal(imported.get(taxonomy).size, sourceRows.length);
+    sourceRows.forEach((row) => {
+      const entry = imported.get(taxonomy).get(Number(row.term_taxonomy_id));
+      const expected = [...new Set(memberships.get(`${taxonomy}:${row.term_taxonomy_id}`) || [])].sort((a, b) => a - b);
+      assert.deepEqual(entry.postIds, expected);
+    });
+  }
+
+  assert.ok(importedTaxonomies.categories.some((term) => term.slug === "zivali"));
+  assert.ok(importedTaxonomies.tags.some((term) => term.slug === "vranja-jama"));
+});
+
+test("keeps the zan author archive over every published post", () => {
+  assert.equal(importedTaxonomies.authors.length, 1);
+  assert.equal(importedTaxonomies.authors[0].slug, "zan");
+  assert.equal(importedTaxonomies.authors[0].postIds.length, importedPosts.length);
+  assert.deepEqual(
+    importedTaxonomies.authors[0].postIds,
+    importedPosts.map((post) => post.id).sort((left, right) => left - right)
+  );
 });
 
 test("MySQL parser preserves complex WordPress HTML and escaped values", () => {

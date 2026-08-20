@@ -11,6 +11,7 @@ const featurePages = require("../src/_data/featurePages");
 const galleryPages = require("../src/_data/galleryPages");
 const pressPages = require("../src/_data/pressPages");
 const featuredPageVariants = require("../src/_data/featuredPageVariants");
+const wordpressArchives = require("../src/_data/wordpressArchives");
 const site = require("../src/_data/site");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -69,6 +70,41 @@ test("builds every legacy WordPress permalink, English counterpart, and bilingua
     const lastArchiveHtml = fs.readFileSync(path.join(archiveDirectory, "page", String(archivePages), "index.html"), "utf8");
     assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, 9);
   }
+});
+
+test("builds WordPress taxonomy, author, date, pagination, and feed archives", () => {
+  const archivePages = wordpressArchives;
+  assert.ok(archivePages.length > 0);
+  archivePages.forEach((archivePage) => {
+    assert.ok(fs.existsSync(outputPath(archivePage.canonicalPath)), `Missing archive route: ${archivePage.canonicalPath}`);
+  });
+  wordpressArchives.feeds.forEach((feed) => {
+    assert.ok(fs.existsSync(outputPath(`${feed.archiveUrl}feed/`)), `Missing archive feed: ${feed.archiveUrl}feed/`);
+  });
+
+  [
+    "/category/zivali/",
+    "/category/panorame/",
+    "/category/sport/",
+    "/tag/jame/",
+    "/tag/vranja-jama/",
+    "/author/zan/",
+    "/2021/",
+    "/2021/05/"
+  ].forEach((route) => assert.ok(fs.existsSync(outputPath(route)), `Missing WordPress index route: ${route}`));
+
+  const category = fs.readFileSync(outputPath("/category/zivali/"), "utf8");
+  const tag = fs.readFileSync(outputPath("/tag/vranja-jama/"), "utf8");
+  const zanAuthor = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/author/zan/");
+  assert.ok(zanAuthor, "Missing Slovenian zan author archive descriptor");
+  assert.equal(zanAuthor.totalPosts, posts.length);
+  assert.equal(zanAuthor.pageCount, Math.ceil(posts.length / wordpressArchives.PAGE_SIZE));
+  assert.match(category, /<title>Kategorija: Živali — Žan Kafol<\/title>/);
+  assert.match(tag, /<title>Oznaka: vranja jama — Žan Kafol<\/title>/);
+  assert.match(category, /href="\/2021\/04\/caplje-in-storklje-planinskega-polja\.html"/);
+  assert.match(tag, /href="\/2021\/05\/vranja-jama\.html"/);
+  assert.ok(fs.existsSync(outputPath("/category/zivali/feed/")), "Missing category Atom feed");
+  assert.ok(fs.existsSync(outputPath("/tag/jame/feed/")), "Missing tag Atom feed");
 });
 
 test("keeps homepage journal links and the National Geographic route canonical", () => {
@@ -189,7 +225,7 @@ test("renders migrated video blocks and avoids duplicate article leads", () => {
 });
 
 test("emits complete bilingual metadata, structured data, feeds, and crawl files", () => {
-  const htmlFiles = collectHtml(OUTPUT).filter((htmlFile) => htmlFile !== path.join(OUTPUT, "feed", "index.html"));
+  const htmlFiles = collectHtml(OUTPUT).filter((htmlFile) => !htmlFile.endsWith(`${path.sep}feed${path.sep}index.html`));
   const htmlByCanonical = new Map();
 
   htmlFiles.forEach((htmlFile) => {
@@ -237,6 +273,10 @@ test("emits complete bilingual metadata, structured data, feeds, and crawl files
   assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
   assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/2025\/10\/koledar-2026\.html<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/en\/2025\/10\/koledar-2026\.html<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/category\/zivali\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/tag\/vranja-jama\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/author\/zan\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/foto\.kafol\.net\/2021\/05\/<\/loc>/);
   assert.match(sitemap, /<image:loc>https:\/\/foto\.kafol\.net\/assets\/blog\//);
 });
 

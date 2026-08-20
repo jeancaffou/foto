@@ -42,6 +42,7 @@ The source dump is `context/blog.sql`; uploads are read from `context/wp-content
 - `src/_includes/layouts/`: shared document layouts
 - `src/_data/site.js`: featured work, press, journal, and social data
 - `src/_data/wordpressPosts.json`: imported post content and metadata
+- `src/_data/wordpressTaxonomies.json`: complete WordPress category/tag membership plus author and date archive indexes
 - `src/_data/blogPostVariants.js`: bilingual variants of the immutable WordPress import
 - `src/_data/authored-posts/`: one module per newly authored post
 - `src/_data/authoredBlogPosts.js`: builds bilingual authored-post variants
@@ -50,6 +51,11 @@ The source dump is `context/blog.sql`; uploads are read from `context/wp-content
 - `scripts/`: deterministic WordPress and featured-image pipelines
 - `tests/`: import, output, taxonomy, and responsive browser checks
 - `_site/`: generated output
+
+The build also publishes the legacy WordPress archive families: `/category/{slug}/`,
+`/tag/{slug}/`, `/author/{nicename}/`, `/{year}/`, and `/{year}/{month}/`, with
+pagination and archive Atom feeds. English counterparts are published beneath
+`/en/`.
 
 Keep production imagery local in `src/assets/`; the supplied `context/` folder and design reference are intentionally ignored.
 

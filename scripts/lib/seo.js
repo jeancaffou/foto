@@ -147,6 +147,7 @@ function blogPostingJsonLd(post, origin) {
 }
 
 function collectionJsonLd(page, origin) {
+  const pageSize = Number(page.pageSize) || 11;
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -158,7 +159,7 @@ function collectionJsonLd(page, origin) {
       "@type": "ItemList",
       itemListElement: page.posts.map((post, index) => ({
         "@type": "ListItem",
-        position: page.pageNumber * 11 + index + 1,
+        position: page.pageNumber * pageSize + index + 1,
         url: absoluteUrl(post.permalink, origin),
         name: post.title
       }))

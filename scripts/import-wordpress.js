@@ -14,13 +14,16 @@ const {
 const ROOT = path.resolve(__dirname, "..");
 const DUMP_PATH = path.join(ROOT, "context", "blog.sql");
 const POSTS_PATH = path.join(ROOT, "src", "_data", "wordpressPosts.json");
+const TAXONOMIES_PATH = path.join(ROOT, "src", "_data", "wordpressTaxonomies.json");
 const MANIFEST_PATH = path.join(ROOT, "scripts", "generated", "wordpress-media-manifest.json");
 const TABLES = [
   "kafol_posts",
   "kafol_postmeta",
   "kafol_terms",
   "kafol_term_taxonomy",
-  "kafol_term_relationships"
+  "kafol_term_relationships",
+  "kafol_users",
+  "kafol_options"
 ];
 const EXTERNAL_MEDIA = {
   "external/animation-of-c-2023-a3-around-sun.gif": {
@@ -69,6 +72,115 @@ function buildTaxonomyLookup(tables) {
   }
 
   return byPost;
+}
+
+function buildWordPressIndexes(tables, posts) {
+  const terms = new Map(
+    tables.kafol_terms.map((term) => [Number(term.term_id), {
+      id: Number(term.term_id),
+      name: decodeHtmlEntities(term.name),
+      slug: term.slug
+    }])
+  );
+  const taxonomies = new Map(
+    tables.kafol_term_taxonomy.map((taxonomy) => [
+      Number(taxonomy.term_taxonomy_id),
+      {
+        ...taxonomy,
+        id: Number(taxonomy.term_taxonomy_id),
+        term: terms.get(Number(taxonomy.term_id))
+      }
+    ])
+  );
+  const publishedPostIds = new Set(posts.map((post) => post.id));
+  const postIdsByTaxonomy = new Map();
+
+  for (const relationship of tables.kafol_term_relationships) {
+    const postId = Number(relationship.object_id);
+    const taxonomy = taxonomies.get(Number(relationship.term_taxonomy_id));
+
+    if (!publishedPostIds.has(postId) || !["category", "post_tag"].includes(taxonomy?.taxonomy)) {
+      continue;
+    }
+
+    if (!postIdsByTaxonomy.has(taxonomy.id)) {
+      postIdsByTaxonomy.set(taxonomy.id, new Set());
+    }
+    postIdsByTaxonomy.get(taxonomy.id).add(postId);
+  }
+
+  function termIndexes(taxonomyName) {
+    return tables.kafol_term_taxonomy
+      .filter((taxonomy) => taxonomy.taxonomy === taxonomyName)
+      .map((taxonomy) => {
+        const taxonomyId = Number(taxonomy.term_taxonomy_id);
+        const term = terms.get(Number(taxonomy.term_id));
+        return {
+          termId: term.id,
+          termTaxonomyId: taxonomyId,
+          name: term.name,
+          slug: term.slug,
+          count: Number(taxonomy.count),
+          postIds: [...(postIdsByTaxonomy.get(taxonomyId) ?? [])].sort((left, right) => left - right)
+        };
+      })
+      .sort((left, right) => left.name.localeCompare(right.name, "sl") || left.slug.localeCompare(right.slug));
+  }
+
+  function postDateIndexes(selector) {
+    const groups = new Map();
+    for (const post of posts.filter(selector)) {
+      const key = selector === yearSelector
+        ? post.year
+        : `${post.year}-${post.month}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(post.id);
+    }
+
+    return [...groups]
+      .sort(([left], [right]) => right.localeCompare(left))
+      .map(([key, postIds]) => {
+        if (selector === yearSelector) return { year: key, postIds };
+        return { year: key.slice(0, 4), month: key.slice(5), postIds };
+      });
+  }
+
+  const yearSelector = (post) => Boolean(post.year);
+  const monthSelector = (post) => Boolean(post.year && post.month);
+  const authorIds = new Map();
+  for (const post of posts) {
+    const source = tables.kafol_posts.find((row) => Number(row.ID) === post.id);
+    const authorId = Number(source?.post_author);
+    if (!authorIds.has(authorId)) authorIds.set(authorId, []);
+    authorIds.get(authorId).push(post.id);
+  }
+
+  const authors = tables.kafol_users
+    .filter((user) => authorIds.has(Number(user.ID)))
+    .map((user) => ({
+      id: Number(user.ID),
+      slug: user.user_nicename,
+      name: decodeHtmlEntities(user.display_name),
+      postIds: [...authorIds.get(Number(user.ID))].sort((left, right) => left - right)
+    }))
+    .sort((left, right) => left.name.localeCompare(right.name, "sl"));
+
+  const optionValue = (name, fallback) => {
+    const value = Number(tables.kafol_options.find((option) => option.option_name === name)?.option_value);
+    return Number.isInteger(value) && value > 0 ? value : fallback;
+  };
+
+  return {
+    generatedFrom: "context/blog.sql",
+    postCount: posts.length,
+    postsPerPage: optionValue("posts_per_page", 10),
+    postsPerRss: optionValue("posts_per_rss", 10),
+    categories: termIndexes("category"),
+    tags: termIndexes("post_tag"),
+    authors,
+    years: postDateIndexes(yearSelector),
+    months: postDateIndexes(monthSelector)
+  };
 }
 
 function buildMetaLookup(rows) {
@@ -185,9 +297,11 @@ if (!fs.existsSync(DUMP_PATH)) {
 
 const tables = parseTables(DUMP_PATH, TABLES);
 const posts = buildPosts(tables);
+const indexes = buildWordPressIndexes(tables, posts);
 const media = buildMediaManifest(posts);
 
 writeJson(POSTS_PATH, posts);
+writeJson(TAXONOMIES_PATH, indexes);
 writeJson(MANIFEST_PATH, {
   generatedFrom: "context/blog.sql",
   postCount: posts.length,
@@ -195,4 +309,7 @@ writeJson(MANIFEST_PATH, {
   media
 });
 
-process.stdout.write(`Imported ${posts.length} published posts with ${media.length} referenced media files.\n`);
+process.stdout.write(
+  `Imported ${posts.length} published posts, ${indexes.categories.length} categories, `
+  + `${indexes.tags.length} tags, and ${media.length} referenced media files.\n`
+);

@@ -1,6 +1,6 @@
 ---
 pagination:
-  data: blogFeedPages
+  data: wordpressArchives.feeds
   size: 1
   alias: feedPage
 permalink: "{{ feedPage.permalink }}"
@@ -13,8 +13,8 @@ eleventyExcludeFromCollections: true
   <subtitle>{{ feedPage.subtitle | xmlEscape | safe }}</subtitle>
   <id>{{ feedPage.archiveUrl | absoluteUrl(seo.origin) | xmlEscape | safe }}</id>
   <link href="{{ feedPage.archiveUrl | absoluteUrl(seo.origin) | xmlEscape | safe }}" />
-  <link rel="self" type="application/atom+xml" href="{{ feedPage.permalink | absoluteUrl(seo.origin) | xmlEscape | safe }}" />
-  <updated>{{ feedPage.posts[0].date | isoLjubljana }}</updated>
+  <link rel="self" type="application/atom+xml" href="{{ feedPage.feedUrl | absoluteUrl(seo.origin) | xmlEscape | safe }}" />
+  {% if feedPage.posts.length %}<updated>{{ feedPage.posts[0].date | isoLjubljana }}</updated>{% endif %}
   <author><name>Žan Kafol</name><uri>{{ '/' | absoluteUrl(seo.origin) | xmlEscape | safe }}</uri></author>
   {% for post in feedPage.posts %}
   <entry>
