@@ -76,14 +76,46 @@ module.exports = {
       title: "Crescent Sun 🌒",
       summary: "A partial solar eclipse over Slovenia, seen through cloud and evening haze from Vremščica.",
       metaItems: ["Vremščica, Slovenia"],
-      categories: [{ name: "Solar eclipse", slug: "solar-eclipse" }],
+      categories: [
+        { name: "Solar eclipse", slug: "solar-eclipse" },
+        { name: "Sun", slug: "sonce" },
+        { name: "Moon", slug: "luna" },
+        { name: "Sky", slug: "nebo" },
+        { name: "Clouds", slug: "oblaki" },
+        { name: "Weather", slug: "vreme" }
+      ],
+      tags: [
+        { name: "astrofoto", slug: "astrofoto" },
+        { name: "astronomija", slug: "astronomija" },
+        { name: "luna", slug: "luna" },
+        { name: "oblak", slug: "oblak" },
+        { name: "oblaki", slug: "oblaki" },
+        { name: "sonce", slug: "sonce" },
+        { name: "vreme", slug: "vreme" }
+      ],
       backLabel: "← Journal"
     },
     sl: {
       title: "Srpasto Sonce 🌒",
       summary: "Delni Sončev mrk nad Slovenijo, ujet skozi oblake in večerno meglico z Vremščice.",
       metaItems: ["Vremščica, Slovenija"],
-      categories: [{ name: "Sončev mrk", slug: "soncev-mrk" }],
+      categories: [
+        { name: "Sončev mrk", slug: "soncev-mrk" },
+        { name: "sonce", slug: "sonce" },
+        { name: "luna", slug: "luna" },
+        { name: "nebo", slug: "nebo" },
+        { name: "oblaki", slug: "oblaki" },
+        { name: "vreme", slug: "vreme" }
+      ],
+      tags: [
+        { name: "astrofoto", slug: "astrofoto" },
+        { name: "astronomija", slug: "astronomija" },
+        { name: "luna", slug: "luna" },
+        { name: "oblak", slug: "oblak" },
+        { name: "oblaki", slug: "oblaki" },
+        { name: "sonce", slug: "sonce" },
+        { name: "vreme", slug: "vreme" }
+      ],
       backLabel: "← Blog"
     }
   },

@@ -40,6 +40,7 @@ function variant(source, lang) {
     summary: version.summary,
     seoDescription: version.summary,
     categories: version.categories,
+    tags: version.tags ?? [],
     metaItems: version.metaItems,
     backLabel: version.backLabel,
     navigation: source.navigation || {},

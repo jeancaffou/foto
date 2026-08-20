@@ -9,6 +9,7 @@ const posts = require("../src/_data/wordpressPosts.json");
 const translations = require("../src/_data/wordpressPostTranslations");
 const variants = require("../src/_data/blogPostVariants");
 const blogPosts = require("../src/_data/blogPostsByLanguage");
+const wordpressArchives = require("../src/_data/wordpressArchives");
 const { applyTextTranslations, getTranslatableSegments } = require("../scripts/lib/blog-localization");
 
 const SOURCE_PATH = path.resolve(__dirname, "../src/_data/wordpressPosts.json");
@@ -43,6 +44,48 @@ test("integrates authored posts with migrated posts through one bilingual blog i
     assert.equal(eclipse.newerUrl, planinska.permalink);
     assert.equal(eclipse.olderUrl, null);
     assert.ok(blogPosts[lang].some((post) => post.sourceType === "wordpress" && post.newerUrl === eclipse.permalink));
+  }
+});
+
+test("merges authored posts into the WordPress archive families", () => {
+  const author = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/author/zan/");
+  const year = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/2026/");
+  const month = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/2026/08/");
+  const category = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/category/soncev-mrk/");
+  const categoryEnglish = wordpressArchives.find((page) => page.lang === "en" && page.canonicalPath === "/en/category/solar-eclipse/");
+
+  assert.equal(author.totalPosts, blogPosts.sl.length);
+  assert.deepEqual(author.posts.slice(0, 2).map((post) => post.id), [
+    "no-time-to-pose-planinska-jama",
+    "crescent-sun-vremscica"
+  ]);
+  assert.deepEqual(year.posts.map((post) => post.id), [
+    "no-time-to-pose-planinska-jama",
+    "crescent-sun-vremscica"
+  ]);
+  assert.deepEqual(month.posts.map((post) => post.id), year.posts.map((post) => post.id));
+  assert.deepEqual(category.posts.map((post) => post.id), ["crescent-sun-vremscica"]);
+  assert.deepEqual(categoryEnglish.posts.map((post) => post.id), ["crescent-sun-vremscica"]);
+  assert.equal(category.alternateUrl, "/en/category/solar-eclipse/");
+  assert.equal(categoryEnglish.alternateUrl, "/category/soncev-mrk/");
+});
+
+test("keeps authored taxonomy memberships aligned with the existing WordPress vocabulary", () => {
+  const planinska = blogPosts.en.find((post) => post.id === "no-time-to-pose-planinska-jama");
+  const eclipse = blogPosts.en.find((post) => post.id === "crescent-sun-vremscica");
+
+  assert.deepEqual(planinska.categories.map((term) => term.slug), ["cave-diving", "jame", "voda"]);
+  assert.deepEqual(planinska.tags.map((term) => term.slug), [
+    "jama", "jame", "jamski-potapljac", "planina", "podzemlje", "potapljanje", "voda", "coln", "colnarjenje"
+  ]);
+  assert.deepEqual(eclipse.categories.map((term) => term.slug), ["solar-eclipse", "sonce", "luna", "nebo", "oblaki", "vreme"]);
+  assert.deepEqual(eclipse.tags.map((term) => term.slug), ["astrofoto", "astronomija", "luna", "oblak", "oblaki", "sonce", "vreme"]);
+
+  for (const slug of ["jame", "voda"]) {
+    assert.ok(wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === `/category/${slug}/`).posts.some((post) => post.id === planinska.id));
+  }
+  for (const slug of ["jama", "jame", "jamski-potapljac", "planina", "podzemlje", "potapljanje", "voda", "coln", "colnarjenje"]) {
+    assert.ok(wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === `/tag/${slug}/`).posts.some((post) => post.id === planinska.id));
   }
 });
 

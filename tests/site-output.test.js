@@ -84,27 +84,48 @@ test("builds WordPress taxonomy, author, date, pagination, and feed archives", (
 
   [
     "/category/zivali/",
+    "/category/jame/",
+    "/category/voda/",
     "/category/panorame/",
     "/category/sport/",
+    "/tag/jama/",
     "/tag/jame/",
+    "/tag/potapljanje/",
     "/tag/vranja-jama/",
     "/author/zan/",
+    "/category/soncev-mrk/",
+    "/en/category/solar-eclipse/",
+    "/2026/",
+    "/2026/08/",
     "/2021/",
     "/2021/05/"
   ].forEach((route) => assert.ok(fs.existsSync(outputPath(route)), `Missing WordPress index route: ${route}`));
 
   const category = fs.readFileSync(outputPath("/category/zivali/"), "utf8");
   const tag = fs.readFileSync(outputPath("/tag/vranja-jama/"), "utf8");
+  const authoredCategory = fs.readFileSync(outputPath("/category/soncev-mrk/"), "utf8");
+  const authoredCategoryEnglish = fs.readFileSync(outputPath("/en/category/solar-eclipse/"), "utf8");
+  const author = fs.readFileSync(outputPath("/author/zan/"), "utf8");
   const zanAuthor = wordpressArchives.find((page) => page.lang === "sl" && page.canonicalPath === "/author/zan/");
   assert.ok(zanAuthor, "Missing Slovenian zan author archive descriptor");
-  assert.equal(zanAuthor.totalPosts, posts.length);
-  assert.equal(zanAuthor.pageCount, Math.ceil(posts.length / wordpressArchives.PAGE_SIZE));
+  assert.equal(zanAuthor.totalPosts, blogPostsByLanguage.sl.length);
+  assert.equal(zanAuthor.pageCount, Math.ceil(blogPostsByLanguage.sl.length / wordpressArchives.PAGE_SIZE));
   assert.match(category, /<title>Kategorija: Živali — Žan Kafol<\/title>/);
   assert.match(tag, /<title>Oznaka: vranja jama — Žan Kafol<\/title>/);
+  assert.match(authoredCategory, /<title>Kategorija: Sončev mrk — Žan Kafol<\/title>/);
+  assert.match(authoredCategoryEnglish, /<title>Category: Solar eclipse — Žan Kafol<\/title>/);
   assert.match(category, /href="\/2021\/04\/caplje-in-storklje-planinskega-polja\.html"/);
   assert.match(tag, /href="\/2021\/05\/vranja-jama\.html"/);
+  assert.match(fs.readFileSync(outputPath("/category/jame/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
+  assert.match(fs.readFileSync(outputPath("/category/voda/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
+  assert.match(fs.readFileSync(outputPath("/tag/jame/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
+  assert.match(fs.readFileSync(outputPath("/tag/potapljanje/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
+  assert.match(authoredCategory, /href="\/2026\/08\/crescent-sun-vremscica\.html"/);
+  assert.match(authoredCategoryEnglish, /href="\/en\/2026\/08\/crescent-sun-vremscica\.html"/);
+  assert.match(author, /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
   assert.ok(fs.existsSync(outputPath("/category/zivali/feed/")), "Missing category Atom feed");
   assert.ok(fs.existsSync(outputPath("/tag/jame/feed/")), "Missing tag Atom feed");
+  assert.ok(fs.existsSync(outputPath("/category/soncev-mrk/feed/")), "Missing authored category Atom feed");
 });
 
 test("keeps homepage journal links and the National Geographic route canonical", () => {

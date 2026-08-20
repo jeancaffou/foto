@@ -199,14 +199,44 @@ module.exports = {
       title: "Planina Cave: Technical Work, No Time to Pose",
       summary: "Four boats, two divers and a fast-moving technical operation at Skrivnostno jezero in Planinska jama.",
       metaItems: ["Planinska jama, Slovenia"],
-      categories: [{ name: "Cave diving", slug: "cave-diving" }],
+      categories: [
+        { name: "Cave diving", slug: "cave-diving" },
+        { name: "Caves", slug: "jame" },
+        { name: "Water", slug: "voda" }
+      ],
+      tags: [
+        { name: "jama", slug: "jama" },
+        { name: "jame", slug: "jame" },
+        { name: "jamski potapljač", slug: "jamski-potapljac" },
+        { name: "planina", slug: "planina" },
+        { name: "podzemlje", slug: "podzemlje" },
+        { name: "potapljanje", slug: "potapljanje" },
+        { name: "voda", slug: "voda" },
+        { name: "čoln", slug: "coln" },
+        { name: "čolnarjenje", slug: "colnarjenje" }
+      ],
       backLabel: "← Journal"
     },
     sl: {
       title: "Planinska jama: tehnično delo brez časa za poziranje",
       summary: "Štirje čolni, dva potapljača in tehnična akcija pri Skrivnostnem jezeru v Planinski jami.",
       metaItems: ["Planinska jama, Slovenija"],
-      categories: [{ name: "Jamsko potapljanje", slug: "jamsko-potapljanje" }],
+      categories: [
+        { name: "Jamsko potapljanje", slug: "jamsko-potapljanje" },
+        { name: "jame", slug: "jame" },
+        { name: "voda", slug: "voda" }
+      ],
+      tags: [
+        { name: "jama", slug: "jama" },
+        { name: "jame", slug: "jame" },
+        { name: "jamski potapljač", slug: "jamski-potapljac" },
+        { name: "planina", slug: "planina" },
+        { name: "podzemlje", slug: "podzemlje" },
+        { name: "potapljanje", slug: "potapljanje" },
+        { name: "voda", slug: "voda" },
+        { name: "čoln", slug: "coln" },
+        { name: "čolnarjenje", slug: "colnarjenje" }
+      ],
       backLabel: "← Blog"
     }
   },

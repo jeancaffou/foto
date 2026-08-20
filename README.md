@@ -46,16 +46,17 @@ The source dump is `context/blog.sql`; uploads are read from `context/wp-content
 - `src/_data/blogPostVariants.js`: bilingual variants of the immutable WordPress import
 - `src/_data/authored-posts/`: one module per newly authored post
 - `src/_data/authoredBlogPosts.js`: builds bilingual authored-post variants
-- `src/_data/blogPostsByLanguage.js`: the chronological merged index used by archives, feeds, and post navigation
+- `src/_data/blogPostsByLanguage.js`: the chronological merged index used by the main archive, feeds, post navigation, and taxonomy/date archives
 - `src/assets/`: local images, styles, and scripts
 - `scripts/`: deterministic WordPress and featured-image pipelines
 - `tests/`: import, output, taxonomy, and responsive browser checks
 - `_site/`: generated output
 
-The build also publishes the legacy WordPress archive families: `/category/{slug}/`,
-`/tag/{slug}/`, `/author/{nicename}/`, `/{year}/`, and `/{year}/{month}/`, with
-pagination and archive Atom feeds. English counterparts are published beneath
-`/en/`.
+The build publishes merged archive families for imported and newly authored posts:
+`/category/{slug}/`, `/tag/{slug}/`, `/author/{nicename}/`, `/{year}/`, and
+`/{year}/{month}/`, with pagination and archive Atom feeds. English counterparts
+are published beneath `/en/`; authored category slugs may be localized between
+the Slovenian and English routes.
 
 Keep production imagery local in `src/assets/`; the supplied `context/` folder and design reference are intentionally ignored.
 

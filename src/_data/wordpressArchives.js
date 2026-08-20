@@ -63,19 +63,30 @@ const ARCHIVE_COPY = {
 };
 
 const postsByLanguage = {
-  en: new Map(blogPosts.en.filter((post) => post.sourceType === "wordpress").map((post) => [post.id, post])),
-  sl: new Map(blogPosts.sl.filter((post) => post.sourceType === "wordpress").map((post) => [post.id, post]))
+  en: new Map(blogPosts.en.map((post) => [post.id, post])),
+  sl: new Map(blogPosts.sl.map((post) => [post.id, post]))
+};
+const authoredPostsByLanguage = {
+  en: blogPosts.en.filter((post) => post.sourceType === "authored"),
+  sl: blogPosts.sl.filter((post) => post.sourceType === "authored")
 };
 
-function sourcePostIds(descriptor) {
-  return descriptor.postIds ?? [];
+function uniquePostIds(postIds) {
+  return [...new Set(postIds)];
+}
+
+function sourcePostIds(descriptor, lang) {
+  return descriptor.postIdsByLanguage?.[lang] ?? descriptor.postIds ?? [];
 }
 
 function postsFor(descriptor, lang) {
-  return sourcePostIds(descriptor)
+  return sourcePostIds(descriptor, lang)
     .map((postId) => postsByLanguage[lang].get(postId))
     .filter(Boolean)
-    .sort((left, right) => String(right.date).localeCompare(String(left.date)) || right.id - left.id);
+    .sort((left, right) => {
+      const dateOrder = String(right.date).localeCompare(String(left.date));
+      return dateOrder || String(right.id).localeCompare(String(left.id));
+    });
 }
 
 function localizedTerm(term, lang, kind) {
@@ -94,42 +105,202 @@ function monthName(year, month, lang) {
 function descriptorsFromTerms(kind, terms) {
   return terms.map((term) => ({
     kind,
-    key: `${kind}:${term.slug}`,
+    key: `${kind}:wordpress:${term.termTaxonomyId}`,
     slug: term.slug,
     name: term.name,
+    slSlug: term.slug,
+    enSlug: term.slug,
+    slName: kind === "category" ? (categoryTranslations[term.name]?.sl ?? term.name) : term.name,
+    enName: kind === "category" ? (categoryTranslations[term.name]?.en ?? term.name) : term.name,
     postIds: term.postIds,
+    postIdsByLanguage: {
+      sl: [...term.postIds],
+      en: [...term.postIds]
+    },
     source: term
   }));
 }
 
-const descriptors = [
-  ...descriptorsFromTerms("category", indexes.categories),
-  ...descriptorsFromTerms("tag", indexes.tags),
-  ...indexes.authors.map((author) => ({
+function authoredTermDescriptors(kind, property) {
+  const englishPosts = new Map(authoredPostsByLanguage.en.map((post) => [post.id, post]));
+  const groups = new Map();
+
+  for (const slovenianPost of authoredPostsByLanguage.sl) {
+    const englishPost = englishPosts.get(slovenianPost.id);
+    const slovenianTerms = Array.isArray(slovenianPost[property]) ? slovenianPost[property] : [];
+    const englishTerms = Array.isArray(englishPost?.[property]) ? englishPost[property] : [];
+
+    for (let index = 0; index < Math.max(slovenianTerms.length, englishTerms.length); index += 1) {
+      const slovenianTerm = slovenianTerms[index] ?? englishTerms[index];
+      const englishTerm = englishTerms[index] ?? slovenianTerms[index];
+      if (!slovenianTerm && !englishTerm) continue;
+
+      const identity = englishTerm.slug ?? slovenianTerm.slug;
+      const key = `${kind}:authored:${identity}`;
+      if (!groups.has(key)) {
+        groups.set(key, {
+          kind,
+          key,
+          slug: slovenianTerm.slug,
+          name: slovenianTerm.name,
+          slSlug: slovenianTerm.slug,
+          enSlug: englishTerm.slug,
+          slName: slovenianTerm.name,
+          enName: englishTerm.name,
+          postIdsByLanguage: { sl: [], en: [] },
+          source: { sourceType: "authored", property }
+        });
+      }
+
+      const group = groups.get(key);
+      group.postIdsByLanguage.sl.push(slovenianPost.id);
+      group.postIdsByLanguage.en.push(englishPost?.id ?? slovenianPost.id);
+    }
+  }
+
+  return [...groups.values()].map((descriptor) => ({
+    ...descriptor,
+    postIds: uniquePostIds(descriptor.postIdsByLanguage.sl),
+    postIdsByLanguage: {
+      sl: uniquePostIds(descriptor.postIdsByLanguage.sl),
+      en: uniquePostIds(descriptor.postIdsByLanguage.en)
+    }
+  }));
+}
+
+function mergeTermDescriptors(existing, additions) {
+  const merged = existing.map((descriptor) => ({
+    ...descriptor,
+    postIdsByLanguage: {
+      sl: [...sourcePostIds(descriptor, "sl")],
+      en: [...sourcePostIds(descriptor, "en")]
+    }
+  }));
+
+  for (const addition of additions) {
+    const match = merged.find((descriptor) => (
+      descriptor.slSlug === addition.slSlug
+      || descriptor.enSlug === addition.enSlug
+      || (descriptor.slName === addition.slName && descriptor.enName === addition.enName)
+    ));
+
+    if (!match) {
+      merged.push(addition);
+      continue;
+    }
+
+    match.postIdsByLanguage.sl = uniquePostIds([
+      ...sourcePostIds(match, "sl"),
+      ...sourcePostIds(addition, "sl")
+    ]);
+    match.postIdsByLanguage.en = uniquePostIds([
+      ...sourcePostIds(match, "en"),
+      ...sourcePostIds(addition, "en")
+    ]);
+    match.postIds = match.postIdsByLanguage.sl;
+  }
+
+  return merged;
+}
+
+function authorDescriptors() {
+  const authors = indexes.authors.map((author) => ({
     kind: "author",
     key: `author:${author.slug}`,
     slug: author.slug,
     name: author.name,
-    postIds: author.postIds,
+    postIds: [...author.postIds],
+    postIdsByLanguage: {
+      sl: [...author.postIds],
+      en: [...author.postIds]
+    },
     source: author
-  })),
-  ...indexes.years.map((year) => ({
-    kind: "year",
-    key: `year:${year.year}`,
-    year: year.year,
-    name: year.year,
-    postIds: year.postIds,
-    source: year
-  })),
-  ...indexes.months.map((month) => ({
-    kind: "month",
-    key: `month:${month.year}-${month.month}`,
-    year: month.year,
-    month: month.month,
-    name: monthName(month.year, month.month, "en-GB"),
-    postIds: month.postIds,
-    source: month
-  }))
+  }));
+  const authoredIds = authoredPostsByLanguage.sl.map((post) => post.id);
+  let zan = authors.find((author) => author.slug === "zan");
+
+  if (!zan) {
+    zan = {
+      kind: "author",
+      key: "author:zan",
+      slug: "zan",
+      name: "Žan Kafol",
+      postIds: [],
+      postIdsByLanguage: { sl: [], en: [] },
+      source: { sourceType: "authored" }
+    };
+    authors.push(zan);
+  }
+
+  zan.postIdsByLanguage.sl = uniquePostIds([...zan.postIdsByLanguage.sl, ...authoredIds]);
+  zan.postIdsByLanguage.en = uniquePostIds([...zan.postIdsByLanguage.en, ...authoredIds]);
+  zan.postIds = zan.postIdsByLanguage.sl;
+  return authors;
+}
+
+function dateDescriptors(kind, terms) {
+  const isMonth = kind === "month";
+  const entries = new Map(terms.map((term) => {
+    const key = isMonth ? `${term.year}-${term.month}` : term.year;
+    return [key, {
+      kind,
+      key: `${kind}:${key}`,
+      year: term.year,
+      ...(isMonth ? { month: term.month } : {}),
+      name: isMonth ? monthName(term.year, term.month, "en-GB") : term.year,
+      postIds: [...term.postIds],
+      postIdsByLanguage: { sl: [...term.postIds], en: [...term.postIds] },
+      source: term
+    }];
+  }));
+
+  for (const post of authoredPostsByLanguage.sl) {
+    const year = String(post.date).slice(0, 4);
+    const month = String(post.date).slice(5, 7);
+    const key = isMonth ? `${year}-${month}` : year;
+    if (!entries.has(key)) {
+      entries.set(key, {
+        kind,
+        key: `${kind}:${key}`,
+        year,
+        ...(isMonth ? { month } : {}),
+        name: isMonth ? monthName(year, month, "en-GB") : year,
+        postIds: [],
+        postIdsByLanguage: { sl: [], en: [] },
+        source: { sourceType: "authored" }
+      });
+    }
+    const entry = entries.get(key);
+    entry.postIdsByLanguage.sl.push(post.id);
+    entry.postIdsByLanguage.en.push(post.id);
+  }
+
+  return [...entries.values()]
+    .map((entry) => ({
+      ...entry,
+      postIds: uniquePostIds(entry.postIdsByLanguage.sl),
+      postIdsByLanguage: {
+        sl: uniquePostIds(entry.postIdsByLanguage.sl),
+        en: uniquePostIds(entry.postIdsByLanguage.en)
+      }
+    }))
+    .sort((left, right) => String(right.year).localeCompare(String(left.year)) || String(right.month ?? "").localeCompare(String(left.month ?? "")));
+}
+
+const categoryDescriptors = mergeTermDescriptors(
+  descriptorsFromTerms("category", indexes.categories),
+  authoredTermDescriptors("category", "categories")
+);
+const tagDescriptors = mergeTermDescriptors(
+  descriptorsFromTerms("tag", indexes.tags),
+  authoredTermDescriptors("tag", "tags")
+);
+const descriptors = [
+  ...categoryDescriptors,
+  ...tagDescriptors,
+  ...authorDescriptors(),
+  ...dateDescriptors("year", indexes.years),
+  ...dateDescriptors("month", indexes.months)
 ];
 
 function prefix(lang) {
@@ -139,8 +310,8 @@ function prefix(lang) {
 function archiveRoot(descriptor, lang) {
   const languagePrefix = prefix(lang);
   switch (descriptor.kind) {
-    case "category": return `${languagePrefix}/category/${descriptor.slug}/`;
-    case "tag": return `${languagePrefix}/tag/${descriptor.slug}/`;
+    case "category": return `${languagePrefix}/category/${descriptor[`${lang}Slug`] ?? descriptor.slug}/`;
+    case "tag": return `${languagePrefix}/tag/${descriptor[`${lang}Slug`] ?? descriptor.slug}/`;
     case "author": return `${languagePrefix}/author/${descriptor.slug}/`;
     case "year": return `${languagePrefix}/${descriptor.year}/`;
     case "month": return `${languagePrefix}/${descriptor.year}/${descriptor.month}/`;
@@ -155,7 +326,7 @@ function archivePath(descriptor, lang, pageNumber = 0) {
 
 function localizedName(descriptor, lang) {
   if (descriptor.kind === "category" || descriptor.kind === "tag") {
-    return localizedTerm(descriptor, lang, descriptor.kind);
+    return descriptor[`${lang}Name`] ?? localizedTerm(descriptor, lang, descriptor.kind);
   }
   if (descriptor.kind === "month") return monthName(descriptor.year, descriptor.month, lang);
   return descriptor.name;

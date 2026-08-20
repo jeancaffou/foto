@@ -22,3 +22,7 @@ The pipeline has three deterministic stages:
   legacy hosts, and checks every local media copy against its source byte size.
 
 Re-running the pipeline is safe. Unchanged media files are not copied again.
+
+The Eleventy archive layer merges this imported index with the bilingual
+authored-post data. New authored posts therefore appear in the main journal,
+category/date/author archives, feeds, and sitemap when the site is rebuilt.
