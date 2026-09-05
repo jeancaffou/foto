@@ -134,7 +134,7 @@ function content(lang, images) {
 
     <h2>Work on both sides of the border</h2>
 
-    <p>A considerable amount of shared work went into the collectors on their stands. Manuela Bisiacchi, Renzo Crevatin and Elvio Merlach at the University of Trieste helped turn the idea into a working prototype. The project involves Dr Lucia Gardossi, Dr Monia Renzi and the BioScience Research Center, where the samples will be analysed in a laboratory specialising in microplastic identification.</p>
+    <p>A considerable amount of shared work went into the collectors on their stands. Manuela Bisiacchi, Renzo Crevatin and Elvio Merlach at the University of Trieste helped turn the idea into a working prototype. The project involves Prof. Lucia Gardossi, Prof. Monia Renzi and the BioScience Research Center, where the samples will be analysed in a laboratory specialising in microplastic identification.</p>
 
     <p>Dr Tanja Pipan and the Karst Research Institute ZRC SAZU team contribute scientific expertise, knowledge of the cave and practical support. Dr Magdalena Aljančič and Dr Blaž Kogovšek were with us on this visit. Postojna Cave Park also provides essential support for the work inside the cave.</p>
 
