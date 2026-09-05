@@ -23,8 +23,9 @@ eleventyComputed:
 {% set copy = post.copy %}
 {% set homeRoot = "/" %}
 {% set blogRoot = "/en/blog/" %}
+{% set categoryRoot = "/en/category/" %}
 {% set pressRoot = "/press/" %}
-{% if post.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set blogRoot = "/blog/" %}{% set pressRoot = "/sl/press/" %}{% endif %}
+{% if post.lang == "sl" %}{% set homeRoot = "/sl/" %}{% set blogRoot = "/blog/" %}{% set categoryRoot = "/category/" %}{% set pressRoot = "/sl/press/" %}{% endif %}
 <header class="site-header" data-header>
   <a class="brand" href="{{ homeRoot }}" aria-label="Žan Kafol, {{ copy.common.home }}">
     <span class="brand__name">Žan Kafol</span>
@@ -56,7 +57,7 @@ eleventyComputed:
       <div class="article-header__meta">
         <time datetime="{{ post.date }}">{{ post.date | formatBlogDate(post.lang, "long") }}</time>
         {% for item in post.metaItems %}<span>{{ item | escape }}</span>{% endfor %}
-        {% for category in post.categories %}<span>{{ category.name | escape }}</span>{% endfor %}
+        {% for category in post.categories %}<span><a href="{{ categoryRoot }}{{ category.slug | escape }}/">{{ category.name | escape }}</a></span>{% endfor %}
       </div>
     </header>
 

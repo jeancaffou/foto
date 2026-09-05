@@ -164,6 +164,8 @@ test("builds WordPress taxonomy, author, date, pagination, and feed archives", (
   assert.match(tag, /href="\/2021\/05\/vranja-jama\.html"/);
   assert.match(fs.readFileSync(outputPath("/category/jame/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
   assert.match(fs.readFileSync(outputPath("/category/voda/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
+  assert.match(fs.readFileSync(outputPath("/2026/08/no-time-to-pose-planinska-jama.html"), "utf8"), /href="\/category\/jamsko-potapljanje\/">Jamsko potapljanje<\/a>/);
+  assert.match(fs.readFileSync(outputPath("/en/2026/08/no-time-to-pose-planinska-jama.html"), "utf8"), /href="\/en\/category\/cave-diving\/">Cave diving<\/a>/);
   assert.match(fs.readFileSync(outputPath("/tag/jame/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
   assert.match(fs.readFileSync(outputPath("/tag/potapljanje/"), "utf8"), /href="\/2026\/08\/no-time-to-pose-planinska-jama\.html"/);
   assert.match(authoredCategory, /href="\/2026\/08\/crescent-sun-vremscica\.html"/);

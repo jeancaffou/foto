@@ -368,6 +368,19 @@
   color: var(--gold-light);
 }
 
+.article-header__meta a {
+  color: inherit;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.article-header__meta a:hover,
+.article-header__meta a:focus-visible {
+  color: var(--paper-bright);
+  text-decoration-color: currentColor;
+}
+
 .article-header__meta span::before {
   margin-right: 1rem;
   color: #514e48;
