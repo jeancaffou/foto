@@ -68,10 +68,10 @@ test("describes every standalone site photograph and editorial still in both lan
 });
 
 test("describes every photograph in authored blog posts", () => {
-  assert.equal(authoredPosts.byLanguage.en.length, 2);
+  assert.equal(authoredPosts.byLanguage.en.length, 3);
   const images = authoredPosts.byLanguage.en.flatMap((post) => post.images);
   const slovenianImages = authoredPosts.byLanguage.sl.flatMap((post) => post.images);
-  assert.equal(images.length, 35);
+  assert.equal(images.length, 57);
   assert.deepEqual(slovenianImages.map((image) => image.src), images.map((image) => image.src));
 
   for (const image of images) {

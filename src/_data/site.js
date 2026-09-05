@@ -201,8 +201,8 @@ module.exports = {
     }
   ],
   posts: [
+    { title: "Microplastics in Postojna Cave: Another Month of Monitoring", excerpt: "With Raffaele, Blaž and Magdalena in Postojna Cave, changing samples for a study of microplastics settling out of the cave air.", date: "Sep 4, 2026", category: "Caves", url: "/en/2026/09/microplastics-postojna-cave.html" },
     { title: "Planina Cave: Technical Work, No Time to Pose", excerpt: "Four boats, two divers and a fast-moving technical operation at Skrivnostno jezero in Planinska jama.", date: "Aug 13, 2026", category: "Cave diving", url: "/en/2026/08/no-time-to-pose-planinska-jama.html" },
-    { title: "Crescent Sun 🌒", excerpt: "A partial solar eclipse over Slovenia, seen through cloud and evening haze from Vremščica.", date: "Aug 12, 2026", category: "Solar eclipse", url: "/en/2026/08/crescent-sun-vremscica.html" },
-    { title: "Ice Cave in Paradana", excerpt: "Ice, darkness and a narrow beam of daylight in the Trnovski gozd karst.", date: "Feb 13, 2025", category: "Cave", url: "/en/2025/02/ledena-jama-v-paradani.html" }
+    { title: "Crescent Sun 🌒", excerpt: "A partial solar eclipse over Slovenia, seen through cloud and evening haze from Vremščica.", date: "Aug 12, 2026", category: "Solar eclipse", url: "/en/2026/08/crescent-sun-vremscica.html" }
   ]
 };

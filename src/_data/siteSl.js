@@ -64,8 +64,8 @@ module.exports = {
     { text: "Da si lahko zares ustvarjalen, moraš včasih kršiti ustaljene okvire.", source: "Žan Kafol, RTV Slovenija, 2023", url: "/sl/press/da-si-lahko-zares-ustvarjalen/" }
   ],
   posts: [
+    { title: "Mikroplastika v Postojnski jami: nov mesec meritev", excerpt: "Z Raffaelejem, Blažem in Magdaleno v Postojnski jami: menjava vzorcev in raziskovanje mikroplastike, ki se useda iz jamskega zraka.", date: "4. sep. 2026", category: "Jame", url: "/2026/09/microplastics-postojna-cave.html" },
     { title: "Planinska jama: tehnično delo brez časa za poziranje", excerpt: "Štirje čolni, dva potapljača in tehnična akcija pri Skrivnostnem jezeru v Planinski jami.", date: "13. avg. 2026", category: "Jamsko potapljanje", url: "/2026/08/no-time-to-pose-planinska-jama.html" },
-    { title: "Srpasto Sonce 🌒", excerpt: "Delni Sončev mrk nad Slovenijo, ujet skozi oblake in večerno meglico z Vremščice.", date: "12. avg. 2026", category: "Sončev mrk", url: "/2026/08/crescent-sun-vremscica.html" },
-    { title: "Ledena jama v Paradani", excerpt: "Led, tema in ozek snop dnevne svetlobe v krasu Trnovskega gozda.", date: "13. feb. 2025", category: "Jame", url: "/2025/02/ledena-jama-v-paradani.html" }
+    { title: "Srpasto Sonce 🌒", excerpt: "Delni Sončev mrk nad Slovenijo, ujet skozi oblake in večerno meglico z Vremščice.", date: "12. avg. 2026", category: "Sončev mrk", url: "/2026/08/crescent-sun-vremscica.html" }
   ]
 };

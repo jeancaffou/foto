@@ -6,11 +6,13 @@ const ui = require("./ui");
 const descriptions = Object.assign(
   {},
   require("./image-descriptions/authored-crescent-sun.json"),
-  require("./image-descriptions/authored-planinska-jama.json")
+  require("./image-descriptions/authored-planinska-jama.json"),
+  require("./image-descriptions/authored-postojna-microplastics.json")
 );
 const sources = [
   require("./authored-posts/crescent-sun-vremscica"),
-  require("./authored-posts/no-time-to-pose-planinska-jama")
+  require("./authored-posts/no-time-to-pose-planinska-jama"),
+  require("./authored-posts/microplastics-postojna-cave")
 ];
 
 function variant(source, lang) {

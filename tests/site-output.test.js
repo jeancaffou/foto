@@ -45,7 +45,7 @@ test("builds every legacy WordPress permalink, English counterpart, and bilingua
     const languagePosts = blogPostsByLanguage[lang];
     const archivePages = Math.ceil(languagePosts.length / 11);
     const archiveDirectory = path.join(OUTPUT, ...root.split("/"));
-    assert.equal(languagePosts.length, 196);
+    assert.equal(languagePosts.length, 197);
     assert.equal(archivePages, 18);
     assert.ok(fs.existsSync(path.join(archiveDirectory, "index.html")));
     for (let page = 2; page <= archivePages; page += 1) {
@@ -68,8 +68,54 @@ test("builds every legacy WordPress permalink, English counterpart, and bilingua
     assert.match(firstArchiveHtml, /src="\/assets\/blog\/2026\/08\/planinska-jama\/20260813-IMG_1131\.jpg"/);
 
     const lastArchiveHtml = fs.readFileSync(path.join(archiveDirectory, "page", String(archivePages), "index.html"), "utf8");
-    assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, 9);
+    assert.equal((lastArchiveHtml.match(/<article class="blog-card/g) || []).length, 10);
   }
+});
+
+test("publishes the Postojna microplastics story throughout both language editions", () => {
+  const sitemap = fs.readFileSync(outputPath("/sitemap.xml"), "utf8");
+  for (const lang of ["sl", "en"]) {
+    const prefix = lang === "en" ? "/en" : "";
+    const post = blogPostsByLanguage[lang].find((entry) => entry.id === "microplastics-postojna-cave");
+    assert.equal(blogPostsByLanguage[lang][0].id, post.id);
+    const html = fs.readFileSync(outputPath(post.permalink), "utf8");
+    const article = html.match(/<div class="post-copy shell">([\s\S]*?)<\/main>/)[1];
+    assert.equal((article.match(/<img\b/g) || []).length, 22);
+    assert.ok(html.includes(`href="${post.alternateUrl}"`));
+    assert.ok(html.includes('href="https://www.primorski.eu/trzaska/po-kateri-poti-mikroplastika-prihaja-v-krasko-podzemlje-LX2257379"'));
+    assert.ok(html.includes("postojna-cave-monitoring-map.jpg"));
+    assert.doesNotMatch(html, /_tmp_new_post|\.docx|word\/media/);
+    const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const blogPosting = schema["@graph"].find((entry) => entry["@type"] === "BlogPosting");
+    assert.ok(blogPosting.keywords.includes(lang === "sl" ? "mikroplastika" : "Microplastics"));
+    for (const imageTag of article.matchAll(/<img\b[^>]*>/g)) {
+      const source = imageTag[0].match(/\bsrc="([^"]+)"/)[1];
+      const full = imageTag[0].match(/\bdata-url="([^"]+)"/)[1];
+      for (const imagePath of [source, full]) assert.ok(fs.existsSync(outputPath(imagePath)), `Missing image ${imagePath}`);
+      const srcset = imageTag[0].match(/\bsrcset="([^"]+)"/)?.[1];
+      for (const candidate of srcset?.split(",") || []) {
+        assert.ok(fs.existsSync(outputPath(candidate.trim().split(/\s+/)[0])));
+      }
+    }
+    const home = fs.readFileSync(outputPath(lang === "en" ? "/index.html" : "/sl/"), "utf8");
+    assert.ok(home.includes(`href="${post.permalink}"`));
+    const archives = [
+      `${prefix}/blog/`, `${prefix}/author/zan/`, `${prefix}/2026/`, `${prefix}/2026/09/`,
+      ...post.categories.map((term) => `${prefix}/category/${term.slug}/`),
+      ...post.tags.map((term) => `${prefix}/tag/${term.slug}/`)
+    ];
+    for (const archive of archives) {
+      assert.ok(fs.readFileSync(outputPath(archive), "utf8").includes(`href="${post.permalink}"`), `Missing story in ${archive}`);
+      const mainFeed = archive.endsWith("/blog/");
+      const feed = mainFeed ? `${archive}feed.xml` : wordpressArchives.find((page) => page.canonicalPath === archive).feedUrl;
+      const feedPost = mainFeed ? post : blogPostsByLanguage.sl[0];
+      const xml = fs.readFileSync(outputPath(feed), "utf8");
+      assert.equal(xml.match(/<entry>[\s\S]*?<id>([^<]+)<\/id>/)[1], `https://foto.kafol.net${feedPost.permalink}`, `Wrong first feed entry in ${feed}`);
+    }
+    assert.ok(sitemap.includes(`<loc>https://foto.kafol.net${post.permalink}</loc>`));
+  }
+  const rss = fs.readFileSync(outputPath("/feed/"), "utf8");
+  assert.equal(rss.match(/<item>[\s\S]*?<link>([^<]+)<\/link>/)[1], "https://foto.kafol.net/2026/09/microplastics-postojna-cave.html");
 });
 
 test("builds WordPress taxonomy, author, date, pagination, and feed archives", () => {
@@ -131,9 +177,9 @@ test("builds WordPress taxonomy, author, date, pagination, and feed archives", (
 test("keeps homepage journal links and the National Geographic route canonical", () => {
   const homepage = fs.readFileSync(path.join(OUTPUT, "index.html"), "utf8");
   const expectedHomepagePosts = [
+    "/en/2026/09/microplastics-postojna-cave.html",
     "/en/2026/08/no-time-to-pose-planinska-jama.html",
-    "/en/2026/08/crescent-sun-vremscica.html",
-    "/en/2025/02/ledena-jama-v-paradani.html"
+    "/en/2026/08/crescent-sun-vremscica.html"
   ];
 
   expectedHomepagePosts.forEach((permalink) => assert.match(homepage, new RegExp(`href="${permalink.replaceAll("/", "\\/")}"`)));
@@ -194,7 +240,7 @@ test("builds the complete Slovenian non-blog route tree with reciprocal language
   assert.match(homepage, /Zračna in jamska<br>fotografija/);
   assert.match(homepage, /href="\/" hreflang="en"/);
   assert.match(homepage, /href="\/sl\/work\/award-winning\/"/);
-  assert.match(homepage, /href="\/2025\/02\/ledena-jama-v-paradani\.html"/);
+  assert.match(homepage, /href="\/2026\/09\/microplastics-postojna-cave\.html"/);
 
   const awardPage = fs.readFileSync(outputPath("/sl/work/award-winning/"), "utf8");
   assert.match(awardPage, /Razsvetljenje \(Vse Mlečne ceste vodijo v Rakov Škocjan\)/);

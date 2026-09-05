@@ -395,6 +395,10 @@
   line-height: 1.78;
 }
 
+.article-header + .post-copy {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
 .post-copy::after {
   display: table;
   clear: both;

@@ -32,14 +32,17 @@ test("keeps the committed WordPress source byte-for-byte unchanged", () => {
 
 test("integrates authored posts with migrated posts through one bilingual blog index", () => {
   for (const lang of ["en", "sl"]) {
-    assert.equal(blogPosts[lang].length, posts.length + 2);
+    assert.equal(blogPosts[lang].length, posts.length + 3);
     const authored = blogPosts[lang].filter((post) => post.sourceType === "authored");
-    assert.equal(authored.length, 2, `Missing authored ${lang} posts`);
+    assert.equal(authored.length, 3, `Missing authored ${lang} posts`);
+    const postojna = authored.find((post) => post.id === "microplastics-postojna-cave");
     const planinska = authored.find((post) => post.id === "no-time-to-pose-planinska-jama");
     const eclipse = authored.find((post) => post.id === "crescent-sun-vremscica");
     assert.ok(planinska.content.includes("photo-story-gallery"));
     assert.ok(eclipse.content.includes("eclipse-gallery"));
-    assert.equal(planinska.newerUrl, null);
+    assert.equal(postojna.newerUrl, null);
+    assert.equal(postojna.olderUrl, planinska.permalink);
+    assert.equal(planinska.newerUrl, postojna.permalink);
     assert.equal(planinska.olderUrl, eclipse.permalink);
     assert.equal(eclipse.newerUrl, planinska.permalink);
     assert.equal(eclipse.olderUrl, null);
@@ -55,15 +58,17 @@ test("merges authored posts into the WordPress archive families", () => {
   const categoryEnglish = wordpressArchives.find((page) => page.lang === "en" && page.canonicalPath === "/en/category/solar-eclipse/");
 
   assert.equal(author.totalPosts, blogPosts.sl.length);
-  assert.deepEqual(author.posts.slice(0, 2).map((post) => post.id), [
+  assert.deepEqual(author.posts.slice(0, 3).map((post) => post.id), [
+    "microplastics-postojna-cave",
     "no-time-to-pose-planinska-jama",
     "crescent-sun-vremscica"
   ]);
   assert.deepEqual(year.posts.map((post) => post.id), [
+    "microplastics-postojna-cave",
     "no-time-to-pose-planinska-jama",
     "crescent-sun-vremscica"
   ]);
-  assert.deepEqual(month.posts.map((post) => post.id), year.posts.map((post) => post.id));
+  assert.deepEqual(month.posts.map((post) => post.id), year.posts.slice(1).map((post) => post.id));
   assert.deepEqual(category.posts.map((post) => post.id), ["crescent-sun-vremscica"]);
   assert.deepEqual(categoryEnglish.posts.map((post) => post.id), ["crescent-sun-vremscica"]);
   assert.equal(category.alternateUrl, "/en/category/solar-eclipse/");

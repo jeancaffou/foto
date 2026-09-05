@@ -138,7 +138,7 @@ function blogPostingJsonLd(post, origin) {
         dateModified: isoLjubljana(post.modified),
         author: { "@id": `${origin}/#zan-kafol` },
         ...(images.length ? { image: images } : {}),
-        keywords: post.categories.map((category) => category.name).join(", ")
+        keywords: [...new Set([...post.categories, ...(post.tags || [])].map((term) => term.name))].join(", ")
       },
       person(origin, post.site.social, post.lang),
       breadcrumb(origin, post.lang, post.title, post.permalink)
