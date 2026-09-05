@@ -83,6 +83,8 @@ function content(lang, images) {
 
       ${gallery([1488, 1518], "Raffaele in Blaž ob vzorčevalnikih v Plesni dvorani")}
 
+      <p>Tudi tokrat je večina fotografij nastala brez poziranja, čeprav smo imeli čas in so bili vsi več kot pripravljeni pozirati. Vse pogosteje opažam, da so mi najbolj všeč prav spontani, nepozirani trenutki. Skrbno postavljanje ljudi v kader lahko hitro začne delovati nekoliko umetno.</p>
+
       <p>Raffaele, veselje je tudi na moji strani. Vedno je prijetno delati z motiviranimi in ustvarjalnimi ljudmi, ki svojo zamisel pripeljejo vse do dela na terenu. Hvala za povabilo in družbo — z veseljem še kdaj.</p>
 
       <p><strong>Postojnska jama, 4. september 2026.</strong></p>`;
@@ -141,6 +143,8 @@ function content(lang, images) {
     <p>Sanela Čoralič also covered the research in Primorski dnevnik on 27 August: <a href="${articleUrl}" hreflang="sl">How do microplastics reach the karst underground?</a> The article is in Slovenian.</p>
 
     ${gallery([1488, 1518], "Raffaele and Blaž beside the samplers in Plesna dvorana")}
+
+    <p>Most of the photographs were taken without posing this time too, even though we had time and everyone was more than willing to pose. I increasingly find that the candid, spontaneous moments are my favourites. Carefully placing people in the frame can soon start to feel a little artificial.</p>
 
     <p>Raffaele, the pleasure is mine too. It is always enjoyable to work with motivated, creative people who carry an idea through to work in the field. Thank you for the invitation and the company — I would be happy to join you again.</p>
 
